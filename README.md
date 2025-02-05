@@ -24,20 +24,4 @@ KingsSolution is an online platform designed to provide exam supply expo for Nig
 ## Setup & Installation  
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/YOUR_GITHUB/KingsSolution.git
-   ### **3. Push to GitHub**  
-If your project is already in a GitHub repository, follow these steps to add the README:  
-
-1. Open **Termux** or **Git Bash** in your project folder.  
-2. Run the following commands:  
-
-```bash
-git add README.md
-git commit -m "Added README file"
-git push origin main  # Use 'master' if your branch is named master
-git init
-git add .
-git commit -m "Initial commit"
-git branch -M main  # Rename to 'main' if needed
-git remote add origin https://github.com/YOUR_GITHUB/KingsSolution.git
-git push -u origin main
+   git clone https://ki-ng0.github.io/Kingssolution/
