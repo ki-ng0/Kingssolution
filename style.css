@@ -161,3 +161,14 @@ a:hover {
   color: #FF0000;
   padding: 6px;
 }
+
+@media (max-width: 650px) {
+  .header input {
+    border: none;
+    height: 20px;
+    width: 100px;
+    border-radius: 2px;
+    outline: none;
+
+  }
+}
