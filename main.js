@@ -102,7 +102,7 @@ function why() {
           amount = '₦12,000';
           localStorage.setItem('amount', JSON.stringify(amount));
           return limit
-        } else if (select === '7,8,9 Arts subjects pin') {
+        } else if (select === '8,9 Arts subjects pin) {
           limit = 9;
           amount = '₦10,000';
           localStorage.setItem('amount', JSON.stringify(amount));
