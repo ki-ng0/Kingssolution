@@ -181,6 +181,7 @@ h1 {
   font-weight: bold;
 }
 
+
 .input em {
   font-weight: bold;
   font-size: 12px;
@@ -198,4 +199,15 @@ hr {
 
 sup {
   color: #FF0000;
+}
+
+@media (max-width: 650px) {
+  .header input {
+    border: none;
+    height: 20px;
+    width: 100px;
+    border-radius: 2px;
+    outline: none;
+
+  }
 }
