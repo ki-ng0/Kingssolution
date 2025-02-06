@@ -154,7 +154,7 @@
       <p><strong>Status:</strong> <span id="status"></span></p>
       <div class="delete">
         <p>If you want to change your subscription package (If you subscribe for one subject and want to add or change it), click the button below.</p>
-        <p><b>NOTE:</b> once you click the button below your account and PIN would be deleted. So only click the button once you have gotten the answers for your subscription.</p>
+        <p><b>NOTE:</b> once you click the button below your account would be deleted but your PIN would still be save.</p>
       </div>
       <div class="btn">
         <button type="submit" onclick="deleteAccount()">Delete Account</button>
@@ -272,6 +272,7 @@
             await deleteDoc(doc(db, "students", docSnap.id));
           });
 
+          alert("Your account has been deleted!");
           localStorage.removeItem("userPin");
           localStorage.removeItem('selectedExam');
           localStorage.removeItem('studentName');
@@ -284,8 +285,6 @@
           localStorage.removeItem('selectedCount');
           localStorage.removeItem('selectedSubjects');
           localStorage.removeItem('amount');
-
-          alert("Your account has been deleted!");
           window.location.href = "index.html";
         } catch (error) {
           console.error("Error deleting account:", error);
