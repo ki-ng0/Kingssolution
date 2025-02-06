@@ -228,3 +228,14 @@ h4 {
   cursor: pointer;
   transition: all 0.3s ease;
 }
+
+@media (max-width: 650px) {
+  .header input {
+    border: none;
+    height: 20px;
+    width: 100px;
+    border-radius: 2px;
+    outline: none;
+
+  }
+}
