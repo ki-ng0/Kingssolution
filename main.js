@@ -84,138 +84,81 @@ function work() {
 }
 
 function why() {
-
   const selectedOption = document.getElementById('options');
   if (selectedOption) {
-
     selectedOption.addEventListener('change', function() {
-      const select = this.options[this.selectedIndex].text;
+      const select = this.options[this.selectedIndex].text.trim().toLowerCase();
 
-      function packageLimit() {
-        if (select === '8,9 Science subjects pin') {
-          limit = 9;
-          amount = '₦10,000';
-          localStorage.setItem('amount', JSON.stringify(amount));
-          return limit
-        } else if (select === '8,9 Science subjects WhatsApp group') {
-          limit = 9;
-          amount = '₦12,000';
-          localStorage.setItem('amount', JSON.stringify(amount));
-          return limit
-        } else if (select === '8,9 Arts subjects pin') {
-          limit = 9;
-          amount = '₦10,000';
-          localStorage.setItem('amount', JSON.stringify(amount));
-          return limit
-        } else if (select === '8,9 Arts subjects WhatsApp group') {
-          limit = 9;
-          amount = '₦12,000';
-          localStorage.setItem('amount', JSON.stringify(amount));
-          return limit
-        } else if (select === '8,9 Commercial subjects pin') {
-          limit = 9;
-          amount = '₦10,000';
-          localStorage.setItem('amount', JSON.stringify(amount));
-          return limit
-        } else if (select === '8,9 Commercial subjects WhatsApp group') {
-          limit = 9;
-          amount = '₦12,000';
-          localStorage.setItem('amount', JSON.stringify(amount));
-          return limit
-        } else if (select === '1 subject only') {
-          limit = 1;
-          amount = '₦1,500';
-          localStorage.setItem('amount', JSON.stringify(amount));
-          return limit
-        } else if (select === '2 subject only') {
-          limit = 2;
-          amount = '₦3,000';
-          localStorage.setItem('amount', JSON.stringify(amount));
-          return limit
-        } else if (select === '3 subject only') {
-          limit = 3;
-          amount = '₦4,000';
-          localStorage.setItem('amount', JSON.stringify(amount));
-          return limit
-        } else if (select === '4,5,6 subjects only') {
-          limit = 6;
-          amount = '₦7,000';
-          localStorage.setItem('amount', JSON.stringify(amount));
-          return limit
-        } else if (select === '7 subject only') {
-          limit = 7;
-          amount = '₦8,000';
-          localStorage.setItem('amount', JSON.stringify(amount));
-          return limit
-        } else if (select === '8 subject only') {
-          limit = 8;
-          amount = '₦9,000';
-          localStorage.setItem('amount', JSON.stringify(amount));
-          return limit;
-        } else if (select === 'All subjects pin') {
-          limit = "You're expected to select all the subjects because the package you selected covers all subjects.";
-          amount = '₦15,000';
-          localStorage.setItem('amount', JSON.stringify(amount));
-          return limit
-        } else if (select === 'VIP whatsapp group') {
-          limit = "You're expected to select all the subjects because the package you selected covers all subjects.";
-          amount = '₦50,000';
-          localStorage.setItem('amount', JSON.stringify(amount));
-          return limit
-        } else if (select === 'Limited VIP whatsapp group') {
-          limit = "You're expected to select all the subjects because the package you selected covers all subjects.";
-          amount = '₦35,000';
-          localStorage.setItem('amount', JSON.stringify(amount));
-          return limit
+      const packageData = {
+        '8,9 science subjects pin': { limit: 9, amount: '₦10,000' },
+        '8,9 science subjects whatsapp group': { limit: 9, amount: '₦12,000' },
+        '8,9 arts subjects pin': { limit: 9, amount: '₦10,000' },
+        '8,9 arts subjects whatsapp group': { limit: 9, amount: '₦12,000' },
+        '8,9 commercial subjects pin': { limit: 9, amount: '₦10,000' },
+        '8,9 commercial subjects whatsapp group': { limit: 9, amount: '₦12,000' },
+        '1 subject only': { limit: 1, amount: '₦1,500' },
+        '2 subject only': { limit: 2, amount: '₦3,000' },
+        '3 subject only': { limit: 3, amount: '₦4,000' },
+        '4,5,6 subjects only': { limit: 6, amount: '₦7,000' },
+        '7 subject only': { limit: 7, amount: '₦8,000' },
+        '8 subject only': { limit: 8, amount: '₦9,000' },
+        'all subjects pin': {
+          limit: "You're expected to select all the subjects because the package you selected covers all subjects.",
+          amount: '₦15,000'
+        },
+        'vip whatsapp group': {
+          limit: "You're expected to select all the subjects because the package you selected covers all subjects.",
+          amount: '₦50,000'
+        },
+        'limited vip whatsapp group': {
+          limit: "You're expected to select all the subjects because the package you selected covers all subjects.",
+          amount: '₦35,000'
         }
-      }
-
-      selectedPackage = {
-        name: select,
-        maxSubjects: packageLimit(),
-
       };
 
-      localStorage.setItem('selectedPackage', JSON.stringify(selectedPackage));
+      if (packageData[select]) {
+        const { limit, amount } = packageData[select];
+        localStorage.setItem('amount', JSON.stringify(amount));
+
+        const selectedPackage = {
+          name: select,
+          maxSubjects: limit
+        };
+
+        localStorage.setItem('selectedPackage', JSON.stringify(selectedPackage));
+      } else {
+        console.warn(`Selected option "${select}" not found in packageData`);
+      }
     });
   }
 }
 
 function fname() {
-  let newOption = why();
+  why();
 
   let selectedPackage = JSON.parse(localStorage.getItem('selectedPackage'));
 
-  const maxSubjects = selectedPackage.maxSubjects;
+  if (!selectedPackage) return;
 
-  document.querySelector('.package').innerHTML = selectedPackage.name;
+  const maxSubjects = selectedPackage.maxSubjects;
+  document.querySelector('.package').textContent = selectedPackage.name;
 
   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
 
-  let selectedCount = 0;
-
   function updateCheckboxState() {
-
-    selectedCount = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
+    let selectedCount = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
 
     checkboxes.forEach(checkbox => {
-      if (selectedCount >= maxSubjects && !checkbox.checked) {
-        checkbox.disabled = true;
-      } else {
-        checkbox.disabled = false;
-      }
+      checkbox.disabled = selectedCount >= maxSubjects && !checkbox.checked;
     });
   }
 
   checkboxes.forEach(checkbox => {
-    checkbox.addEventListener('change', () => {
-      updateCheckboxState();
-    });
+    checkbox.addEventListener('change', updateCheckboxState);
   });
 
   updateCheckboxState();
-
-};
+}
 
 function countSelected() {
   let selectedPackage = JSON.parse(localStorage.getItem('selectedPackage'));
@@ -424,32 +367,4 @@ function information() {
   examType.innerHTML = selectedExam;
   name.innerHTML = studentName;
   phone.innerHTML = studentNumber;
-  email.innerHTML = studentEmail;
-  packageType.innerHTML = selectedPackage.name;
-  department.innerHTML = selectDepartment;
-  examYear.innerHTML = selectYear;
-
-  sub.innerHTML = "";
-
-  subjects.forEach(subject => {
-    const listItem = document.createElement("li");
-    listItem.textContent = subject;
-    sub.appendChild(listItem);
-  });
-  count.innerHTML = selectedCount;
-}
-
-function checkUserPin() {
-  const userPin = localStorage.getItem("userPin");
-
-  if (userPin) {
-    alert(`You already have an account. Your User PIN: ${userPin}`);
-    window.location.href = "verification.html";
-  } else {
-    window.location.href = "subscribe.html";
-  }
-}
-
-function amounts() {
-  document.querySelector('.Amount').innerHTML = JSON.parse(localStorage.getItem('amount'));
-}
+  email.innerHTML = stu
