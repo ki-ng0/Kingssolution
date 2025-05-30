@@ -148,28 +148,33 @@ async function fetchUserData() {
 }
 
 async function checkUserAccess() {
-  const userPin = document.getElementById("userPinInput").value.trim();
+  const userPinInput = document.getElementById("userPinInput");
+  const userPin = userPinInput.value.trim();
+  
   if (!userPin) return alert("Please enter your PIN.");
-
+  
   if (userPin === "08162347402") {
+    userPinInput.value = "";
     window.location.href = "admin-dashboard.html";
     return;
   }
-
+  
   const q = query(collection(db, "students"), where("userId", "==", parseInt(userPin)));
   const querySnapshot = await getDocs(q);
-
+  
   if (querySnapshot.empty) {
     alert("Invalid PIN! Please check and try again.");
     return;
   }
-
+  
   const userData = querySnapshot.docs[0].data();
   if (userData.status !== "approved") {
     alert("Your account is still pending approval.");
     return;
   }
-
+  
+  userPinInput.value = "";
+  
   localStorage.setItem("userSubjects", JSON.stringify(userData.subjects));
   window.location.href = "answers.html";
 }

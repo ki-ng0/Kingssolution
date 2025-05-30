@@ -166,7 +166,7 @@ h1 {
 }
 
 .input input {
-  width: 350px;
+  width: 300px;
   padding: 7px;
   border: 2px solid #555555;
   border-radius: 5px;
@@ -201,7 +201,7 @@ sup {
   color: #FF0000;
 }
 
-@media (max-width: 650px) {
+@media (min-width: 650px) {
   .header input {
     border: none;
     height: 20px;
