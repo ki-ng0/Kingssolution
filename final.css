@@ -1,0 +1,241 @@
+body {
+  margin: 0px
+}
+
+.container {
+  padding: 0px 8px;
+}
+
+header {
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  background-color: #000000;
+  padding: 15px 0px;
+}
+
+.header {
+  position: sticky;
+  top: 0px;
+}
+
+.header button {
+  background-color: #000000;
+  font-size: 20px;
+  font-weight: bold;
+  color: #FFFFFF;
+  transition: 0.3s;
+  font-size: 13px;
+}
+
+.header button:hover {
+  background-color: #FFFFFF;
+  color: #145CE0;
+}
+
+.header input {
+  border: none;
+  height: 20px;
+  width: 120px;
+  border-radius: 2px;
+  outline: none;
+}
+
+.register {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.subjects {
+  text-align: center;
+  margin: 40px 0px;
+  font-size: 18px;
+}
+
+.button {
+  margin-top: 60px;
+  display: flex;
+  gap: 80px;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.button button {
+  padding: 15px 30px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #FFFFFF;
+  background-color: #000000;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.button button:hover {
+  transform: scale(1.05);
+  background-color: #4F4E4D;
+}
+
+.button button:active {
+  transform: scale(0.95);
+  background-color: #2F2F2F;
+}
+
+.register .newSpan {
+  color: #FF0000;
+  margin: 20px 0px;
+}
+
+.register .text {
+  color: #FF0202;
+  text-align: center;
+  margin-top: 30px;
+}
+
+.packing {
+  margin: 20px 0px;
+  font-weight: bold;
+}
+
+/* Basic checkbox styling */
+.checkbox-container {
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0;
+}
+
+.checkbox-label {
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+}
+
+/* Style the checkbox itself */
+input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  cursor: pointer;
+  accent-color: #007BFF;
+  /* Modern browsers will use this accent color */
+}
+
+/* Optional: Change background when checkbox is checked */
+input[type="checkbox"]:checked {
+  background-color: #007BFF;
+  border-color: #0056b3;
+}
+
+/* Optional: Add a hover effect for checkboxes */
+input[type="checkbox"]:hover {
+  background-color: #f0f0f0;
+}
+
+.container p .older {
+  font-weight: bold;
+}
+
+.details {
+  background: #fafafa;
+  padding: 15px;
+  border-radius: 5px;
+}
+
+.details p {
+  font-size: 16px;
+  margin: 20px 10px;
+}
+
+.older {
+  font-weight: bold;
+  color: #000000;
+}
+
+#Subjects {
+  list-style-type: none;
+  padding: 0;
+}
+
+#Subjects li {
+  color: #333333;
+  padding: 8px;
+  border-radius: 5px;
+  margin: 5px 0;
+  text-align: start;
+  font-size: 14px;
+}
+
+h3,
+h4 {
+  text-align: center;
+}
+
+.bank {
+  font-weight: bolder;
+}
+
+.bankDetails ul {
+  list-style: none;
+}
+
+.Amount {
+  font-weight: bolder;
+}
+
+.btn0 {
+  margin-top: 50px;
+  display: flex;
+  gap: 80px;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.btn {
+  padding: 15px 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #000000;
+  background-color: #20D71D;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn0 button:hover {
+  transform: scale(1.05);
+  background-color: #4F4E4D;
+}
+
+.btn0 button:active {
+  transform: scale(0.95);
+  background-color: #2F2F2F;
+}
+
+.btn1 {
+  padding: 15px 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #FFFFFF;
+  background-color: #FF0000;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+@media (min-width: 650px) {
+  .header input {
+    border: none;
+    height: 20px;
+    width: 100px;
+    border-radius: 2px;
+    outline: none;
+
+  }
+}

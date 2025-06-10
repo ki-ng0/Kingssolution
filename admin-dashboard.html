@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="Kings solution - Your best Expo site">
+  <meta property="og:description" content="Affordable Expo for all secondary schools examination">
+  <meta property="og:image" content="kingssolution.png">
+  <meta property="og:url" content="https://github.com/ki-ng0/Kingssolution.git">
+  <meta property="og:type" content="website">
+  <meta name="description" content="Study Lab provides affordable learning resources and career guidance for Nigerian students.">
+  <meta name="keywords" content="Kings solution, EXPO, WAEC, NECO, GCE, NABTEB, JUPEB, IJMB">
+  <meta name="author" content="Nnebedum Somtochukwu Oliver">
+  <title>ADMIN</title>
+  <link rel="icon" type="image/png" href="kingssolution.png">
+</head>
+
+<body>
+  
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    
+    h2,
+    h3 {
+      color: #333;
+    }
+    
+    .container {
+      max-width: 800px;
+      background: white;
+      padding: 20px;
+      margin: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    
+    input,
+    select,
+    textarea,
+    button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    
+    button {
+      background-color: #000000;
+      color: white;
+      cursor: pointer;
+      border: none;
+    }
+    
+    button:hover {
+      background-color: #0056b3;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    
+    table,
+    th,
+    td {
+      border: 1px solid #ddd;
+    }
+    
+    th,
+    td {
+      padding: 10px;
+      text-align: left;
+    }
+    
+    th {
+      background-color: #007bff;
+      color: white;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+    
+    .btn-group button {
+      width: auto;
+      margin: 5px;
+    }
+  </style>
+  
+  <h2>Admin Panel</h2>
+  
+  <h3>Search Users by Name</h3>
+  <input type="text" id="userNameSearch" placeholder="Search by Name">
+  <button onclick="searchUsers()">Search</button>
+  
+  <h3>Users Management</h3>
+  <button onclick="fetchUsers()">Refresh Users</button>
+  <button onclick="disableAllUsers()">Disable All Users</button>
+  <button onclick="deleteAllUsers()">Delete All Users</button>
+  
+  <table id="usersTable" border="1">
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Package</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </table>
+  
+  <h3>Answers Management</h3>
+  <button onclick="fetchAnswers()">Refresh Answers</button>
+  
+  <table id="answersTable" border="1">
+    <tr>
+      <th>Subject</th>
+      <th>Status</th>
+      <th>Action</th>
+    </tr>
+  </table>
+  
+  <h3>Upload Answer</h3>
+  <select id="subjectSelect">
+    <option value="insurance">Insurance</option>
+    <option value="tourism">Tourism</option>
+    <option value="health-science">Health Science</option>
+    <option value="animal-husbandry">Animal Husbandry</option>
+    <option value="book-keeping">Book Keeping</option>
+    <option value="health-education">Health Education</option>
+    <option value="food-and-nutrition">Food and Nutrition</option>
+    <option value="english">English</option>
+    <option value="mathematics">Mathematics</option>
+    <option value="civic-education">Civic Education</option>
+    <option value="biology">Biology</option>
+    <option value="physics">Physics</option>
+    <option value="chemistry">Chemistry</option>
+    <option value="literature">Literature</option>
+    <option value="government">Government</option>
+    <option value="geography">Geography</option>
+    <option value="economics">Economics</option>
+    <option value="commerce">Commerce</option>
+    <option value="accounting">Accounting</option>
+    <option value="agricultural-science">Agricultural Science</option>
+    <option value="further-mathematics">Further Mathematics</option>
+    <option value="christian-religious-studies">Christian Religious Studies</option>
+    <option value="office-practice">Office Practice</option>
+    <option value="marketing">Marketing</option>
+    <option value="catering">Catering</option>
+    <option value="ict">I.C.T</option>
+    <option value="data-processing">Data Processing</option>
+    <option value="phe">P.H.E</option>
+    <option value="technical-drawing">Technical Drawing</option>
+    <option value="home-management">Home Management</option>
+  </select>
+  
+  <textarea id="answerText" placeholder="Enter answer text (optional)"></textarea>
+  <input type="file" id="answerFiles" multiple accept="image/*,video/*">
+  <button onclick="uploadAnswer()">Upload</button>
+  
+  
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+    import { getFirestore, collection, getDoc, getDocs, updateDoc, doc, setDoc, deleteDoc, query, where, arrayUnion } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+    
+    const firebaseConfig = {
+      apiKey: "AIzaSyCEA3gSy36gSnyKoPj4NFLl9yIldR4LkpY",
+      authDomain: "kings-solution-bba0e.firebaseapp.com",
+      projectId: "kings-solution-bba0e",
+      storageBucket: "kings-solution-bba0e.firebasestorage.app",
+      messagingSenderId: "18111445430",
+      appId: "1:18111445430:web:5ca39cd117b0e2a7e6a917",
+      measurementId: "G-XL28VT1DGT"
+    };
+    
+    
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    
+    
+    async function fetchUsers(filterName = "") {
+      console.log("Fetching users...");
+      const usersTable = document.getElementById("usersTable");
+      usersTable.innerHTML = "<tr><th>Name</th><th>Email</th><th>Package</th><th>Status</th><th>Action</th></tr>";
+      
+      let userQuery = collection(db, "students");
+      
+      if (filterName) {
+        userQuery = query(userQuery, where("name", "==", filterName));
+      }
+      
+      try {
+        const querySnapshot = await getDocs(userQuery);
+        querySnapshot.forEach((docSnap) => {
+          const user = docSnap.data();
+          const row = `<tr>
+  <td>${user.name}</td>
+  <td>${user.email}<br><small>${user.phone || ''}</small></td>
+  <td>${user.packageType?.name || 'N/A'}</td>
+  <td id="status-${docSnap.id}">${user.status || 'pending'}</td>
+  <td>
+    <button onclick="approveUser('${docSnap.id}')">Approve</button>
+    <button onclick="rejectUser('${docSnap.id}')">Reject</button>
+    <button onclick="disableUser('${docSnap.id}')">Disable</button>
+    <button onclick="deleteUser('${docSnap.id}')">Delete</button>
+  </td>
+</tr>`;
+          usersTable.innerHTML += row;
+        });
+        
+        if (querySnapshot.empty) {
+          usersTable.innerHTML += `<tr><td colspan="5">No users found</td></tr>`;
+        }
+      } catch (error) {
+        console.error("Error fetching users:", error);
+        alert("Error fetching users. Check console for details.");
+      }
+    }
+    
+    
+    function searchUsers() {
+      const nameFilter = document.getElementById("userNameSearch").value.trim();
+      fetchUsers(nameFilter);
+    }
+    
+    
+    window.fetchUsers = fetchUsers;
+    window.searchUsers = searchUsers;
+    
+    async function approveUser(userId) {
+      await updateDoc(doc(db, "students", userId), { status: "approved" });
+      document.getElementById(`status-${userId}`).innerText = "approved";
+      alert("User approved!");
+    }
+    
+    async function rejectUser(userId) {
+      await updateDoc(doc(db, "students", userId), { status: "rejected" });
+      document.getElementById(`status-${userId}`).innerText = "rejected";
+      alert("User rejected!");
+    }
+    
+    async function disableUser(userId) {
+      await updateDoc(doc(db, "students", userId), { status: "disabled" });
+      document.getElementById(`status-${userId}`).innerText = "disabled";
+      alert("User disabled!");
+    }
+    
+    async function deleteUser(userId) {
+      await deleteDoc(doc(db, "students", userId));
+      
+      localStorage.removeItem("userPin");
+      localStorage.removeItem('selectedExam');
+      localStorage.removeItem('studentName');
+      localStorage.removeItem('studentNumber');
+      localStorage.removeItem('studentEmail');
+      localStorage.removeItem('selectedPackage');
+      localStorage.removeItem('selectDepartment');
+      localStorage.removeItem('selectYear');
+      localStorage.removeItem('userSubjects');
+      localStorage.removeItem('selectedCount');
+      localStorage.removeItem('selectedSubjects');
+      localStorage.removeItem('amount');
+      
+      fetchUsers();
+      alert("User deleted!");
+      
+    }
+    
+    async function disableAllUsers() {
+      const querySnapshot = await getDocs(collection(db, "students"));
+      querySnapshot.forEach(async (docSnap) => {
+        await updateDoc(doc(db, "students", docSnap.id), { status: "disabled" });
+      });
+      fetchUsers();
+      alert("All users disabled!");
+    }
+    
+    async function deleteAllUsers() {
+      const querySnapshot = await getDocs(collection(db, "students"));
+      
+      const deletePromises = querySnapshot.docs.map(async (docSnap) => {
+        return deleteDoc(doc(db, "students", docSnap.id));
+      });
+      
+      
+      await Promise.all(deletePromises);
+      
+      
+      localStorage.removeItem("userPin");
+      localStorage.removeItem('selectedExam');
+      localStorage.removeItem('studentName');
+      localStorage.removeItem('studentNumber');
+      localStorage.removeItem('studentEmail');
+      localStorage.removeItem('selectedPackage');
+      localStorage.removeItem('selectDepartment');
+      localStorage.removeItem('selectYear');
+      localStorage.removeItem('userSubjects');
+      localStorage.removeItem('selectedCount');
+      localStorage.removeItem('selectedSubjects');
+      localStorage.removeItem('amount');
+      
+      
+      fetchUsers();
+      alert("All users deleted and user PINs removed from localStorage!");
+    }
+    
+    async function fetchAnswers() {
+      console.log("Fetching answers...");
+      const answersTable = document.getElementById("answersTable");
+      answersTable.innerHTML = "<tr><th>Subject</th><th>Status</th><th>Action</th></tr>";
+      
+      const querySnapshot = await getDocs(collection(db, "answers"));
+      querySnapshot.forEach((docSnap) => {
+        const answer = docSnap.data();
+        const row = `<tr>
+                     <td>${docSnap.id}</td>
+                      <td id="status-${docSnap.id}">${answer.status || 'active'}</td>
+                      <td>
+                          <button onclick="toggleSuspendAnswer('${docSnap.id}')">Suspend/Unsuspend</button>
+                          <button onclick="deleteAnswer('${docSnap.id}')">Delete</button>
+                      </td>
+                    </tr>`;
+        answersTable.innerHTML += row;
+      });
+    }
+    
+    
+    
+    async function uploadAnswer() {
+      const files = document.getElementById("answerFiles").files;
+      const subject = document.getElementById("subjectSelect").value;
+      const answerText = document.getElementById("answerText").value.trim();
+      
+      if (!subject) {
+        alert("Please select a subject.");
+        return;
+      }
+      
+      if (files.length === 0 && answerText === "") {
+        alert("Please upload at least one file or enter an answer.");
+        return;
+      }
+      
+      console.log("Uploading files...");
+      const uploadedURLs = [];
+      
+      for (const file of files) {
+        const formData = new FormData();
+        formData.append("file", file);
+        formData.append("upload_preset", "oliver");
+        
+        try {
+          const response = await fetch(
+            "https://api.cloudinary.com/v1_1/dnsuizb8o/upload", { method: "POST", body: formData }
+          );
+          
+          const result = await response.json();
+          if (result.secure_url) {
+            uploadedURLs.push(result.secure_url);
+          }
+        } catch (error) {
+          console.error("Error uploading file:", error);
+        }
+      }
+      
+      const answerRef = doc(db, "answers", subject);
+      const pastQuestionRef = doc(db, "pastQuestions", subject);
+      
+      try {
+        const docSnap = await getDoc(answerRef);
+        
+        if (docSnap.exists()) {
+          await updateDoc(answerRef, {
+            mediaURLs: uploadedURLs.length > 0 ? arrayUnion(...uploadedURLs) : arrayUnion(),
+            answerText: answerText ? arrayUnion(answerText) : arrayUnion(),
+          });
+          
+          await updateDoc(pastQuestionRef, {
+            mediaURLs: uploadedURLs.length > 0 ? arrayUnion(...uploadedURLs) : arrayUnion(),
+            answerText: answerText ? arrayUnion(answerText) : arrayUnion(),
+          });
+        } else {
+          await setDoc(answerRef, {
+            mediaURLs: uploadedURLs.length > 0 ? uploadedURLs : [],
+            answerText: answerText ? [answerText] : [],
+          });
+          
+          await setDoc(pastQuestionRef, {
+            mediaURLs: uploadedURLs.length > 0 ? uploadedURLs : [],
+            answerText: answerText ? [answerText] : [],
+          });
+        }
+        
+        alert("Answer uploaded successfully!");
+      } catch (error) {
+        console.error("Error saving to Firestore:", error);
+        alert("Failed to save answer. Check console for details.");
+      }
+      
+      fetchAnswers();
+    }
+    
+    async function toggleSuspendAnswer(answerId) {
+      const answerRef = doc(db, "answers", answerId);
+      
+      try {
+        const answerSnap = await getDocs(collection(db, "answers"));
+        let newStatus = "suspended";
+        
+        answerSnap.forEach((docSnap) => {
+          if (docSnap.id === answerId && docSnap.data().status === "suspended") {
+            newStatus = "active";
+          }
+        });
+        
+        await updateDoc(answerRef, { status: newStatus });
+        document.getElementById(`status-${answerId}`).innerText = newStatus;
+        alert(`Answer status changed to ${newStatus}!`);
+      } catch (error) {
+        console.error("Error toggling answer status:", error);
+        alert("Failed to change answer status. Check console for details.");
+      }
+    }
+    
+    async function deleteAnswer(answerId) {
+      try {
+        await deleteDoc(doc(db, "answers", answerId));
+        fetchAnswers();
+        alert("Answer deleted successfully!");
+      } catch (error) {
+        console.error("Error deleting answer:", error);
+        alert("Failed to delete answer. Check console for details.");
+      }
+    }
+    
+    
+    window.deleteAnswer = deleteAnswer;
+    
+    
+    window.toggleSuspendAnswer = toggleSuspendAnswer;
+    
+    window.onload = () => {
+      fetchUsers();
+      fetchAnswers();
+    };
+    window.uploadAnswer = uploadAnswer;
+    window.fetchUsers = fetchUsers;
+    window.approveUser = approveUser;
+    window.rejectUser = rejectUser;
+    window.disableUser = disableUser;
+    window.deleteUser = deleteUser;
+    window.disableAllUsers = disableAllUsers;
+    window.deleteAllUsers = deleteAllUsers;
+    window.fetchAnswers = fetchAnswers;
+    window.toggleSuspendAnswer = toggleSuspendAnswer;
+    window.deleteAnswer = deleteAnswer;
+  </script>
+</body>
+
+</html>

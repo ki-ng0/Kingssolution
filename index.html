@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="Kings solution - Your best Expo site">
+  <meta property="og:description" content="Affordable Expo for all secondary schools examination">
+  <meta property="og:image" content="kingssolution.png">
+  <meta property="og:url" content="https://github.com/ki-ng0/Kingssolution.git">
+  <meta property="og:type" content="website">
+  <meta name="description" content="Study Lab provides affordable learning resources and career guidance for Nigerian students.">
+  <meta name="keywords" content="Kings solution, EXPO, WAEC, NECO, GCE, NABTEB, JUPEB, IJMB">
+  <meta name="author" content="Nnebedum Somtochukwu Oliver">
+  <title>KING'S SOLUTION</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="kingssolution.png">
+</head>
+
+<body onload="checkUser()">
+  <div class="header">
+    <header>
+      <button type="submit" onclick="main('index')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+          <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+        </svg>
+      </button>
+      <button type="submit" onclick="main('group')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
+          <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232" />
+        </svg>
+        GROUP
+      </button>
+      <button type="submit" onclick="checkUserPin()">Subscribe</button>
+      <div class="ans">
+        <input type="text" id="userPinInput" placeholder="PIN">
+        <button onclick="checkUserAccess()">View ans</button>
+      </div>
+    </header>
+  </div>
+
+  <p id="section8"><b>Are you one of the candidates who has registered for the WAEC 2025/2026 Exam and is looking for WAEC Answers, WAEC EXPO 2025, WAEC RUNS 2025, 2025 Waec Question and Answers, Legit Waec runs 2025, Waec Expo WhatsApp Group Link? As long as this page is involved, your problem is fixed.</b></p>
+
+  <div class="contact">
+    <button type="submit" onclick="main('massageUs')"> <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
+        <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232" />
+      </svg>
+      Message us
+    </button>
+  </div>
+  <div class="container">
+    <div class="Table-of-Contents">
+      <fieldset>
+        <figcaption>Table of Contents</figcaption>
+        <ul>
+
+          <li><a href="#section1">Notice board</a></li><br>
+          <li><a href="#section2">Prices</a></li><br>
+          <li><a href="#section3">2025 TIMETABLES</a></li><br>
+          <li><a href="#section4">This platform has been</a></li><br>
+          <li><a href="#section5">Are you looking for a perfect source</a></li><br>
+          <li><a href="#section6">Lists of available subjects</a></li><br>
+          <li><a href="#section7">About us</a></li><br>
+
+        </ul>
+      </fieldset>
+    </div>
+    <div class="notice_board" id="section1">
+      <h2>NOTICE BOARD</h2>
+      <b>NOTE:</b> if you where directed here, then use our assistance help desk to avoid any regret in return. We confirm and verify before distribution. You dont need to panic, because you won’t need to take your phone along with you to examination center.<em>So far our assistance will be surely delivered at night or 7hours before exam.</em><br>
+      <div class="chat-us">
+        Chat us on WhatsApp now …. 2025 WAEC Subscription is on. ₦8,000 if you pay today or tomorrow... Subscribe now.. daily subscription should be done at least a day before exam... Full WhatsApp Group Subscribers get the answers much earlier before other people
+      </div>
+    </div>
+    <hr>
+    <div class="price" id="section2">
+      <h2>PRICES</h2>
+      <ul>
+        <li>
+          <p>To get all the Science Answers cost: ₦12,000</p>
+        </li>
+        <li>
+          <p>To get all the Art Answers cost: ₦10,000</p>
+        </li>
+        <li>
+          <p>All Subjects (science+Art) Password: ₦20,000</p>
+        </li>
+        <li>
+          <p>All subjects (science+Art) Questions & Answers via WhatsApp: ₦23,000</p>
+        </li>
+        <li>
+          <p>School Owners/Principal/webmasters/VIP– All the subjects Answers Cost:₦30,000</p>
+        </li>
+        <li>
+          <p>Per subject Price (Password): ₦1,000</p>
+        </li>
+        <li>
+          <p>Per subject Price (Whatsapp Answers Delivery): ₦1,500</p>
+        </li>
+        <li>
+          <p>English Only costs: ₦1,500</p>
+        </li>
+        <li>
+          <p>Mathematics Only costs: ₦1,500</p>
+        </li>
+        <li>
+          <p>only Practical Answers costs ₦1,000 each</p>
+        </li>
+      </ul>
+    </div>
+    <hr>
+    <div class="timetable" id="section3">
+      <h3>2025 TIMETABLES</h3>
+      <p><a href="#" download>2025 Waec timetable</a></p>
+      <p><a href="#" download>2025 Neco timetable</a></p>
+      <p><a href="#" download>2025 Nabteb timetable</a></p>
+      <p><a href="#" download>2025 Jupeb timetable</a></p>
+      <p><a href="#" download>2025 Waec gce timetable</a></p>
+      <p><a href="#" download>2025 Neco gce timetable</a></p>
+    </div>
+
+    <div class="text">
+
+      <hr>
+      <p id="section4">This Platform has been created to help individual Candidates, Parents, Guardians, Teachers and Principals/School owners with WAEC EXPO, WAEC VERIFIED RUNS, WAEC QUESTIONS AND ANSWERS. It’s Not A New thing that Candidates and Schools make use of EXPO/Assistance in WAEC Exam</p>
+      <p>Only if you want to fail, that’s when you will not make use of our Assistance Forum to free yourself from the bondage of O-level Exam. Note: this opportunity is open to everyone including school owners and parents/guardians who will like to get WAEC Questions and Answers for their students/children. Only if you did not support our Assistance, that’s when you will not make use of our Expo Assistance Platform</p>
+      <hr>
+      <p id="section5">
+      <h4>ARE YOU LOOKING FOR A PERFECT SOURCE FOR YOUR EXAM SUCCESS IN 2025 WAEC?</h4>
+      <p>Welcome To king’s solution, you’re reading this post at the right time and at the right place. Getting A’s or B’s is not as simple as you think, but with our strong assistance, I guarantee you of A’s and B’s, We only dropped the verified answers to all our subscribers night before the exam starts.<em>KING’S SOLUTION IS THE BEST 2025 WAEC EXPO/RUNZ SITE TO USE IN ORDER TO SCORE As AND Bs in YOUR RESULT</em>. Our WAEC Expo Assistance is Real and trusted. We have gathered a lot of experience throughout the years of doing NECO runz, so we can handle any new thing that comes up. We have over 10 years of experience and can answer any WAEC questions easily because we understand their tricks and how they set questions, YOU SHOULD BE HAPPY YOU FOUND THIS GREAT WEBSITE.</p>
+    </div>
+    <div class="subject">
+      <p id="section6">
+      <h4>LISTS OF AVAILABLE SUBJECTS FOR 2025 QUESTIONS AND ANSWERS</h4>
+      </p>
+      English<br>
+      Mathematics<br>
+      Civic Education <br>
+      Biology<br>
+      physics<br>
+      Chemistry<br>
+      Literature<br>
+      Govenment<br>
+      Geography <br>
+      Economics <br>
+      Commerce <br>
+      Accounting <br>
+      Agricultural science<br>
+      Further Mathematics<br>
+      Christian religious st<br>
+      Office Practice<br>
+      Marketing <br>
+      Catering <br>
+      I.C.T <br>
+      Data processing <br>
+      P.H.E <br>
+      Technical drawing <br>
+      Home management <br>
+
+      <p><b>NEWLY INTRODUCED SUBJECTS:</b></p>
+
+      Insurance <br>
+      Tourism <br>
+      Health Science <br>
+      Animal Husbandry <br>
+      Book Keeping <br>
+      Health Education <br>
+      Food and nutrition <br>
+
+      <p><b>AVAILABLE PRACTICALS:</b></p>
+
+      Agric <br>
+      Physics <br>
+      Chemistry <br>
+      Animal Husbandry <br>
+      Biology <br>
+      Catering <br>
+      Home management <br>
+    </div>
+  </div>
+  <footer class="footer">
+    <b id="section7">ABOUT US</b><br>
+    <hr>
+    KING’S SOLUTION is the Top Verified Exam Runs Website for Waec Expo, Neco Expo, Gce Runz, Jupeb Expo, Ijmb Expo, Nabteb Runz, State Bece Runz, Joint and Promotion Exam Expo. Founded about 10 Years Ago with high class experience in Exam Expo/Runs Assistance and All School Updates
+    KING’S SOLUTION is the most populous Expo site all over the social media for their dedication and relentless pursuits towards students achievements and success in all Exams <br>
+
+    <b>CONNECT WITH US</b><br>
+    <hr>
+    <a href="sms:+2347057217535">07057217535</a> (Send Us Sms Direct)<br>
+    <a href="https://wa.me/+2347057217535">07057217535</a> ( WhatsApp us)<br>
+    <a href="mailto:kingssolution2@gmail.com? subject=subject text">kingssolution2@gmail.com</a> (Mail us for more enquiries)<br>
+    <a href="#">Top menu</a><br>
+    <hr>
+
+    <div class="copyright">
+      Copyright<sup>©</sup> 2024 | Designed by KING’S SOLUTION
+    </div>
+
+  </footer>
+  <script type="module" src="database.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>

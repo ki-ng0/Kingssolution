@@ -1,0 +1,173 @@
+body {
+  background-image: url(King’ssolutio_20250109_120019_0000.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  margin: 0px;
+}
+
+.container {
+  padding: 0px 6px;
+  margin-bottom: 20px;
+}
+
+.header {
+  position: sticky;
+  top: 0px;
+}
+
+header {
+  display: flex;
+  justify-content: space-evenly;
+  align-content: center;
+  background-color: #000000;
+  padding: 15px 0px;
+}
+
+.header button {
+  background-color: #000000;
+  font-weight: bold;
+  color: #FFFFFF;
+  transition: 0.3s;
+  font-size: 13px;
+}
+
+.header button:hover {
+  background-color: #FFFFFF;
+  color: #145CE0;
+}
+
+.header input {
+  border: none;
+  height: 20px;
+  width: 110px;
+  border-radius: 2px;
+  outline: none;
+}
+
+.contact {
+  text-align: center;
+  padding: 7px;
+  background-color: #000000;
+  color: #FFFFFF;
+  position: sticky;
+  top: 52px;
+}
+
+.contact button {
+  color: #FFFFFF;
+  font-size: bold;
+  background-color: #000000;
+  font-size: 22px;
+}
+
+.contact button:hover {
+  background-color: #FFFFFF;
+  color: #FF3232;
+}
+
+.Table-of-Contents {
+  padding: 20px;
+  margin: 20px auto;
+  border: 2px solid #007BFF;
+  max-width: 800px;
+  background-color: #F5F5F5;
+}
+
+.Table-of-Contents figcaption {
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.Table-of-Contents ul {
+  list-style-type: none;
+  padding: 0px;
+}
+
+.Table-of-Contents ul li {
+  margin: 10px 0;
+}
+
+.Table-of-Contents ul li a {
+  text-decoration: none;
+  color: #464242;
+}
+
+.Table-of-Contents ul li a:hover {
+  text-decoration: underline;
+  color: #FF0000;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  text-align: center;
+}
+
+.price {
+  border-radius: 5px;
+  padding: 5px;
+
+}
+
+.price p {
+  margin: 10px 0px;
+  color: #FF0000;
+}
+
+.footer {
+  background-color: #000000;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 20px;
+}
+
+.copyright {
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.footer a {
+  text-decoration: none;
+  color: #FF0000;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: #2C1DCF;
+}
+
+#section8 {
+  padding: 0px 5px;
+}
+
+.chat-us {
+  color: #FF0000;
+  padding: 6px;
+}
+
+@media (min-width: 650px) {
+  .header input {
+    border: none;
+    height: 20px;
+    width: 80px;
+    border-radius: 2px;
+    outline: none;
+
+  }
+}

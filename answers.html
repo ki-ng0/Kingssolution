@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="Kings solution - Your best Expo site">
+  <meta property="og:description" content="Affordable Expo for all secondary schools examination">
+  <meta property="og:image" content="kingssolution.png">
+  <meta property="og:url" content="https://github.com/ki-ng0/Kingssolution.git">
+  <meta property="og:type" content="website">
+  <meta name="description" content="Study Lab provides affordable learning resources and career guidance for Nigerian students.">
+  <meta name="keywords" content="Kings solution, EXPO, WAEC, NECO, GCE, NABTEB, JUPEB, IJMB">
+  <meta name="author" content="Nnebedum Somtochukwu Oliver">
+  <title>ANSWERS</title>
+  <link rel="icon" type="image/png" href="kingssolution.png">
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+    import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCEA3gSy36gSnyKoPj4NFLl9yIldR4LkpY",
+      authDomain: "kings-solution-bba0e.firebaseapp.com",
+      projectId: "kings-solution-bba0e",
+      storageBucket: "kings-solution-bba0e.appspot.com",
+      messagingSenderId: "18111445430",
+      appId: "1:18111445430:web:5ca39cd117b0e2a7e6a917",
+      measurementId: "G-XL28VT1DGT"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    async function loadAnswers() {
+      const subjects = JSON.parse(localStorage.getItem("userSubjects"));
+      if (!subjects || subjects.length === 0) {
+        document.getElementById("answerContainer").innerHTML =
+          '<p class="Answer">No Answer found yet. Please come back later, or check your internet connection</p>';
+        return;
+      }
+
+      const answerContainer = document.getElementById("answerContainer");
+      answerContainer.innerHTML = "<h2>Your Answers</h2>";
+
+      for (let subject of subjects) {
+        const subjectLower = subject.toLowerCase().replace(/\s+/g, "-");
+        const docRef = doc(db, "answers", subjectLower);
+        const docSnap = await getDoc(docRef);
+
+        if (!docSnap.exists()) continue;
+
+        const data = docSnap.data();
+        if (!data.answerText && (!data.mediaURLs || data.mediaURLs.length === 0)) continue;
+
+        const subjectButton = document.createElement("button");
+        subjectButton.innerText = subject;
+        subjectButton.classList.add("subject-btn");
+
+        const answerSection = document.createElement("div");
+        answerSection.style.display = "none";
+
+        const answerList = document.createElement("ul");
+        answerList.style.listStyleType = "none";
+        answerList.style.padding = "0";
+
+        if (data.answerText && Array.isArray(data.answerText)) {
+          data.answerText.forEach(text => {
+            const answerTextItem = document.createElement("li");
+            answerTextItem.innerText = text;
+            answerTextItem.style.marginBottom = "15px";
+            answerTextItem.style.fontSize = "16px";
+            answerTextItem.style.lineHeight = "1.5";
+            answerTextItem.style.border = "1px solid #ddd";
+            answerTextItem.style.padding = "10px";
+            answerTextItem.style.borderRadius = "5px";
+            answerTextItem.style.background = "#f9f9f9";
+            answerList.appendChild(answerTextItem);
+          });
+        }
+
+        if (data.mediaURLs && Array.isArray(data.mediaURLs)) {
+          data.mediaURLs.forEach(url => {
+            const imageItem = document.createElement("li");
+            imageItem.style.marginBottom = "15px";
+
+            const imgElement = document.createElement("img");
+            imgElement.src = url;
+            imgElement.classList.add("clickable-image");
+            imgElement.style.width = "100%";
+            imgElement.style.maxWidth = "400px";
+            imgElement.style.borderRadius = "5px";
+            imgElement.style.display = "block";
+            imgElement.style.margin = "auto";
+
+            imgElement.addEventListener("click", () => showFullScreenImage(url));
+
+            imageItem.appendChild(imgElement);
+            answerList.appendChild(imageItem);
+          });
+        }
+
+        answerSection.appendChild(answerList);
+
+        subjectButton.addEventListener("click", () => {
+          answerSection.style.display = answerSection.style.display === "none" ? "block" : "none";
+        });
+
+        answerContainer.appendChild(subjectButton);
+        answerContainer.appendChild(answerSection);
+      }
+    }
+
+    function showFullScreenImage(imgSrc) {
+      const fullscreenDiv = document.createElement("div");
+      fullscreenDiv.classList.add("fullscreen");
+
+      const fullscreenImg = document.createElement("img");
+      fullscreenImg.src = imgSrc;
+
+      fullscreenDiv.appendChild(fullscreenImg);
+      document.body.appendChild(fullscreenDiv);
+
+      fullscreenDiv.addEventListener("click", () => {
+        fullscreenDiv.remove();
+      });
+    }
+
+    window.onload = loadAnswers;
+  </script>
+
+  <script>
+    function updateLastActiveTime() {
+      sessionStorage.setItem("lastActiveTime", Date.now());
+    }
+
+    function checkInactivity() {
+      const lastActiveTime = sessionStorage.getItem("lastActiveTime");
+      if (lastActiveTime) {
+        const currentTime = Date.now();
+        const inactiveDuration = currentTime - parseInt(lastActiveTime);
+
+        if (inactiveDuration > 60 * 60 * 1000) {
+          window.location.href = "index.html";
+        }
+      }
+    }
+
+    document.addEventListener("mousemove", updateLastActiveTime);
+    document.addEventListener("keypress", updateLastActiveTime);
+    document.addEventListener("touchstart", updateLastActiveTime);
+
+    updateLastActiveTime();
+    setInterval(checkInactivity, 60 * 1000);
+  </script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+
+    .subject-btn {
+      display: block;
+      margin: 10px auto;
+      padding: 10px;
+      width: 200px;
+      border: none;
+      cursor: pointer;
+      background: #007BFF;
+      color: white;
+      border-radius: 5px;
+    }
+
+    img {
+      display: block;
+      margin: auto;
+      width: 200px;
+      cursor: pointer;
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .fullscreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .fullscreen img {
+      width: 100vw;
+      height: 100vh;
+      object-fit: contain;
+      cursor: zoom-out;
+    }
+
+    .Answer {
+      font-weight: bold;
+      text-align: center;
+      margin-top: 15%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="answerContainer">
+    <p class="Answer">No Answer found yet. Please come back later, or check your internet connection</p>
+  </div>
+
+</body>
+
+</html>

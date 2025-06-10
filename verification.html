@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="Kings solution - Your best Expo site">
+  <meta property="og:description" content="Affordable Expo for all secondary schools examination">
+  <meta property="og:image" content="kingssolution.png">
+  <meta property="og:url" content="https://github.com/ki-ng0/Kingssolution.git">
+  <meta property="og:type" content="website">
+  <meta name="description" content="Study Lab provides affordable learning resources and career guidance for Nigerian students.">
+  <meta name="keywords" content="Kings solution, EXPO, WAEC, NECO, GCE, NABTEB, JUPEB, IJMB">
+  <meta name="author" content="Nnebedum Somtochukwu Oliver">
+  <title>VERIFICATION</title>
+  <link rel="icon" type="image/png" href="kingssolution.png">
+</head>
+
+<body>
+  <style>
+    body {
+      margin: 0px;
+    }
+
+    .container {
+      padding: 0px 8px;
+    }
+.logo{
+  background-color: black;
+}
+    .logo img {
+      width: 60px;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 10px;
+      margin-bottom: 50px;
+
+    }
+
+    p {
+      font-size: 15px;
+      font-family: monospace;
+      display: flexbox;
+      justify-content: space-evenly;
+    }
+
+    .verify {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .verify input {
+      padding: 10px 7px;
+      outline: none;
+      border-radius: 3px;
+      margin-bottom: 40px;
+      margin-top: 30px;
+      width: 55%;
+    }
+
+    .verify button {
+      padding: 10px 13px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #FFFFFF;
+      background-color: #000000;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 35px;
+    }
+
+    .verify button:hover {
+      transform: scale(1.05);
+      background-color: #4F4E4D;
+    }
+
+    .verify button:active {
+      transform: scale(0.95);
+      background-color: #2F2F2F;
+    }
+
+    .pin {
+      color: #FF0000;
+    }
+
+    .scam {
+      margin-top: 60px;
+      text-align: center;
+    }
+  </style>
+  <div class="logo"><img src="kingssolution.png" alt="kings solution logo"></div>
+  <div class="container">
+    <h1>Verification Page</h1>
+    <p>This is the PIN for the last details you uploaded to our server <span class="pin"></span> Save this PIN somewhere because you will need it until your last paper.</p>
+    <p>Enter the PIN below to see the details you have uploaded</p>
+    <div class="verify">
+      <input type="password" id="inputPin" placeholder="Enter your PIN" required>
+      <button type="submit" onclick="verification()">Verify Subscription</button>
+    </div>
+    <hr />
+    <p class="scam">Beware of scam - Chat <a href="https://wa.me/+2347057217535">07057217535</a> Only.</p>
+  </div>
+
+  <script type="module" src="database.js"></script>
+  <script>
+    document.querySelector('.pin').innerHTML = JSON.parse(localStorage.getItem('userPin'));
+  </script>
+</body>
+
+</html>

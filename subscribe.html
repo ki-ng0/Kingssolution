@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="subscribe.css">
+  <meta property="og:title" content="Kings solution - Your best Expo site">
+  <meta property="og:description" content="Affordable Expo for all secondary schools examination">
+  <meta property="og:image" content="kingssolution.png">
+  <meta property="og:url" content="https://github.com/ki-ng0/Kingssolution.git">
+  <meta property="og:type" content="website">
+  <meta name="description" content="Study Lab provides affordable learning resources and career guidance for Nigerian students.">
+  <meta name="keywords" content="Kings solution, EXPO, WAEC, NECO, GCE, NABTEB, JUPEB, IJMB">
+  <meta name="author" content="Nnebedum Somtochukwu Oliver">
+  <title>STEP 1</title>
+  <link rel="icon" type="image/png" href="kingssolution.png">
+</head>
+
+<body onload="getSelectedExam()">
+  <div class="header">
+    <header>
+      <button type="submit" id="home" onclick="main('index')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+          <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+        </svg>
+      </button>
+      <button type="submit" onclick="main('group')">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
+          <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232" />
+        </svg>
+        GROUP
+      </button>
+      <button type="submit" onclick="main('proofs')">PROOFS</button>
+      <div class="ans">
+        <input type="text" id="userPinInput" placeholder="Enter your PIN">
+        <button onclick="checkUserAccess()">View ans</button>
+      </div>
+    </header>
+  </div>
+  <div class="container">
+    <div class="register">
+      <h1>EXAM DETAILS UPLOADER</h1>
+      <p>Please select the exam you want to subscribe for. If you're writing more than one exam, you can subscribe them separately.</p>
+      <span>[STEP 1]</span>
+      <div class="select">
+        <select name="" id="examSelect">
+          <option value="" disabled selected>SELECT EXAM</option>
+          <option value="SCHOOL WAEC">SCHOOL WAEC</option>
+          <option value="SCHOOL NECO">SCHOOL NECO</option>
+          <option value="SCHOOL NABTEB">SCHOOL NABTEB</option>
+          <option value="WAEC GCE">WAEC GCE</option>
+          <option value="NECO GCE">NECO GCE</option>
+          <option value="NABTEB GCE">NABTEB GCE</option>
+          <option value="JUPEB">JUPEB</option>
+          <option value="IJMB">IJMB</option>
+        </select>
+        <select name="">
+          <option value="" disabled selected>SELECT COUNTRY</option>
+          <option value="NIGERIA">NIGERIA</option>
+          <option value="GHANA">GHANA</option>
+          <option value="LIBERIA">LIBERIA</option>
+          <option value="GAMBIA">GAMBIA</option>
+        </select>
+      </div>
+      <div class="chat-us">
+        <p>Chat us on WhatsApp now …. 2025 WAEC Subscription is on. 8K if you pay today or tomorrow... Subscribe now.. daily subscription should be done at least a day before exam... Full WhatsApp Group Subscribers get the answers much earlier before other people. Note: we don't accept calls. This is king’s solution, we source other websites.</p>
+      </div>
+      <div class="button">
+        <button type="submit" id="back" onclick="main('back')">BACK</button>
+        <button type="submit" onclick="valid1('step2.html')" id="next">NEXT</button>
+      </div>
+    </div>
+  </div>
+
+
+  <script type="module" src="database.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
