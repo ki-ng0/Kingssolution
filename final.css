@@ -54,7 +54,7 @@ header {
   font-size: 18px;
 }
 
-.button {
+#button {
   margin-top: 60px;
   display: flex;
   gap: 80px;
@@ -63,7 +63,7 @@ header {
   margin-bottom: 20px;
 }
 
-.button button {
+#button button {
   padding: 15px 30px;
   font-size: 16px;
   font-weight: bold;
@@ -75,12 +75,12 @@ header {
   transition: all 0.3s ease;
 }
 
-.button button:hover {
+#button button:hover {
   transform: scale(1.05);
   background-color: #4F4E4D;
 }
 
-.button button:active {
+#button button:active {
   transform: scale(0.95);
   background-color: #2F2F2F;
 }
@@ -101,7 +101,6 @@ header {
   font-weight: bold;
 }
 
-/* Basic checkbox styling */
 .checkbox-container {
   display: flex;
   flex-direction: column;

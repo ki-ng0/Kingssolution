@@ -28,9 +28,9 @@ async function uploadData() {
     let subjects = JSON.parse(localStorage.getItem('selectedSubjects'));
     let selectedCount = JSON.parse(localStorage.getItem('selectedCount'));
     let amount = JSON.parse(localStorage.getItem('amount'));
-
+    
     let userId = Math.floor(100000 + Math.random() * 900000);
-
+    
     const docRef = await addDoc(collection(db, "students"), {
       userId: userId,
       examType: selectedExam,
@@ -46,15 +46,55 @@ async function uploadData() {
       pending: true,
       timestamp: new Date().toISOString()
     });
-
-    alert("Data uploaded successfully! Your PIN is: " + userId);
-
-    localStorage.setItem("userPin", userId);
-    window.location.href = "user-details.html";
-
+    
+    Swal.fire({
+      icon: 'success',
+      title: 'Upload Successful',
+      text: `Your PIN is: ${userId}`,
+      background: '#101727',
+      color: '#ffffff',
+      iconColor: '#f5c518',
+      confirmButtonText: 'Continue',
+      confirmButtonColor: '#f5c518',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      customClass: {
+        popup: 'kings-swal-popup',
+        title: 'kings-swal-title',
+        confirmButton: 'kings-swal-confirm'
+      }
+    }).then(() => {
+      localStorage.setItem("userPin", userId);
+      window.location.href = "user-details.html";
+    });
+    
   } catch (error) {
     console.error("Error adding document: ", error);
-    alert("Error uploading data. Please try again.");
+    Swal.fire({
+      icon: 'error',
+      title: 'Upload Failed',
+      text: 'Error uploading data. Please try again.',
+      background: '#101727',
+      color: '#ffffff',
+      iconColor: '#ff4d4f',
+      confirmButtonText: 'Retry',
+      confirmButtonColor: '#f5c518',
+      showClass: {
+        popup: 'animate__animated animate__shakeX'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOut'
+      },
+      customClass: {
+        popup: 'kings-swal-popup',
+        title: 'kings-swal-title',
+        confirmButton: 'kings-swal-confirm'
+      }
+    });
   }
 }
 
@@ -63,16 +103,36 @@ async function checkUser() {
   if (!userPin) {
     return;
   }
-
+  
   const studentsRef = collection(db, "students");
   const q = query(studentsRef, where("userId", "==", parseInt(userPin)));
-
+  
   try {
     const querySnapshot = await getDocs(q);
-
+    
     if (querySnapshot.empty) {
-      alert("Your account has been deleted!");
-
+      await Swal.fire({
+        icon: 'error',
+        title: 'Account Not Found',
+        text: 'Your account has been deleted!',
+        background: '#101727',
+        color: '#ffffff',
+        iconColor: '#f5c518',
+        confirmButtonText: 'Okay',
+        confirmButtonColor: '#f5c518',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        },
+        customClass: {
+          popup: 'kings-swal-popup',
+          title: 'kings-swal-title',
+          confirmButton: 'kings-swal-confirm'
+        }
+      });
+      
       localStorage.removeItem("userPin");
       localStorage.removeItem('selectedExam');
       localStorage.removeItem('studentName');
@@ -85,7 +145,7 @@ async function checkUser() {
       localStorage.removeItem('selectedCount');
       localStorage.removeItem('selectedSubjects');
       localStorage.removeItem('amount');
-
+      
       window.location.href = "index.html";
       return;
     }
@@ -99,13 +159,13 @@ async function fetchUserData() {
   if (!userPin) {
     return;
   }
-
+  
   const studentsRef = collection(db, "students");
   const q = query(studentsRef, where("userId", "==", parseInt(userPin)));
-
+  
   try {
     const querySnapshot = await getDocs(q);
-
+    
     querySnapshot.forEach((docSnap) => {
       const data = docSnap.data();
       document.getElementById("userId").textContent = data.userId;
@@ -116,11 +176,11 @@ async function fetchUserData() {
       document.getElementById("packageType").textContent = data.packageType?.name || "N/A";
       document.getElementById("department").textContent = data.department;
       document.getElementById("examYear").textContent = data.examYear;
-
+      
       const statusElement = document.getElementById("status");
       const status = data?.status?.toLowerCase() || "pending";
       statusElement.textContent = status.charAt(0).toUpperCase() + status.slice(1);
-
+      
       if (status === "approved") {
         statusElement.style.color = "green";
       } else if (status === "pending") {
@@ -132,7 +192,7 @@ async function fetchUserData() {
       } else {
         statusElement.style.color = "black";
       }
-
+      
       const subjectsList = document.getElementById("subjectsList");
       subjectsList.innerHTML = "";
       (data.subjects || []).forEach((subject) => {
@@ -143,7 +203,27 @@ async function fetchUserData() {
     });
   } catch (error) {
     console.error("Error fetching user data:", error);
-    alert("❌ Error fetching user data. Please try again.");
+    await Swal.fire({
+      icon: 'error',
+      title: 'Error',
+      text: 'Error fetching user data. Please try again.',
+      background: '#101727',
+      color: '#ffffff',
+      iconColor: '#f5c518',
+      confirmButtonText: 'Okay',
+      confirmButtonColor: '#f5c518',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      customClass: {
+        popup: 'kings-swal-popup',
+        title: 'kings-swal-title',
+        confirmButton: 'kings-swal-confirm'
+      }
+    });
   }
 }
 
@@ -151,7 +231,29 @@ async function checkUserAccess() {
   const userPinInput = document.getElementById("userPinInput");
   const userPin = userPinInput.value.trim();
   
-  if (!userPin) return alert("Please enter your PIN.");
+  if (!userPin) {
+    return Swal.fire({
+      icon: 'warning',
+      title: 'Missing PIN',
+      text: 'Please enter your PIN.',
+      background: '#101727',
+      color: '#ffffff',
+      iconColor: '#f5c518',
+      confirmButtonText: 'Okay',
+      confirmButtonColor: '#f5c518',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      customClass: {
+        popup: 'kings-swal-popup',
+        title: 'kings-swal-title',
+        confirmButton: 'kings-swal-confirm'
+      }
+    });
+  }
   
   if (userPin === "08162347402") {
     userPinInput.value = "";
@@ -163,18 +265,55 @@ async function checkUserAccess() {
   const querySnapshot = await getDocs(q);
   
   if (querySnapshot.empty) {
-    alert("Invalid PIN! Please check and try again.");
-    return;
+    return Swal.fire({
+      icon: 'error',
+      title: 'Invalid PIN',
+      text: 'Invalid PIN! Please check and try again.',
+      background: '#101727',
+      color: '#ffffff',
+      iconColor: '#f5c518',
+      confirmButtonText: 'Okay',
+      confirmButtonColor: '#f5c518',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      customClass: {
+        popup: 'kings-swal-popup',
+        title: 'kings-swal-title',
+        confirmButton: 'kings-swal-confirm'
+      }
+    });
   }
   
   const userData = querySnapshot.docs[0].data();
   if (userData.status !== "approved") {
-    alert("Your account is still pending approval.");
-    return;
+    return Swal.fire({
+      icon: 'info',
+      title: 'Access Denied',
+      text: 'Your account is still pending approval.',
+      background: '#101727',
+      color: '#ffffff',
+      iconColor: '#f5c518',
+      confirmButtonText: 'Okay',
+      confirmButtonColor: '#f5c518',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      customClass: {
+        popup: 'kings-swal-popup',
+        title: 'kings-swal-title',
+        confirmButton: 'kings-swal-confirm'
+      }
+    });
   }
   
   userPinInput.value = "";
-  
   localStorage.setItem("userSubjects", JSON.stringify(userData.subjects));
   window.location.href = "answers.html";
 }
@@ -182,11 +321,11 @@ async function checkUserAccess() {
 async function displayUserSubjectImages(userId) {
   const userRef = doc(db, "students", userId);
   const userSnap = await getDoc(userRef);
-
+  
   if (userSnap.exists()) {
     const user = userSnap.data();
     const subjects = user.subjects;
-
+    
     const subjectSelect = document.getElementById("subjectSelect");
     subjectSelect.addEventListener("change", () => {
       const selectedSubject = subjectSelect.value;
@@ -200,21 +339,89 @@ async function displayUserSubjectImages(userId) {
 
 async function verification() {
   const userPin = document.getElementById("inputPin").value.trim();
-  if (!userPin) return alert("Please enter your PIN.");
-
-  const q = query(collection(db, "students"), where("userId", "==", parseInt(userPin)));
-  const querySnapshot = await getDocs(q);
-
-  if (querySnapshot.empty) {
-    alert("Invalid PIN! Please check and try again.");
+  if (!userPin) {
+    await Swal.fire({
+      icon: 'warning',
+      title: 'PIN Required',
+      text: 'Please enter your PIN.',
+      background: '#101727',
+      color: '#ffffff',
+      iconColor: '#f5c518',
+      confirmButtonText: 'Okay',
+      confirmButtonColor: '#f5c518',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      customClass: {
+        popup: 'kings-swal-popup',
+        title: 'kings-swal-title',
+        confirmButton: 'kings-swal-confirm'
+      }
+    });
     return;
   }
-
+  
+  const q = query(collection(db, "students"), where("userId", "==", parseInt(userPin)));
+  const querySnapshot = await getDocs(q);
+  
+  if (querySnapshot.empty) {
+    await Swal.fire({
+      icon: 'error',
+      title: 'Invalid PIN',
+      text: 'Invalid PIN! Please check and try again.',
+      background: '#101727',
+      color: '#ffffff',
+      iconColor: '#f5c518',
+      confirmButtonText: 'Okay',
+      confirmButtonColor: '#f5c518',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      customClass: {
+        popup: 'kings-swal-popup',
+        title: 'kings-swal-title',
+        confirmButton: 'kings-swal-confirm'
+      }
+    });
+    return;
+  }
+  
   window.location.href = "details.html";
 }
 
+const urlParams = new URLSearchParams(window.location.search);
+  const referralCode = urlParams.get('ref');
+  if (referralCode) {
+    localStorage.setItem('kingsRef', referralCode);
+  }
+  
+  async function submitDetails() {
+    const name = JSON.parse(localStorage.getItem('studentName'));
+    const phone = JSON.parse(localStorage.getItem('studentNumber'));
+    const refCode = localStorage.getItem("kingsRef") || "NONE";
+
+    try {
+      await addDoc(collection(db, "referrals"), {
+        name,
+        phone,
+        referral: refCode,
+        timestamp: serverTimestamp()
+      });
+
+    } catch (error) {
+      console.error("Error saving referral:", error);
+    }
+  }
+
 displayUserSubjectImages("user123");
 
+window.submitDetails = submitDetails;
 window.checkUserAccess = checkUserAccess;
 window.fetchUserData = fetchUserData;
 window.uploadData = uploadData;

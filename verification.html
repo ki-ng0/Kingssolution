@@ -14,87 +14,16 @@
   <meta name="author" content="Nnebedum Somtochukwu Oliver">
   <title>VERIFICATION</title>
   <link rel="icon" type="image/png" href="kingssolution.png">
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <style>
-    body {
-      margin: 0px;
-    }
-
-    .container {
-      padding: 0px 8px;
-    }
-.logo{
-  background-color: black;
-}
-    .logo img {
-      width: 60px;
-    }
-
-    h1 {
-      text-align: center;
-      margin-top: 10px;
-      margin-bottom: 50px;
-
-    }
-
-    p {
-      font-size: 15px;
-      font-family: monospace;
-      display: flexbox;
-      justify-content: space-evenly;
-    }
-
-    .verify {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .verify input {
-      padding: 10px 7px;
-      outline: none;
-      border-radius: 3px;
-      margin-bottom: 40px;
-      margin-top: 30px;
-      width: 55%;
-    }
-
-    .verify button {
-      padding: 10px 13px;
-      font-size: 16px;
-      font-weight: bold;
-      color: #FFFFFF;
-      background-color: #000000;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      margin-bottom: 35px;
-    }
-
-    .verify button:hover {
-      transform: scale(1.05);
-      background-color: #4F4E4D;
-    }
-
-    .verify button:active {
-      transform: scale(0.95);
-      background-color: #2F2F2F;
-    }
-
-    .pin {
-      color: #FF0000;
-    }
-
-    .scam {
-      margin-top: 60px;
-      text-align: center;
-    }
-  </style>
-  <div class="logo"><img src="kingssolution.png" alt="kings solution logo"></div>
+  <header>
+    <div class="logo">
+      <img src="kingssolution.png" alt="KS Logo">
+      <span>KingsSolution</span>
+    </div>
+  </header>
   <div class="container">
     <h1>Verification Page</h1>
     <p>This is the PIN for the last details you uploaded to our server <span class="pin"></span> Save this PIN somewhere because you will need it until your last paper.</p>
@@ -111,6 +40,8 @@
   <script>
     document.querySelector('.pin').innerHTML = JSON.parse(localStorage.getItem('userPin'));
   </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 </body>
 
 </html>

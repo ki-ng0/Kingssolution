@@ -1,3 +1,41 @@
+const menuToggle = document.getElementById('menuToggle');
+const navMenu = document.getElementById('menu');
+
+menuToggle.addEventListener('click', (e) => {
+  e.stopPropagation(); // prevent the document click from triggering
+  navMenu.classList.toggle('active');
+  menuToggle.classList.toggle('active');
+});
+
+// Close menu when clicking outside
+document.addEventListener('click', (e) => {
+  const isClickInsideMenu = navMenu.contains(e.target);
+  const isClickOnToggle = menuToggle.contains(e.target);
+  
+  if (!isClickInsideMenu && !isClickOnToggle) {
+    navMenu.classList.remove('active');
+    menuToggle.classList.remove('active');
+  }
+});
+
+function togglePinVisibility() {
+  const input = document.getElementById("userPinInput");
+  const eyeOpen = document.getElementById("eyeOpen");
+  const eyeSlash = document.getElementById("eyeSlash");
+  
+  if (input.type === "password") {
+    input.type = "text";
+    eyeOpen.style.display = "none";
+    eyeSlash.style.display = "inline";
+  } else {
+    input.type = "password";
+    eyeOpen.style.display = "inline";
+    eyeSlash.style.display = "none";
+  }
+}
+
+
+
 function main(param) {
   if (param === 'index') {
     window.location.href = 'index.html';
@@ -11,21 +49,45 @@ function main(param) {
     window.location.href = 'proofs.html';
   } else if (param === 'verification') {
     window.location.href = 'verification.html'
+  } else if (param == 'past') {
+    window.location.href = 'pastQuestions.html'
   }
 }
 
 function valid1(nextPage) {
   let filed = document.querySelectorAll('select');
-  let isvalid = true
+  let isvalid = true;
+  
   filed.forEach((selectField, index) => {
     if (selectField.value === '') {
-      alert(`Please select an option for filed ${index + 1}`);
+      Swal.fire({
+        icon: 'warning',
+        title: 'Missing Selection',
+        text: `Please select an option for the field`,
+        background: '#101727',
+        color: '#ffffff',
+        iconColor: '#f5c518',
+        confirmButtonText: 'Okay',
+        confirmButtonColor: '#f5c518',
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        },
+        customClass: {
+          popup: 'kings-swal-popup',
+          title: 'kings-swal-title',
+          confirmButton: 'kings-swal-confirm'
+        }
+      });
+      
       isvalid = false;
     }
   });
-
+  
   if (isvalid) {
-    window.location.href = `${nextPage}`
+    window.location.href = `${nextPage}`;
   }
 }
 
@@ -34,26 +96,87 @@ function call() {
   let number = document.getElementById('number');
 
   if (text.value.length <= 3) {
-    alert('Name must be more than 3 characters');
+    Swal.fire({
+      icon: 'warning',
+      title: 'Invalid Name',
+      text: 'Name must be more than 3 characters',
+      background: '#101727',
+    color: '#ffffff',
+    iconColor: '#f5c518',
+    confirmButtonText: 'Okay',
+    confirmButtonColor: '#f5c518',
+    showClass: {
+      popup: 'animate__animated animate__fadeInDown'
+    },
+    hideClass: {
+      popup: 'animate__animated animate__fadeOutUp'
+    },
+    customClass: {
+      popup: 'kings-swal-popup',
+      title: 'kings-swal-title',
+      confirmButton: 'kings-swal-confirm'
+    }
+    });
     return false;
   }
   else if (number.value.length <= 10) {
-    alert('Phone number must be more than 10 digit');
+    Swal.fire({
+      icon: 'warning',
+      title: 'Invalid Number',
+      text: 'Phone number must be more than 10 digits',
+      background: '#101727',
+  color: '#ffffff',
+  iconColor: '#f5c518',
+  confirmButtonText: 'Okay',
+  confirmButtonColor: '#f5c518',
+  showClass: {
+    popup: 'animate__animated animate__fadeInDown'
+  },
+  hideClass: {
+    popup: 'animate__animated animate__fadeOutUp'
+  },
+  customClass: {
+    popup: 'kings-swal-popup',
+    title: 'kings-swal-title',
+    confirmButton: 'kings-swal-confirm'
+  }
+    });
     return false;
   }
   else if (number.value.length > 11) {
-    alert('phone should not be more then 11 digit')
-    return false
+    Swal.fire({
+      icon: 'warning',
+      title: 'Too Long',
+      text: 'Phone number should not be more than 11 digits',
+      background: '#101727',
+  color: '#ffffff',
+  iconColor: '#f5c518',
+  confirmButtonText: 'Okay',
+  confirmButtonColor: '#f5c518',
+  showClass: {
+    popup: 'animate__animated animate__fadeInDown'
+  },
+  hideClass: {
+    popup: 'animate__animated animate__fadeOutUp'
+  },
+  customClass: {
+    popup: 'kings-swal-popup',
+    title: 'kings-swal-title',
+    confirmButton: 'kings-swal-confirm'
   }
+    });
+    return false;
+  }
+
   window.location.href = 'step3.html';
 }
 
 function work() {
-
+  
   const selectElement = document.getElementById('options');
   const selectedOptionElement = document.getElementById('selected-option');
   const descriptionElement = document.getElementById('description');
-
+  
   const descriptions = {
     "8,9 Science subjects pin": "<b>Description:</b> <em>This is for science students who determined to pass their 9 subjects with our help. Subscribers on this package will only get 9 subjects questions, Answers, Practical from our answer page but won't be added to our WhatsApp group but he/she can still join our subject groups through the links that will be displayed to him/her on the answer page.</em><hr>" + "<br/>" + "<b>Normal Price:</b> ₦10,000" + "<br/>" + "<b>Promo Price:</b> ₦0.000" + "<br/>" + "<b>Promo Discount:</b> ₦0.000" + "<br/>" + "<b>Promo End Date:</b> Sat 31 th Jan 2025. <span>ended</span>" + "<br/><hr>" + "<b>Maximum Subjects:</b> 9",
     "8,9 Science subjects WhatsApp group": "<b>Description:</b> <em>This is the the most popular package. This is designed for candidates who want to subscribe either for their 9 subjects or less than that and prefer getting the answers from our answer page or our android app. Subscribers on this package will be getting password a day or midnight to any day he/she has exam which he/she can use to login to view his/her answers at least mid-night to the exam. All subscribers on this package will also be added to our WhatsApp group where they will get everything they needed for the exam.</em><hr>" + "<br/>" + "<b>Normal Price:</b> ₦12,000" + "<br/>" + "<b>Promo Price:</b> ₦0.000" + "<br/>" + "<b>Promo Discount:</b> ₦0.000" + "<br/>" + "<b>Promo End Date:</b> Sat 31 th Jan 2025. <span>ended</span>" + "<br/><hr>" + "<b>Maximum Subjects:</b> 9",
@@ -71,11 +194,11 @@ function work() {
     "VIP whatsapp group": "<b>Description:</b> <em>You will receive all the exam answers on WhatsApp mid-night to the exams including questions and practicals. All Our WhatsApp VIP subscribers also receive our daily password to view the answers online via our answers page if they wish. Our answers come to our WhatsApp Group or Private to you if you don't like WhatsApp group. This is the best option for all that want both Science, Arts and Commercial answers on WhatsApp with VIP treat attached.</em><hr>" + "<br/>" + "<b>Normal Price:</b> ₦50,000" + "<br/>" + "<b>Promo Price:</b> ₦0.000" + "<br/>" + "<b>Promo Discount:</b> ₦0.000" + "<br/>" + "<b>Promo End Date:</b> Sat 31 th Jan 2025. <span>ended</span>" + "<br/><hr>" + "<b>Maximum Subjects:</b> All",
     "Limited VIP whatsapp group": "<b>Description:</b> <em>You will receive all the exam answers on WhatsApp mid-night to the exams including questions and practicals. All Our WhatsApp VIP subscribers also receive our daily password to view the answers online via our answers page if they wish. Our answers come to our WhatsApp Group or Private to you if you don't like WhatsApp group. This is the best option for all that want both Science, Arts and Commercial answers on WhatsApp with VIP treat attached.</em><hr>" + "<br/>" + "<b>Normal Price:</b> ₦35,000" + "<br/>" + "<b>Promo Price:</b> ₦0.000" + "<br/>" + "<b>Promo Discount:</b> ₦0.000" + "<br/>" + "<b>Promo End Date:</b> Sat 31 th Jan 2025. <span>ended</span>" + "<br/><hr>" + "<b>Maximum Subjects:</b> All",
   };
-
+  
   selectElement.addEventListener('change', function() {
     const selectedValue = this.value;
     const selectedText = this.options[this.selectedIndex].text;
-
+    
     selectedOptionElement.innerHTML = `<strong>Selected Package:</strong> ${selectedText}`;
     descriptionElement.innerHTML = descriptions[selectedValue];
     descriptionElement.style.fontSize = '13px';
@@ -88,7 +211,7 @@ function why() {
   if (selectedOption) {
     selectedOption.addEventListener('change', function() {
       const select = this.options[this.selectedIndex].text.trim().toLowerCase();
-
+      
       const packageData = {
         '8,9 science subjects pin': { limit: 9, amount: '₦10,000' },
         '8,9 science subjects whatsapp group': { limit: 9, amount: '₦12,000' },
@@ -115,16 +238,16 @@ function why() {
           amount: '₦35,000'
         }
       };
-
+      
       if (packageData[select]) {
         const { limit, amount } = packageData[select];
         localStorage.setItem('amount', JSON.stringify(amount));
-
+        
         const selectedPackage = {
           name: select,
           maxSubjects: limit
         };
-
+        
         localStorage.setItem('selectedPackage', JSON.stringify(selectedPackage));
       } else {
         console.warn(`Selected option "${select}" not found in packageData`);
@@ -135,46 +258,46 @@ function why() {
 
 function fname() {
   why();
-
+  
   let selectedPackage = JSON.parse(localStorage.getItem('selectedPackage'));
-
+  
   if (!selectedPackage) return;
-
+  
   const maxSubjects = selectedPackage.maxSubjects;
   document.querySelector('.package').textContent = selectedPackage.name;
-
+  
   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-
+  
   function updateCheckboxState() {
     let selectedCount = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
-
+    
     checkboxes.forEach(checkbox => {
       checkbox.disabled = selectedCount >= maxSubjects && !checkbox.checked;
     });
   }
-
+  
   checkboxes.forEach(checkbox => {
     checkbox.addEventListener('change', updateCheckboxState);
   });
-
+  
   updateCheckboxState();
 }
 
 function countSelected() {
   let selectedPackage = JSON.parse(localStorage.getItem('selectedPackage'));
-
+  
   const checkboxes = document.querySelectorAll('input[type="checkbox"]');
   const selectedCountDisplay = document.getElementById('selectedCount');
   const maxCountDisplay = document.getElementById('maxCount');
-
+  
   maxCountDisplay.textContent = selectedPackage.maxSubjects;
-
+  
   function updateSelectedCount() {
     const selectedCount = Array.from(checkboxes).filter(checkbox => checkbox.checked).length;
-
+    
     selectedCountDisplay.textContent = selectedCount;
     localStorage.setItem('selectedCount', JSON.stringify(selectedCount))
-
+    
     checkboxes.forEach(checkbox => {
       if (selectedCount >= selectedPackage.maxSubjects && !checkbox.checked) {
         checkbox.disabled = true;
@@ -183,20 +306,20 @@ function countSelected() {
       }
     });
   }
-
+  
   checkboxes.forEach(checkbox => {
     checkbox.addEventListener('change', () => {
       updateSelectedCount();
     });
   });
-
+  
   updateSelectedCount();
 }
 
 function getSelectedSubjects() {
   const selectedSubjects = [];
   const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
-
+  
   checkboxes.forEach(checkbox => {
     selectedSubjects.push(checkbox.value);
   });
@@ -207,9 +330,9 @@ function getSelectedSubjects() {
 function subjectsSelected() {
   document.getElementById('next').addEventListener('click', () => {
     const selectedSubjects = getSelectedSubjects();
-
+    
     console.log("Selected Subjects:", selectedSubjects);
-
+    
     localStorage.setItem('selectedSubjects', JSON.stringify(selectedSubjects));
   });
 }
@@ -223,7 +346,7 @@ function getSelectedExam() {
 function newName() {
   document.getElementById("examSelect").addEventListener("change", function() {
     const selectedExam = getSelectedExam();
-
+    
   });
 }
 
@@ -232,7 +355,7 @@ function examSelect() {
     const selectedExam = getSelectedExam();
     if (selectedExam) {
       localStorage.setItem("selectedExam", JSON.stringify(selectedExam));
-
+      
     } else {
       console.log(selectedExam)
     }
@@ -249,7 +372,7 @@ function inputText() {
     const name = getEnteredName();
     if (name.trim() !== "") {
       localStorage.setItem("studentName", JSON.stringify(name));
-
+      
     } else {
       console.log(name);
     }
@@ -266,7 +389,7 @@ function inputNumber() {
     const number = getEnteredNumber();
     if (number.trim() !== "" && !isNaN(number) && number > 0) {
       localStorage.setItem("studentNumber", JSON.stringify(number));
-
+      
     } else {
       console.log(number);
     }
@@ -287,12 +410,12 @@ function Email() {
     const email = getEnteredEmail();
     if (isValidEmail(email)) {
       localStorage.setItem("studentEmail", JSON.stringify(email));
-
+      
     } else {
       console.log(email)
     }
   });
-
+  
 }
 
 function getSelectedDepartment() {
@@ -304,7 +427,7 @@ function getSelectedDepartment() {
 function SON() {
   document.getElementById("selectDepartment").addEventListener("change", function() {
     const selectedDepartment = getSelectedDepartment();
-
+    
   });
 }
 
@@ -313,7 +436,7 @@ function Department() {
     const selectDepartment = getSelectedDepartment();
     if (selectDepartment) {
       localStorage.setItem("selectDepartment", JSON.stringify(selectDepartment));
-
+      
     } else {
       console.log(selectDepartment)
     }
@@ -329,7 +452,7 @@ function getSelectedYear() {
 function yearSON() {
   document.getElementById("selectYear").addEventListener("change", function() {
     const selectedDepartment = getSelectedYear();
-
+    
   });
 }
 
@@ -338,7 +461,7 @@ function Year() {
     const selectYear = getSelectedYear();
     if (selectYear) {
       localStorage.setItem("selectYear", JSON.stringify(selectYear));
-
+      
     } else {
       console.log(selectYear)
     }
@@ -371,9 +494,9 @@ function information() {
   packageType.innerHTML = selectedPackage.name;
   department.innerHTML = selectDepartment;
   examYear.innerHTML = selectYear;
-
+  
   sub.innerHTML = "";
-
+  
   subjects.forEach(subject => {
     const listItem = document.createElement("li");
     listItem.textContent = subject;
@@ -386,8 +509,29 @@ function checkUserPin() {
   const userPin = localStorage.getItem("userPin");
 
   if (userPin) {
-    alert(`You already have an account. Your User PIN: ${userPin}`);
-    window.location.href = "verification.html";
+    Swal.fire({
+      icon: 'info',
+      title: 'Account Found',
+      text: `You already have an account. Your User PIN: ${userPin}`,
+      background: '#101727',
+      color: '#ffffff',
+      iconColor: '#f5c518',
+      confirmButtonText: 'Proceed to Verify',
+      confirmButtonColor: '#f5c518',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      customClass: {
+        popup: 'kings-swal-popup',
+        title: 'kings-swal-title',
+        confirmButton: 'kings-swal-confirm'
+      }
+    }).then(() => {
+      window.location.href = "verification.html";
+    });
   } else {
     window.location.href = "subscribe.html";
   }
