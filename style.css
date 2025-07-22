@@ -169,7 +169,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 15px 20px;
+      padding: 10px 15px;
       position: relative;
       z-index: 1000;
       position: sticky;
@@ -257,7 +257,6 @@
       border-radius: 20px;
       background: linear-gradient(to right, #003366, #336699);
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
-      
     }
     
     nav.nav.active {
@@ -346,7 +345,6 @@
       outline: none;
       width: 100%;
       padding: 10px 36px 10px 12px;
-      /* enough space for the icon */
       box-sizing: border-box;
     }
     
@@ -463,6 +461,7 @@
       cursor: pointer;
       appearance: none;
     }
+    
     .select select:hover {
       border-color: #A186FF;
     }
@@ -595,266 +594,262 @@
     }
     
     #button {
-  margin-top: 60px;
-  display: flex;
-  gap: 80px;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-#button button {
-  padding: 15px 30px;
-  font-size: 16px;
-  font-weight: bold;
-  color: #FFFFFF;
-  background-color: #000000;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-#button button:hover {
-  transform: scale(1.05);
-  background-color: #4F4E4D;
-}
-
-#button button:active {
-  transform: scale(0.95);
-  background-color: #2F2F2F;
-}
-
-.packing {
-  margin: 20px 0px;
-  font-weight: bold;
-}
-
-.checkbox-container {
-  display: flex;
-  flex-direction: column;
-  margin: 20px 0;
-}
-
-.checkbox-label {
-  margin-bottom: 10px;
-  font-size: 16px;
-  font-family: Arial, sans-serif;
-}
-
-/* Style the checkbox itself */
-input[type="checkbox"] {
-  width: 20px;
-  height: 20px;
-  margin-right: 10px;
-  cursor: pointer;
-  accent-color: #007BFF;
-  /* Modern browsers will use this accent color */
-}
-
-/* Optional: Change background when checkbox is checked */
-input[type="checkbox"]:checked {
-  background-color: #007BFF;
-  border-color: #0056b3;
-}
-
-/* Optional: Add a hover effect for checkboxes */
-input[type="checkbox"]:hover {
-  background-color: #f0f0f0;
-}
-
-.container p .older {
-  font-weight: bold;
-}
-
-.details {
-  padding: 15px;
-  border-radius: 5px;
-}
-
-.details p {
-  font-size: 16px;
-  margin: 20px 10px;
-  color: white;
-}
-
-.older {
-  font-weight: bold;
-  color: #00e0ff;
-}
-
-#Subjects {
-  list-style-type: none;
-  padding: 0;
-}
-
-#Subjects li {
-  color: white;
-  padding: 8px;
-  border-radius: 5px;
-  margin: 5px 0;
-  text-align: start;
-  font-size: 14px;
-}
-
-h3,
-h4 {
-  text-align: center;
-}
-
-.bank {
-  font-weight: bolder;
-}
-
-.bankDetails ul {
-  list-style: none;
-}
-
-.Amount {
-  font-weight: bolder;
-}
-
-.btn0 {
-  margin-top: 50px;
-  display: flex;
-  gap: 80px;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-bottom: 30px;
-}
-
-.btn {
-  padding: 15px 10px;
-  font-size: 16px;
-  font-weight: bold;
-  color: #000000;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn0 button:hover {
-  transform: scale(1.05);
-  background-color: #4F4E4D;
-}
-
-.btn0 button:active {
-  transform: scale(0.95);
-  background-color: #2F2F2F;
-}
-
-.btn1 {
-  padding: 15px 10px;
-  font-size: 16px;
-  font-weight: bold;
-  color: #FFFFFF;
-  background-color: #FF0000;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.text {
-  font-size: 17px;
-  display: flexbox;
-  justify-content: space-evenly;
-}
-
-.link {
-  text-decoration: none;
-  color: #00e0ff;
-}
-
-.button {
-  margin-top: 60px;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.button button {
-  padding: 15px 30px;
-  font-size: 16px;
-  font-weight: bold;
-  color: #FFFFFF;
-  background-color: #000000;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.button button:hover {
-  transform: scale(1.05);
-  background-color: #4F4E4D;
-}
-
-.button button:active {
-  transform: scale(0.95);
-  background-color: #2F2F2F;
-}
-
-#subjectsList {
-  font-weight: bold;
-  font-family: 'Times New Roman', Times, serif;
-}
-
-strong {
-  color: #00e0ff;
-}
-
-.btn {
-  margin-top: 60px;
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-bottom: -20px;
-}
-
-.btn button {
-  padding: 12px 25px;
-  font-size: 16px;
-  font-weight: bold;
-  color: #FFFFFF;
-  background-color: #FF0000;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.btn button:hover {
-  transform: scale(1.05);
-  background-color: #4F4E4D;
-}
-
-.btn button:active {
-  transform: scale(0.95);
-  background-color: #2F2F2F;
-}
-
-.delete {
-  margin-top: 50px;
-  font-family: 'Times New Roman', Times, serif;
-}
-
+      margin-top: 60px;
+      display: flex;
+      gap: 80px;
+      justify-content: space-evenly;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    #button button {
+      padding: 15px 30px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #FFFFFF;
+      background-color: #000000;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    #button button:hover {
+      transform: scale(1.05);
+      background-color: #4F4E4D;
+    }
+    
+    #button button:active {
+      transform: scale(0.95);
+      background-color: #2F2F2F;
+    }
+    
+    .packing {
+      margin: 20px 0px;
+      font-weight: bold;
+    }
+    
+    .checkbox-container {
+      display: flex;
+      flex-direction: column;
+      margin: 20px 0;
+    }
+    
+    .checkbox-label {
+      margin-bottom: 10px;
+      font-size: 16px;
+      font-family: Arial, sans-serif;
+    }
+    
+    input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      cursor: pointer;
+      accent-color: #007BFF;
+    }
+    
+    input[type="checkbox"]:checked {
+      background-color: #007BFF;
+      border-color: #0056b3;
+    }
+    
+    input[type="checkbox"]:hover {
+      background-color: #f0f0f0;
+    }
+    
+    .container p .older {
+      font-weight: bold;
+    }
+    
+    .details {
+      padding: 15px;
+      border-radius: 5px;
+    }
+    
+    .details p {
+      font-size: 16px;
+      margin: 20px 10px;
+      color: white;
+    }
+    
+    .older {
+      font-weight: bold;
+      color: #00e0ff;
+    }
+    
+    #Subjects {
+      list-style-type: none;
+      padding: 0;
+    }
+    
+    #Subjects li {
+      color: white;
+      padding: 8px;
+      border-radius: 5px;
+      margin: 5px 0;
+      text-align: start;
+      font-size: 14px;
+    }
+    
+    h3,
+    h4 {
+      text-align: center;
+    }
+    
+    .bank {
+      font-weight: bolder;
+    }
+    
+    .bankDetails ul {
+      list-style: none;
+    }
+    
+    .Amount {
+      font-weight: bolder;
+    }
+    
+    .btn0 {
+      margin-top: 50px;
+      display: flex;
+      gap: 80px;
+      justify-content: space-evenly;
+      align-items: center;
+      margin-bottom: 30px;
+    }
+    
+    .btn {
+      padding: 15px 10px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #000000;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .btn0 button:hover {
+      transform: scale(1.05);
+      background-color: #4F4E4D;
+    }
+    
+    .btn0 button:active {
+      transform: scale(0.95);
+      background-color: #2F2F2F;
+    }
+    
+    .btn1 {
+      padding: 15px 10px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #FFFFFF;
+      background-color: #FF0000;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .text {
+      font-size: 17px;
+      display: flexbox;
+      justify-content: space-evenly;
+    }
+    
+    .link {
+      text-decoration: none;
+      color: #00e0ff;
+    }
+    
+    .button {
+      margin-top: 60px;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .button button {
+      padding: 15px 30px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #FFFFFF;
+      background-color: #000000;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .button button:hover {
+      transform: scale(1.05);
+      background-color: #4F4E4D;
+    }
+    
+    .button button:active {
+      transform: scale(0.95);
+      background-color: #2F2F2F;
+    }
+    
+    #subjectsList {
+      font-weight: bold;
+      font-family: 'Times New Roman', Times, serif;
+    }
+    
+    strong {
+      color: #00e0ff;
+    }
+    
+    .btn {
+      margin-top: 60px;
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      margin-bottom: -20px;
+    }
+    
+    .btn button {
+      padding: 12px 25px;
+      font-size: 16px;
+      font-weight: bold;
+      color: #FFFFFF;
+      background-color: #FF0000;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    
+    .btn button:hover {
+      transform: scale(1.05);
+      background-color: #4F4E4D;
+    }
+    
+    .btn button:active {
+      transform: scale(0.95);
+      background-color: #2F2F2F;
+    }
+    
+    .delete {
+      margin-top: 50px;
+      font-family: 'Times New Roman', Times, serif;
+    }
+    
     h1 {
       text-align: center;
       margin-top: 10px;
       margin-bottom: 50px;
-
+      
     }
-
+    
     .verify {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
     }
-
+    
     .verify input {
       border: 2px solid #003366;
       border-radius: 10px;
@@ -869,7 +864,7 @@ strong {
       margin-top: 20px;
       box-sizing: border-box;
     }
-
+    
     .verify button {
       padding: 10px 13px;
       font-size: 16px;
@@ -882,35 +877,35 @@ strong {
       transition: all 0.3s ease;
       margin-bottom: 35px;
     }
-
+    
     .verify button:hover {
       transform: scale(1.05);
       background-color: #4F4E4D;
     }
-
+    
     .verify button:active {
       transform: scale(0.95);
       background-color: #2F2F2F;
     }
-
+    
     .pin {
       color: #FF0000;
     }
-
+    
     .scam {
       margin-top: 60px;
       text-align: center;
     }
     
-    .payment-button{
+    .payment-button {
       list-style: none;
       gap: 40px;
       display: flex;
       margin-top: 30px;
     }
     
-   .payment-button button{
-     background-color: #FFD700;
+    .payment-button button {
+      background-color: #FFD700;
       color: #003366;
       border: none;
       padding: 10px 20px;
@@ -923,16 +918,16 @@ strong {
       cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
-   }
-   
-  .answerBody {
-   font-family: Arial, sans-serif;
-   text-align: center;
-   margin: 0;
-   padding: 0;
-   background-color: #f5f5f5;
- }
- 
+    }
+    
+    .answerBody {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      background-color: #f5f5f5;
+    }
+    
     .subject-btn {
       display: block;
       margin: 10px auto;
@@ -944,7 +939,7 @@ strong {
       color: white;
       border-radius: 5px;
     }
-
+    
     img {
       display: block;
       margin: auto;
@@ -952,7 +947,7 @@ strong {
       cursor: pointer;
       transition: transform 0.3s ease-in-out;
     }
-
+    
     .fullscreen {
       position: fixed;
       top: 0;
@@ -965,14 +960,14 @@ strong {
       align-items: center;
       z-index: 9999;
     }
-
+    
     .fullscreen img {
       width: 100vw;
       height: 100vh;
       object-fit: contain;
       cursor: zoom-out;
     }
-
+    
     .Answer {
       font-weight: bold;
       text-align: center;
@@ -994,7 +989,28 @@ strong {
       cursor: pointer;
       transition: background 0.3s ease;
     }
-
+    
     .subject-btn:hover {
       background-color: #324cdd;
+    }
+    
+    #contact-us {
+      margin-top: 120px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    
+    .contact-us {
+      margin-top: 70px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    
+    .contact-text {
+      font-size: 22px;
+      font-weight: 700;
+      color: #222;
+      font-family: Arial, sans-serif;
     }

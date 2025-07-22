@@ -49,7 +49,7 @@ function main(param) {
   } else if (param === 'back') {
     window.history.back();
   } else if (param === 'massageUs') {
-    window.location.href = 'https://wa.me/+2347057217535';
+    window.location.href = 'https://wa.me/2347057217535?text=I%20have%20made%20my%20payment%20in%20full%20here%20is%20my%20receipt........';
   } else if (param === 'group') {
     window.location.href = 'https://chat.whatsapp.com/LWrkOhTaICL2oy3oF8v5Bh';
   } else if (param === 'proofs') {

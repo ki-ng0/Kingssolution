@@ -188,43 +188,44 @@
     
     
     async function fetchUsers(filterName = "") {
-      console.log("Fetching users...");
-      const usersTable = document.getElementById("usersTable");
-      usersTable.innerHTML = "<tr><th>Name</th><th>Email</th><th>Package</th><th>Status</th><th>Action</th></tr>";
-      
-      let userQuery = collection(db, "students");
-      
-      if (filterName) {
-        userQuery = query(userQuery, where("name", "==", filterName));
-      }
-      
-      try {
-        const querySnapshot = await getDocs(userQuery);
-        querySnapshot.forEach((docSnap) => {
-          const user = docSnap.data();
-          const row = `<tr>
-  <td>${user.name}</td>
-  <td>${user.email}<br><small>${user.phone || ''}</small></td>
-  <td>${user.packageType?.name || 'N/A'}</td>
-  <td id="status-${docSnap.id}">${user.status || 'pending'}</td>
-  <td>
-    <button onclick="approveUser('${docSnap.id}')">Approve</button>
-    <button onclick="rejectUser('${docSnap.id}')">Reject</button>
-    <button onclick="disableUser('${docSnap.id}')">Disable</button>
-    <button onclick="deleteUser('${docSnap.id}')">Delete</button>
-  </td>
-</tr>`;
-          usersTable.innerHTML += row;
-        });
-        
-        if (querySnapshot.empty) {
-          usersTable.innerHTML += `<tr><td colspan="5">No users found</td></tr>`;
-        }
-      } catch (error) {
-        console.error("Error fetching users:", error);
-        alert("Error fetching users. Check console for details.");
-      }
+  console.log("Fetching users...");
+  const usersTable = document.getElementById("usersTable");
+  usersTable.innerHTML = "<tr><th>Name</th><th>Email</th><th>Package</th><th>Status</th><th>Referral Code</th><th>Action</th></tr>";
+
+  let userQuery = collection(db, "students");
+
+  if (filterName) {
+    userQuery = query(userQuery, where("name", "==", filterName));
+  }
+
+  try {
+    const querySnapshot = await getDocs(userQuery);
+    querySnapshot.forEach((docSnap) => {
+      const user = docSnap.data();
+      const row = `<tr>
+        <td>${user.name}</td>
+        <td>${user.email}<br><small>${user.phone || ''}</small></td>
+        <td>${user.packageType?.name || 'N/A'}</td>
+        <td id="status-${docSnap.id}">${user.status || 'pending'}</td>
+        <td>${user.referredBy || '—'}</td>
+        <td>
+          <button onclick="approveUser('${docSnap.id}')">Approve</button>
+          <button onclick="rejectUser('${docSnap.id}')">Reject</button>
+          <button onclick="disableUser('${docSnap.id}')">Disable</button>
+          <button onclick="deleteUser('${docSnap.id}')">Delete</button>
+        </td>
+      </tr>`;
+      usersTable.innerHTML += row;
+    });
+
+    if (querySnapshot.empty) {
+      usersTable.innerHTML += `<tr><td colspan="6">No users found</td></tr>`;
     }
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    alert("Error fetching users. Check console for details.");
+  }
+}
     
     
     function searchUsers() {
