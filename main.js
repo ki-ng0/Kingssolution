@@ -1,3 +1,10 @@
+const urlParams = new URLSearchParams(window.location.search);
+const ref = urlParams.get('ref');
+
+if (ref) {
+  localStorage.setItem('referralMarketer', ref);
+}
+
 const menuToggle = document.getElementById('menuToggle');
 const navMenu = document.getElementById('menu');
 

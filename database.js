@@ -28,9 +28,11 @@ async function uploadData() {
     let subjects = JSON.parse(localStorage.getItem('selectedSubjects'));
     let selectedCount = JSON.parse(localStorage.getItem('selectedCount'));
     let amount = JSON.parse(localStorage.getItem('amount'));
-    
+
+    let referralCode = localStorage.getItem('referralMarketer');
+
     let userId = Math.floor(100000 + Math.random() * 900000);
-    
+
     const docRef = await addDoc(collection(db, "students"), {
       userId: userId,
       examType: selectedExam,
@@ -43,10 +45,11 @@ async function uploadData() {
       subjects: subjects,
       amount: amount,
       totalSubjects: selectedCount,
+      referredBy: referralCode || null,
       pending: true,
       timestamp: new Date().toISOString()
     });
-    
+
     Swal.fire({
       icon: 'success',
       title: 'Upload Successful',
@@ -71,7 +74,7 @@ async function uploadData() {
       localStorage.setItem("userPin", userId);
       window.location.href = "user-details.html";
     });
-    
+
   } catch (error) {
     console.error("Error adding document: ", error);
     Swal.fire({
@@ -395,33 +398,8 @@ async function verification() {
   window.location.href = "details.html";
 }
 
-const urlParams = new URLSearchParams(window.location.search);
-  const referralCode = urlParams.get('ref');
-  if (referralCode) {
-    localStorage.setItem('kingsRef', referralCode);
-  }
-  
-  async function submitDetails() {
-    const name = JSON.parse(localStorage.getItem('studentName'));
-    const phone = JSON.parse(localStorage.getItem('studentNumber'));
-    const refCode = localStorage.getItem("kingsRef") || "NONE";
-
-    try {
-      await addDoc(collection(db, "referrals"), {
-        name,
-        phone,
-        referral: refCode,
-        timestamp: serverTimestamp()
-      });
-
-    } catch (error) {
-      console.error("Error saving referral:", error);
-    }
-  }
-
 displayUserSubjectImages("user123");
 
-window.submitDetails = submitDetails;
 window.checkUserAccess = checkUserAccess;
 window.fetchUserData = fetchUserData;
 window.uploadData = uploadData;
