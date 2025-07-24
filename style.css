@@ -246,7 +246,7 @@
       display: flex;
       color: white;
       position: fixed;
-      top: 0;
+      top: -5px;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
       right: -100%;
       width: 60%;
@@ -925,7 +925,7 @@
       text-align: center;
       margin: 0;
       padding: 0;
-      background-color: #f5f5f5;
+      color: #000;
     }
     
     .subject-btn {
@@ -1013,4 +1013,8 @@
       font-weight: 700;
       color: #222;
       font-family: Arial, sans-serif;
+    }
+    
+    .coming-soon {
+      text-align: center;
     }

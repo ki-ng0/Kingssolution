@@ -9,12 +9,12 @@ const menuToggle = document.getElementById('menuToggle');
 const navMenu = document.getElementById('menu');
 
 menuToggle.addEventListener('click', (e) => {
-  e.stopPropagation(); // prevent the document click from triggering
+  e.stopPropagation();
   navMenu.classList.toggle('active');
   menuToggle.classList.toggle('active');
 });
 
-// Close menu when clicking outside
+
 document.addEventListener('click', (e) => {
   const isClickInsideMenu = navMenu.contains(e.target);
   const isClickOnToggle = menuToggle.contains(e.target);
@@ -41,6 +41,32 @@ function togglePinVisibility() {
   }
 }
 
+
+  const inputs = document.querySelectorAll("nav.nav input, nav.nav textarea");
+
+  inputs.forEach(input => {
+    input.addEventListener("focus", () => {
+      setTimeout(() => {
+        input.scrollIntoView({
+          behavior: "smooth",
+          block: "center"
+        });
+      }, 300);
+    });
+  });
+
+  window.addEventListener("resize", () => {
+    const nav = document.querySelector("nav.nav");
+    if (window.innerHeight < 500) {
+
+      nav.style.height = "100vh";
+      nav.style.overflowY = "auto";
+    } else {
+
+      nav.style.height = "";
+      nav.style.overflowY = "";
+    }
+  });
 
 
 function main(param) {
@@ -101,28 +127,28 @@ function valid1(nextPage) {
 function call() {
   let text = document.getElementById('text');
   let number = document.getElementById('number');
-
+  
   if (text.value.length <= 3) {
     Swal.fire({
       icon: 'warning',
       title: 'Invalid Name',
       text: 'Name must be more than 3 characters',
       background: '#101727',
-    color: '#ffffff',
-    iconColor: '#f5c518',
-    confirmButtonText: 'Okay',
-    confirmButtonColor: '#f5c518',
-    showClass: {
-      popup: 'animate__animated animate__fadeInDown'
-    },
-    hideClass: {
-      popup: 'animate__animated animate__fadeOutUp'
-    },
-    customClass: {
-      popup: 'kings-swal-popup',
-      title: 'kings-swal-title',
-      confirmButton: 'kings-swal-confirm'
-    }
+      color: '#ffffff',
+      iconColor: '#f5c518',
+      confirmButtonText: 'Okay',
+      confirmButtonColor: '#f5c518',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      customClass: {
+        popup: 'kings-swal-popup',
+        title: 'kings-swal-title',
+        confirmButton: 'kings-swal-confirm'
+      }
     });
     return false;
   }
@@ -132,21 +158,21 @@ function call() {
       title: 'Invalid Number',
       text: 'Phone number must be more than 10 digits',
       background: '#101727',
-  color: '#ffffff',
-  iconColor: '#f5c518',
-  confirmButtonText: 'Okay',
-  confirmButtonColor: '#f5c518',
-  showClass: {
-    popup: 'animate__animated animate__fadeInDown'
-  },
-  hideClass: {
-    popup: 'animate__animated animate__fadeOutUp'
-  },
-  customClass: {
-    popup: 'kings-swal-popup',
-    title: 'kings-swal-title',
-    confirmButton: 'kings-swal-confirm'
-  }
+      color: '#ffffff',
+      iconColor: '#f5c518',
+      confirmButtonText: 'Okay',
+      confirmButtonColor: '#f5c518',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      customClass: {
+        popup: 'kings-swal-popup',
+        title: 'kings-swal-title',
+        confirmButton: 'kings-swal-confirm'
+      }
     });
     return false;
   }
@@ -156,25 +182,25 @@ function call() {
       title: 'Too Long',
       text: 'Phone number should not be more than 11 digits',
       background: '#101727',
-  color: '#ffffff',
-  iconColor: '#f5c518',
-  confirmButtonText: 'Okay',
-  confirmButtonColor: '#f5c518',
-  showClass: {
-    popup: 'animate__animated animate__fadeInDown'
-  },
-  hideClass: {
-    popup: 'animate__animated animate__fadeOutUp'
-  },
-  customClass: {
-    popup: 'kings-swal-popup',
-    title: 'kings-swal-title',
-    confirmButton: 'kings-swal-confirm'
-  }
+      color: '#ffffff',
+      iconColor: '#f5c518',
+      confirmButtonText: 'Okay',
+      confirmButtonColor: '#f5c518',
+      showClass: {
+        popup: 'animate__animated animate__fadeInDown'
+      },
+      hideClass: {
+        popup: 'animate__animated animate__fadeOutUp'
+      },
+      customClass: {
+        popup: 'kings-swal-popup',
+        title: 'kings-swal-title',
+        confirmButton: 'kings-swal-confirm'
+      }
     });
     return false;
   }
-
+  
   window.location.href = 'step3.html';
 }
 
@@ -514,7 +540,7 @@ function information() {
 
 function checkUserPin() {
   const userPin = localStorage.getItem("userPin");
-
+  
   if (userPin) {
     Swal.fire({
       icon: 'info',

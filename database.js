@@ -28,11 +28,11 @@ async function uploadData() {
     let subjects = JSON.parse(localStorage.getItem('selectedSubjects'));
     let selectedCount = JSON.parse(localStorage.getItem('selectedCount'));
     let amount = JSON.parse(localStorage.getItem('amount'));
-
+    
     let referralCode = localStorage.getItem('referralMarketer');
-
+    
     let userId = Math.floor(100000 + Math.random() * 900000);
-
+    
     const docRef = await addDoc(collection(db, "students"), {
       userId: userId,
       examType: selectedExam,
@@ -49,7 +49,7 @@ async function uploadData() {
       pending: true,
       timestamp: new Date().toISOString()
     });
-
+    
     Swal.fire({
       icon: 'success',
       title: 'Upload Successful',
@@ -74,7 +74,7 @@ async function uploadData() {
       localStorage.setItem("userPin", userId);
       window.location.href = "user-details.html";
     });
-
+    
   } catch (error) {
     console.error("Error adding document: ", error);
     Swal.fire({

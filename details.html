@@ -60,7 +60,7 @@
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
       import { getStorage, ref, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-storage.js";
-      import { getFirestore, collection, query, where, getDoc, getDocs, addDoc, doc, } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+      import { getFirestore, collection, query, where, getDoc, getDocs, deleteDoc, addDoc, doc, } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
       
       const firebaseConfig = {
         apiKey: "AIzaSyCEA3gSy36gSnyKoPj4NFLl9yIldR4LkpY",
@@ -86,7 +86,7 @@
             background: '#101727',
             color: '#ffffff',
             iconColor: '#f5c518',
-            confirmButtonText: 'Proceed to Verify',
+            confirmButtonText: 'OKay',
             confirmButtonColor: '#f5c518',
             showClass: {
               popup: 'animate__animated animate__fadeInDown'
@@ -116,7 +116,7 @@
               background: '#101727',
               color: '#ffffff',
               iconColor: '#f5c518',
-              confirmButtonText: 'Proceed to Verify',
+              confirmButtonText: 'OKay,
               confirmButtonColor: '#f5c518',
               showClass: {
                 popup: 'animate__animated animate__fadeInDown'
@@ -178,7 +178,7 @@
             background: '#101727',
             color: '#ffffff',
             iconColor: '#f5c518',
-            confirmButtonText: 'Proceed to Verify',
+            confirmButtonText: 'OKay',
             confirmButtonColor: '#f5c518',
             showClass: {
               popup: 'animate__animated animate__fadeInDown'
@@ -205,19 +205,19 @@
             background: '#101727',
             color: '#ffffff',
             iconColor: '#f5c518',
-            confirmButtonText: 'Proceed to Verify',
+            confirmButtonText: 'OKay',
             confirmButtonColor: '#f5c518',
             showClass: {
-                popup: 'animate__animated animate__fadeInDown'
-              },
-              hideClass: {
-                popup: 'animate__animated animate__fadeOutUp'
-              },
-              customClass: {
-                popup: 'kings-swal-popup',
-                title: 'kings-swal-title',
-                confirmButton: 'kings-swal-confirm'
-              }
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            },
+            customClass: {
+              popup: 'kings-swal-popup',
+              title: 'kings-swal-title',
+              confirmButton: 'kings-swal-confirm'
+            }
           });
           return;
         }
@@ -235,7 +235,7 @@
               background: '#101727',
               color: '#ffffff',
               iconColor: '#f5c518',
-              confirmButtonText: 'Proceed to Verify',
+              confirmButtonText: 'OKay',
               confirmButtonColor: '#f5c518',
               showClass: {
                 popup: 'animate__animated animate__fadeInDown'
@@ -263,7 +263,7 @@
             background: '#101727',
             color: '#ffffff',
             iconColor: '#f5c518',
-            confirmButtonText: 'Proceed to Verify',
+            confirmButtonText: 'OKay,
             confirmButtonColor: '#f5c518',
             showClass: {
               popup: 'animate__animated animate__fadeInDown'
@@ -301,7 +301,7 @@
             background: '#101727',
             color: '#ffffff',
             iconColor: '#f5c518',
-            confirmButtonText: 'Proceed to Verify',
+            confirmButtonText: 'OKay',
             confirmButtonColor: '#f5c518',
             showClass: {
               popup: 'animate__animated animate__fadeInDown'
