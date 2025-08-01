@@ -167,10 +167,12 @@
   <input type="file" id="answerFiles" multiple accept="image/*,video/*">
   <button onclick="uploadAnswer()">Upload</button>
   
+  <input type="file" id="fileInput" multiple accept/>
+  <button onclick="uploadImage()">Upload</button>
   
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
-    import { getFirestore, collection, getDoc, getDocs, updateDoc, doc, setDoc, deleteDoc, query, where, arrayUnion } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+    import { getFirestore, collection, getDoc, getDocs, updateDoc, doc, setDoc, deleteDoc, query, where, arrayUnion, addDoc, serverTimestamp} from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
     
     const firebaseConfig = {
       apiKey: "AIzaSyCEA3gSy36gSnyKoPj4NFLl9yIldR4LkpY",
@@ -185,6 +187,40 @@
     
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
+    
+    
+    async function uploadImage() {
+      const file = document.getElementById("fileInput").files[0];
+      if (!file) return alert("No image selected!");
+      
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("upload_preset", "be6pebbj"); // your unsigned preset
+      
+      try {
+        const res = await fetch("https://api.cloudinary.com/v1_1/dnsuizb8o/image/upload", {
+          method: "POST",
+          body: formData
+        });
+        
+        const result = await res.json();
+        console.log("Cloudinary upload result:", result);
+        
+        if (result.secure_url) {
+          await addDoc(collection(db, "images"), {
+            url: result.secure_url,
+            uploadedAt: serverTimestamp()
+          });
+          
+          alert("Upload successful and saved to Firestore!");
+        } else {
+          alert("Upload failed: " + (result.error?.message || "Unknown error"));
+        }
+      } catch (error) {
+        console.error("Error uploading or saving:", error);
+        alert("An error occurred: " + error.message);
+      }
+    }
     
     
     async function fetchUsers(filterName = "") {
@@ -357,7 +393,7 @@
       for (const file of files) {
         const formData = new FormData();
         formData.append("file", file);
-        formData.append("upload_preset", "oliver");
+        formData.append("upload_preset", "be6pebbj");
         
         try {
           const response = await fetch(
@@ -464,6 +500,7 @@
     window.fetchAnswers = fetchAnswers;
     window.toggleSuspendAnswer = toggleSuspendAnswer;
     window.deleteAnswer = deleteAnswer;
+    window.uploadImage = uploadImage;
   </script>
 </body>
 

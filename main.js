@@ -573,3 +573,16 @@ function checkUserPin() {
 function amounts() {
   document.querySelector('.Amount').innerHTML = JSON.parse(localStorage.getItem('amount'));
 }
+
+  const images = document.querySelectorAll('.zoom-img');
+
+  images.forEach(img => {
+    img.addEventListener('click', () => {
+      if (img.classList.contains('expanded')) {
+        img.classList.remove('expanded');
+      } else {
+        images.forEach(i => i.classList.remove('expanded'));
+        img.classList.add('expanded');
+      }
+    });
+  });

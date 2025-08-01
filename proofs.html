@@ -4,18 +4,99 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=Edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="KingsSolution provides verified WAEC, NECO, and GCE expo answers, latest exam updates, and preparation tips to help Nigerian students pass easily.">
+  <meta name="keywords" content="WAEC expo 2026, NECO answers, GCE runs, NABTEB answers, KingsSolution, JUPEB updates, Nigerian exams, free expo site, EXPO, WAEC, NECO, GCE, NABTEB, JUPEB, IJMB">
+  <meta name="author" content="KingsSolution Team">
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:title" content="Kings solution - Your best Expo site">
   <meta property="og:description" content="Affordable Expo for all secondary schools examination">
   <meta property="og:image" content="kingssolution.png">
-  <meta property="og:url" content="https://github.com/ki-ng0/Kingssolution.git">
+  <meta property="og:url" content="https://ki-ng0.github.io/Kingssolution">
   <meta property="og:type" content="website">
-  <meta name="description" content="Study Lab provides affordable learning resources and career guidance for Nigerian students.">
-  <meta name="keywords" content="Kings solution, EXPO, WAEC, NECO, GCE, NABTEB, JUPEB, IJMB">
-  <meta name="author" content="Nnebedum Somtochukwu Oliver">
+  <meta name="google-site-verification" content="5Pspuiw6AmknmoYMZraWfhYichkz-SJj4kl6fb0IVX4" />
+  <link rel="canonical" href="https://ki-ng0.github.io/Kingssolution/" />
   <title>Proofs</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="kingssolution.png">
+  
+  
+   <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCEA3gSy36gSnyKoPj4NFLl9yIldR4LkpY",
+      authDomain: "kings-solution-bba0e.firebaseapp.com",
+      projectId: "kings-solution-bba0e",
+      storageBucket: "kings-solution-bba0e.appspot.com",
+      messagingSenderId: "18111445430",
+      appId: "1:18111445430:web:5ca39cd117b0e2a7e6a917",
+      measurementId: "G-XL28VT1DGT"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    async function loadImages() {
+      const imagesCol = collection(db, "images");
+      const snapshot = await getDocs(imagesCol);
+      const container = document.getElementById("imageContainer");
+
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        const img = document.createElement("img");
+        img.src = data.url;
+        img.alt = "Uploaded image";
+        img.className = "image-thumb";
+        img.addEventListener("click", () => {
+          toggleExpand(img);
+        });
+        container.appendChild(img);
+      });
+    }
+
+    function toggleExpand(clickedImg) {
+      const allImages = document.querySelectorAll(".image-thumb");
+
+      allImages.forEach(img => {
+        if (img !== clickedImg) {
+          img.classList.remove("expanded");
+        }
+      });
+
+      clickedImg.classList.toggle("expanded");
+    }
+
+    window.addEventListener("DOMContentLoaded", loadImages);
+  </script>
+
+  <style>
+
+    #imageContainer {
+      display: flex;
+      flex-wrap: wrap;
+      
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .image-thumb {
+      max-width: 150px;
+      max-height: 150px;
+      transition: transform 0.3s ease, max-width 0.3s ease, max-height 0.3s ease;
+      cursor: pointer;
+      border-radius: 6px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    }
+
+    .image-thumb.expanded {
+      z-index: 10;
+      position: relative;
+      transform: scale(2.5);
+      box-shadow: 0 0 15px rgba(0,0,0,0.5);
+    }
+  </style>
 </head>
 
 <body>
@@ -91,10 +172,7 @@
     </ul>
   </nav>
   
-  <script type="module" src="database.js"></script>
-  <script src="main.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+  <h1>All Uploaded Images</h1>
+  <div id="imageContainer"></div>
 </body>
-
 </html>
