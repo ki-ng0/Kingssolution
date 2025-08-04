@@ -77,7 +77,7 @@ function main(param) {
   } else if (param === 'massageUs') {
     window.location.href = 'https://wa.me/2347057217535?text=I%20have%20made%20my%20payment%20in%20full%20here%20is%20my%20receipt........';
   } else if (param === 'group') {
-    window.location.href = 'https://chat.whatsapp.com/BkbG13vukPd2qHYgCcthyr?mode=ac_t';
+    window.location.href = 'https://chat.whatsapp.com/LWrkOhTaICL2oy3oF8v5Bh';
   } else if (param === 'proofs') {
     window.location.href = 'proofs.html';
   } else if (param === 'verification') {
