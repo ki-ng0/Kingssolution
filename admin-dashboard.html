@@ -230,7 +230,8 @@
     async function fetchUsers(filterName = "") {
       console.log("Fetching users...");
       const usersTable = document.getElementById("usersTable");
-      usersTable.innerHTML = "<tr><th>Name</th><th>Email</th><th>Package</th><th>Status</th><th>Referral Code</th><th>Action</th></tr>";
+      
+      usersTable.innerHTML = "<tr><th>Name</th><th>Number/Email</th><th>Package</th><th>Amount</th><th>Status</th><th>Referral Code</th><th>Action</th></tr>";
       
       let userQuery = collection(db, "students");
       
@@ -242,10 +243,12 @@
         const querySnapshot = await getDocs(userQuery);
         querySnapshot.forEach((docSnap) => {
           const user = docSnap.data();
+          
           const row = `<tr>
         <td>${user.name}</td>
         <td>${user.email}<br><small>${user.phone || ''}</small></td>
         <td>${user.packageType?.name || 'N/A'}</td>
+        <td>${user.amount || '0'}</td>
         <td id="status-${docSnap.id}">${user.status || 'pending'}</td>
         <td>${user.referredBy || '—'}</td>
         <td>
@@ -259,7 +262,7 @@
         });
         
         if (querySnapshot.empty) {
-          usersTable.innerHTML += `<tr><td colspan="6">No users found</td></tr>`;
+          usersTable.innerHTML += `<tr><td colspan="7">No users found</td></tr>`;
         }
       } catch (error) {
         console.error("Error fetching users:", error);
