@@ -176,7 +176,7 @@
   
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
-    import { getFirestore, collection, getDoc, getDocs, updateDoc, doc, setDoc, deleteDoc, query, where, arrayUnion, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+    import { getFirestore, collection, getDoc, getDocs, updateDoc, doc, setDoc, deleteDoc, query, orderBy, startAt, endAt, where, arrayUnion, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
     
     const firebaseConfig = {
       apiKey: "AIzaSyCEA3gSy36gSnyKoPj4NFLl9yIldR4LkpY",
@@ -199,7 +199,7 @@
       
       const formData = new FormData();
       formData.append("file", file);
-      formData.append("upload_preset", "be6pebbj"); // your unsigned preset
+      formData.append("upload_preset", "be6pebbj");
       
       try {
         const res = await fetch("https://api.cloudinary.com/v1_1/dnsuizb8o/image/upload", {
@@ -230,25 +230,29 @@
     async function fetchUsers(filterName = "") {
       console.log("Fetching users...");
       const usersTable = document.getElementById("usersTable");
+      usersTable.innerHTML = "<tr><th>Name</th><th>Email</th><th>Package</th><th>Amount Paid</th><th>Status</th><th>Referral Code</th><th>Action</th></tr>";
       
-      usersTable.innerHTML = "<tr><th>Name</th><th>Number/Email</th><th>Package</th><th>Amount</th><th>Status</th><th>Referral Code</th><th>Action</th></tr>";
-      
-      let userQuery = collection(db, "students");
-      
-      if (filterName) {
-        userQuery = query(userQuery, where("name", "==", filterName));
-      }
+      const userQuery = collection(db, "students");
       
       try {
         const querySnapshot = await getDocs(userQuery);
+        
+        let found = false;
+        
         querySnapshot.forEach((docSnap) => {
           const user = docSnap.data();
+          
+          if (filterName && !user.name?.toLowerCase().includes(filterName.toLowerCase())) {
+            return;
+          }
+          
+          found = true;
           
           const row = `<tr>
         <td>${user.name}</td>
         <td>${user.email}<br><small>${user.phone || ''}</small></td>
         <td>${user.packageType?.name || 'N/A'}</td>
-        <td>${user.amount || '0'}</td>
+        <td>${user.amount || '₦0'}</td>
         <td id="status-${docSnap.id}">${user.status || 'pending'}</td>
         <td>${user.referredBy || '—'}</td>
         <td>
@@ -258,10 +262,11 @@
           <button onclick="deleteUser('${docSnap.id}')">Delete</button>
         </td>
       </tr>`;
+          
           usersTable.innerHTML += row;
         });
         
-        if (querySnapshot.empty) {
+        if (!found) {
           usersTable.innerHTML += `<tr><td colspan="7">No users found</td></tr>`;
         }
       } catch (error) {
