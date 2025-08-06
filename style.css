@@ -1038,3 +1038,34 @@
       z-index: 10;
       position: relative;
     }
+    
+  .notice_board {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 12px;
+  margin: 30px auto;
+  width: 100%;
+  max-width: 800px;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  transition: all 0.3s ease-in-out;
+}
+
+.notice_board:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+}
+
+.notice_board h2 {
+  font-size: 24px;
+  color: #f5c518;
+  margin-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 8px;
+}
+
+.notice_board p {
+  font-size: 16px;
+  line-height: 1.6;
+}

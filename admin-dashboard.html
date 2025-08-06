@@ -3,15 +3,19 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="description" content="KingsSolution provides verified WAEC, NECO, and GCE expo answers, latest exam updates, and preparation tips to help Nigerian students pass easily.">
+  <meta name="keywords" content="WAEC expo 2026, NECO answers, GCE runs, NABTEB answers, KingsSolution, JUPEB updates, Nigerian exams, waec result, waec updates, free expo site, EXPO, WAEC, NECO, GCE, NABTEB, JUPEB, IJMB">
+  <meta name="author" content="KingsSolution Team">
+  <meta name="robots" content="index, follow">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta property="og:title" content="Kings solution - Your best Expo site">
-  <meta property="og:description" content="Affordable Expo for all secondary schools examination">
+  <meta property="og:title" content="KingsSolution - Trusted WAEC, NECO & GCE Updates and Assistance">
+  <meta property="og:description" content="KingsSolution provides real-time updates and verified answers for WAEC, NECO, and GCE. Trusted by thousands of students nationwide.">
   <meta property="og:image" content="kingssolution.png">
-  <meta property="og:url" content="https://github.com/ki-ng0/Kingssolution.git">
+  <meta property="og:url" content="https://kingssolution.vercel.app">
   <meta property="og:type" content="website">
-  <meta name="description" content="Study Lab provides affordable learning resources and career guidance for Nigerian students.">
-  <meta name="keywords" content="Kings solution, EXPO, WAEC, NECO, GCE, NABTEB, JUPEB, IJMB">
-  <meta name="author" content="Nnebedum Somtochukwu Oliver">
+  <meta name="google-site-verification" content="5Pspuiw6AmknmoYMZraWfhYichkz-SJj4kl6fb0IVX4" />
+  <link rel="canonical" href="https://kingssolution.vercel.app" />
   <title>ADMIN</title>
   <link rel="icon" type="image/png" href="kingssolution.png">
 </head>
@@ -167,12 +171,12 @@
   <input type="file" id="answerFiles" multiple accept="image/*,video/*">
   <button onclick="uploadAnswer()">Upload</button>
   
-  <input type="file" id="fileInput" multiple accept/>
+  <input type="file" id="fileInput" multiple accept />
   <button onclick="uploadImage()">Upload</button>
   
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
-    import { getFirestore, collection, getDoc, getDocs, updateDoc, doc, setDoc, deleteDoc, query, where, arrayUnion, addDoc, serverTimestamp} from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+    import { getFirestore, collection, getDoc, getDocs, updateDoc, doc, setDoc, deleteDoc, query, where, arrayUnion, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
     
     const firebaseConfig = {
       apiKey: "AIzaSyCEA3gSy36gSnyKoPj4NFLl9yIldR4LkpY",
