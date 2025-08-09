@@ -42,31 +42,31 @@ function togglePinVisibility() {
 }
 
 
-  const inputs = document.querySelectorAll("nav.nav input, nav.nav textarea");
+const inputs = document.querySelectorAll("nav.nav input, nav.nav textarea");
 
-  inputs.forEach(input => {
-    input.addEventListener("focus", () => {
-      setTimeout(() => {
-        input.scrollIntoView({
-          behavior: "smooth",
-          block: "center"
-        });
-      }, 300);
-    });
+inputs.forEach(input => {
+  input.addEventListener("focus", () => {
+    setTimeout(() => {
+      input.scrollIntoView({
+        behavior: "smooth",
+        block: "center"
+      });
+    }, 300);
   });
+});
 
-  window.addEventListener("resize", () => {
-    const nav = document.querySelector("nav.nav");
-    if (window.innerHeight < 500) {
-
-      nav.style.height = "100vh";
-      nav.style.overflowY = "auto";
-    } else {
-
-      nav.style.height = "";
-      nav.style.overflowY = "";
-    }
-  });
+window.addEventListener("resize", () => {
+  const nav = document.querySelector("nav.nav");
+  if (window.innerHeight < 500) {
+    
+    nav.style.height = "100vh";
+    nav.style.overflowY = "auto";
+  } else {
+    
+    nav.style.height = "";
+    nav.style.overflowY = "";
+  }
+});
 
 
 function main(param) {
@@ -83,7 +83,7 @@ function main(param) {
   } else if (param === 'verification') {
     window.location.href = 'verification.html'
   } else if (param == 'past') {
-    window.location.href = 'pastQuestions.html'
+    window.location.href = 'timer.html'
   }
 }
 
@@ -574,15 +574,15 @@ function amounts() {
   document.querySelector('.Amount').innerHTML = JSON.parse(localStorage.getItem('amount'));
 }
 
-  const images = document.querySelectorAll('.zoom-img');
+const images = document.querySelectorAll('.zoom-img');
 
-  images.forEach(img => {
-    img.addEventListener('click', () => {
-      if (img.classList.contains('expanded')) {
-        img.classList.remove('expanded');
-      } else {
-        images.forEach(i => i.classList.remove('expanded'));
-        img.classList.add('expanded');
-      }
-    });
+images.forEach(img => {
+  img.addEventListener('click', () => {
+    if (img.classList.contains('expanded')) {
+      img.classList.remove('expanded');
+    } else {
+      images.forEach(i => i.classList.remove('expanded'));
+      img.classList.add('expanded');
+    }
   });
+});

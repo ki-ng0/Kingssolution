@@ -32,66 +32,68 @@
       <div class="bar2"></div>
       <div class="bar3"></div>
     </div>
-  </header>
-  <nav class="nav" id="menu">
-    <ul>
-      <li>
-        <button type="submit" onclick="main('index')">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
-            <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
-          </svg>
-        </button>
-      </li>
-      <li>
-        <button type="submit" onclick="main('group')">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
-            <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232" />
-          </svg>
-          GROUP
-        </button>
-      </li>
-      <li>
-        <button type="submit" onclick="main('proofs')">
-          Proofs
-        </button>
-      </li>
-      <li>
-        <button type="submit" onclick="main('past')">
-          Past Questions
-        </button>
-      </li>
-      <div class="ans">
+    
+    <nav class="nav" id="menu">
+      <ul>
         <li>
-          <div class="pin-wrapper">
-            <input type="password" id="userPinInput" placeholder="Enter PIN" />
-            <span class="toggle-visibility" onclick="togglePinVisibility()">
-            
-              <svg id="eyeOpen" xmlns="http://www.w3.org/2000/svg" fill="#666" viewBox="0 0 24 24" width="18" height="18">
-                <path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12a5 5 0 1 1 0-10z" />
-              </svg>
-              
-              <svg id="eyeSlash" xmlns="http://www.w3.org/2000/svg" fill="#666" viewBox="0 0 24 24" width="18" height="18" style="display: none;">
-                <path d="M2.1 3.51L1 4.62l3.64 3.64C2.96 9.62 1 12 1 12s4 7 11 7c2.33 0 4.31-.68 6-1.79l2.38 2.38 1.11-1.11L2.1 3.51zm9.9 13.49c-4.48 0-7.29-3.41-8.31-5 .54-.87 1.36-1.88 2.47-2.73l2.01 2.01A5 5 0 0 0 12 17zm.73-6.84l2.11 2.11a5 5 0 0 0-2.11-2.11zM14.12 9.88l2.01 2.01a5 5 0 0 0-2.01-2.01zM12 7a5 5 0 0 1 5 5c0 .39-.04.77-.1 1.14l2.35 2.35c.53-.62.99-1.27 1.35-1.84-1.01-1.59-3.82-5-8.3-5-.65 0-1.27.07-1.87.19l2.29 2.29c.14-.03.29-.04.44-.04z" />
-              </svg>
-            </span>
-          </div>
-        </li>
-        <li>
-          <button onclick="checkUserAccess()">View ans</button>
-        </li>
-      </div>
-      <div id="contact-us">
-        <li>
-          <h2 class="contact-text">Contact us</h2>
-        </li>
-        <li>
-          <button type="submit" onclick="window.location.href='https://wa.me/2347057217535?text=Assistance%20needed%2C%20please%20help.......'">
-            whatsapp
+          <button type="submit" onclick="main('index')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-house-door-fill" viewBox="0 0 16 16">
+              <path d="M6.5 14.5v-3.505c0-.245.25-.495.5-.495h2c.25 0 .5.25.5.5v3.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-7a.5.5 0 0 0-.146-.354L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293L8.354 1.146a.5.5 0 0 0-.708 0l-6 6A.5.5 0 0 0 1.5 7.5v7a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5" />
+            </svg>
           </button>
         </li>
-      </div>
-    </ul>
-  </nav>
+        <li>
+          <button type="submit" onclick="main('group')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
+              <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232" />
+            </svg>
+            GROUP
+          </button>
+        </li>
+        <li>
+          <button type="submit" onclick="main('proofs')">
+            Proofs
+          </button>
+        </li>
+        <li>
+          <button type="submit" onclick="main('past')">
+            Past Questions
+          </button>
+        </li>
+        <div class="ans">
+          <li>
+            <div class="pin-wrapper">
+              <input type="password" id="userPinInput" placeholder="Enter PIN" />
+              <span class="toggle-visibility" onclick="togglePinVisibility()">
+              
+                <svg id="eyeOpen" xmlns="http://www.w3.org/2000/svg" fill="#666" viewBox="0 0 24 24" width="18" height="18">
+                  <path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12a5 5 0 1 1 0-10z" />
+                </svg>
+                
+                <svg id="eyeSlash" xmlns="http://www.w3.org/2000/svg" fill="#666" viewBox="0 0 24 24" width="18" height="18" style="display: none;">
+                  <path d="M2.1 3.51L1 4.62l3.64 3.64C2.96 9.62 1 12 1 12s4 7 11 7c2.33 0 4.31-.68 6-1.79l2.38 2.38 1.11-1.11L2.1 3.51zm9.9 13.49c-4.48 0-7.29-3.41-8.31-5 .54-.87 1.36-1.88 2.47-2.73l2.01 2.01A5 5 0 0 0 12 17zm.73-6.84l2.11 2.11a5 5 0 0 0-2.11-2.11zM14.12 9.88l2.01 2.01a5 5 0 0 0-2.01-2.01zM12 7a5 5 0 0 1 5 5c0 .39-.04.77-.1 1.14l2.35 2.35c.53-.62.99-1.27 1.35-1.84-1.01-1.59-3.82-5-8.3-5-.65 0-1.27.07-1.87.19l2.29 2.29c.14-.03.29-.04.44-.04z" />
+                </svg>
+              </span>
+            </div>
+          </li>
+          <li>
+            <button onclick="checkUserAccess()">View ans</button>
+          </li>
+        </div>
+        <div id="contact-us">
+          <li>
+            <h2 class="contact-text">Contact us</h2>
+          </li>
+          <li>
+            <button type="submit" onclick="window.location.href='https://wa.me/2347057217535?text=Assistance%20needed%2C%20please%20help.......'">
+              whatsapp
+            </button>
+          </li>
+        </div>
+      </ul>
+    </nav>
+  </header>
+  
   <div class="container">
     <div class="register">
       <h1>EXAM DETAILS UPLOADER</h1>

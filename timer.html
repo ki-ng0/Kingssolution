@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
   <meta charset="UTF-8">
@@ -16,12 +16,12 @@
   <meta property="og:type" content="website">
   <meta name="google-site-verification" content="5Pspuiw6AmknmoYMZraWfhYichkz-SJj4kl6fb0IVX4" />
   <link rel="canonical" href="https://kingssolution.vercel.app" />
-  <title>PAYMENT DETAILS</title>
+  <title>Page Locked — Opening Soon!</title>
   <link rel="icon" type="image/png" href="kingssolution.png">
   <link rel="stylesheet" href="style.css" />
 </head>
 
-<body onload="fetchUserData(), amounts()">
+<body onload="timer()">
   <header>
     <div class="logo">
       <img src="kingssolution.png" alt="KS Logo">
@@ -60,12 +60,19 @@
             Past Questions
           </button>
         </li>
+        <li>
+          <button type="submit" onclick="checkUserPin()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-hand-thumbs-up-fill" viewBox="0 0 16 16">
+              <path d="M6.956 1.745C7.021.81 7.908.087 8.864.325l.261.066c.463.116.874.456 1.012.965.22.816.533 2.511.062 4.51a10 10 0 0 1 .443-.051c.713-.065 1.669-.072 2.516.21.518.173.994.681 1.2 1.273.184.532.16 1.162-.234 1.733q.086.18.138.363c.077.27.113.567.113.856s-.036.586-.113.856c-.039.135-.09.273-.16.404.169.387.107.819-.003 1.148a3.2 3.2 0 0 1-.488.901c.054.152.076.312.076.465 0 .305-.089.625-.253.912C13.1 15.522 12.437 16 11.5 16H8c-.605 0-1.07-.081-1.466-.218a4.8 4.8 0 0 1-.97-.484l-.048-.03c-.504-.307-.999-.609-2.068-.722C2.682 14.464 2 13.846 2 13V9c0-.85.685-1.432 1.357-1.615.849-.232 1.574-.787 2.132-1.41.56-.627.914-1.28 1.039-1.639.199-.575.356-1.539.428-2.59z" />
+            </svg>
+            Subscribe
+          </button>
+        </li>
         <div class="ans">
           <li>
             <div class="pin-wrapper">
               <input type="password" id="userPinInput" placeholder="Enter PIN" />
               <span class="toggle-visibility" onclick="togglePinVisibility()">
-              
                 <svg id="eyeOpen" xmlns="http://www.w3.org/2000/svg" fill="#666" viewBox="0 0 24 24" width="18" height="18">
                   <path d="M12 5c-7 0-11 7-11 7s4 7 11 7 11-7 11-7-4-7-11-7zm0 12a5 5 0 1 1 0-10z" />
                 </svg>
@@ -80,7 +87,7 @@
             <button onclick="checkUserAccess()">View ans</button>
           </li>
         </div>
-        <div id="contact-us">
+        <div class="contact-us">
           <li>
             <h2 class="contact-text">Contact us</h2>
           </li>
@@ -94,59 +101,18 @@
     </nav>
   </header>
   
-  <div class="container">
-    <h1>User Details</h1>
-    <h3>We have Captured your subscription details</h3>
-    <p><strong>PIN:</strong> <span id="userId"></span> (Keep this safe)</p>
-    <p><strong>Exam Type:</strong> <span id="examType"></span></p>
-    <p><strong>Name:</strong> <span id="name"></span></p>
-    <p><strong>Phone:</strong> <span id="phone"></span></p>
-    <p><strong>Email:</strong> <span id="email"></span></p>
-    <p><strong>Package:</strong> <span id="packageType"></span></p>
-    <p><strong>Department:</strong> <span id="department"></span></p>
-    <p><strong>Exam Year:</strong> <span id="examYear"></span></p>
-    <p><strong>Subjects:</strong>
-    <ul id="subjectsList"></ul>
+  <div class="card">
+    <h1>This Page is Locked — Opening Soon!</h1>
+    <h2>We’re preparing something exciting for you</h2>
+    <p>
+      This section is temporarily unavailable. We’re making some updates and will open the doors
+      at the exact time shown below. Keep this page open — it will automatically refresh when the countdown ends.
     </p>
-    <p><strong>Status:</strong> <span id="status"></span></p>
-    
-    <hr />
-    <h3>Notice</h3>
-    <p>The Pin is what you will be using as your answer password once your account has been verified. But if you are subscribing for Whatsapp group you can forget about the pin, Because you will be added to the group automatically.</p>
-    <h3>
-      PAYMENT PROCEDURE
-    </h3>
-    <p>If you have already paid, kindly ignore the payment process and send us proof of payment on Whatsapp with this number 07057217535 Or simply click the the button <em>I Have Made Payment,</em> for immediate confirmation of your payment and approval of your subscription. If you have not paid, kindly follow the process below to make your payment.</p>
-    <h4>PAY TO</h4>
-    <div class="bankDetails">
-      <hr />
-      <ul>
-        <li>
-          Amount: <span class="Amount"></span>
-        </li>
-      </ul>
-      <hr />
-      <ul>
-        <li>
-          Account Number: <span class="bank">2025354423</span>
-        </li><br />
-        <li>
-          Bank Name: <span class="bank">Kuda</span>
-        </li><br />
-        <li>
-          Acc. Name: <span class="bank">Nnebedum<br> Somtochukwu Oliver</span>
-        </li>
-      </ul>
-    </div>
-    <p><span class="">NOTE: </span>Pay now and avoid "Abeg Sir" because we won't listen to you.</p>
-    <div class="payment-button">
-      <button type="submit" onclick="main('massageUs')">I Have Made Payment</button>
-      <button type="submit" onclick="main('index')"> I will pay later</button>
-    </div>
+    <div id="timer">Loading...</div>
   </div>
+  
   <script type="module" src="database.js"></script>
   <script src="main.js"></script>
-  
 </body>
 
 </html>

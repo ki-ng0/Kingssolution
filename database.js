@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
-import { getStorage, ref, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-storage.js";
-import { getFirestore, collection, query, where, getDoc, getDocs, addDoc, doc, } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+import { getStorage, ref, getDownloadURL  } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-storage.js";
+import { getFirestore, collection, query, where, getDoc, getDocs, addDoc, doc, onSnapshot, orderBy, limit} from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCEA3gSy36gSnyKoPj4NFLl9yIldR4LkpY",
@@ -400,8 +400,118 @@ async function verification() {
 
 displayUserSubjectImages("user123");
 
+function timer() {
+let countdownInterval = null;
+
+onSnapshot(doc(db, "settings", "unlock"), (docSnap) => {
+  if (docSnap.exists()) {
+    let unlockTimeRaw = docSnap.data().unlockTime;
+    
+    
+    let unlockTime;
+    if (unlockTimeRaw && typeof unlockTimeRaw.toMillis === "function") {
+      unlockTime = unlockTimeRaw.toMillis();
+    } else {
+      unlockTime = Number(unlockTimeRaw);
+    }
+    
+    
+    if (!unlockTime || isNaN(unlockTime)) {
+      document.getElementById("timer").textContent = "Invalid unlock time format.";
+      return;
+    }
+    
+    if (countdownInterval) clearInterval(countdownInterval);
+    
+    function updateTimer() {
+      const now = Date.now();
+      const diff = unlockTime - now;
+      
+      if (diff <= 0) {
+        window.location.href = "pastQuestions.html";
+      } else {
+        const seconds = Math.floor(diff / 1000) % 60;
+        const minutes = Math.floor(diff / 1000 / 60) % 60;
+        const hours = Math.floor(diff / 1000 / 60 / 60) % 24;
+        const days = Math.floor(diff / 1000 / 60 / 60 / 24);
+        
+        document.getElementById("timer").textContent =
+          `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      }
+    }
+    
+    updateTimer();
+    countdownInterval = setInterval(updateTimer, 1000);
+    
+  } else {
+    document.getElementById("timer").textContent = "No unlock time set.";
+  }
+}, (err) => {
+  console.error("Error fetching unlock time:", err);
+  document.getElementById("timer").textContent = "Error loading countdown.";
+});
+}
+
+function notice() {
+
+  const noticesRef = collection(db, "noticeBoard");
+
+let autoSlideInterval;
+
+onSnapshot(
+  query(noticesRef, orderBy("date", "desc")),
+  (snapshot) => {
+    const noticeDiv = document.getElementById("noticeContent");
+    noticeDiv.innerHTML = "";
+
+    snapshot.forEach(doc => {
+      const notice = doc.data();
+      const item = document.createElement("div");
+      item.classList.add("notice-item");
+      item.innerHTML = `
+        <h3>${notice.title}</h3>
+        <p>${notice.content}</p>
+      `;
+      noticeDiv.appendChild(item);
+    });
+
+    startAutoSlide();
+  },
+  (error) => {
+    console.error("Error loading notices:", error);
+    document.getElementById("noticeContent").innerHTML = "<p>Failed to load notices.</p>";
+  }
+);
+
+function startAutoSlide() {
+  clearInterval(autoSlideInterval);
+  const container = document.getElementById("noticeContent");
+  let scrollAmount = 0;
+  const scrollStep = 270;
+  const delay = 5000;
+
+  autoSlideInterval = setInterval(() => {
+    if (scrollAmount >= container.scrollWidth - container.clientWidth) {
+      scrollAmount = 0;
+    } else {
+      scrollAmount += scrollStep;
+    }
+    container.scrollTo({
+      left: scrollAmount,
+      behavior: "smooth"
+    });
+  }, delay);
+
+  // Pause on hover
+  container.addEventListener("mouseenter", () => clearInterval(autoSlideInterval));
+  container.addEventListener("mouseleave", startAutoSlide);
+}
+}
+
+window.notice = notice
 window.checkUserAccess = checkUserAccess;
 window.fetchUserData = fetchUserData;
 window.uploadData = uploadData;
 window.verification = verification;
 window.checkUser = checkUser;
+window.timer = timer
