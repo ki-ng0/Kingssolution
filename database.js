@@ -18,6 +18,7 @@ const storage = getStorage(app);
 
 async function uploadData() {
   try {
+    // Get user info from localStorage
     let selectedExam = JSON.parse(localStorage.getItem('selectedExam'));
     let studentName = JSON.parse(localStorage.getItem('studentName'));
     let studentNumber = JSON.parse(localStorage.getItem('studentNumber'));
@@ -28,13 +29,13 @@ async function uploadData() {
     let subjects = JSON.parse(localStorage.getItem('selectedSubjects'));
     let selectedCount = JSON.parse(localStorage.getItem('selectedCount'));
     let amount = JSON.parse(localStorage.getItem('amount'));
-
-    // Use referralCode as affiliate ID if it represents the affiliate user ID
+    
+    // Referral code
     let referralCode = localStorage.getItem('referralMarketer');
-
+    
     let userId = Math.floor(100000 + Math.random() * 900000);
-
-    // Save student data to 'students' collection
+    
+    // Save student data
     const docRef = await addDoc(collection(db, "students"), {
       userId: userId,
       examType: selectedExam,
@@ -51,30 +52,26 @@ async function uploadData() {
       pending: true,
       timestamp: new Date().toISOString()
     });
-
-    // Calculate gain and progress
-    const gain = amount * 0.2;
-    const progress = Math.min((amount / 23000) * 100, 100);
-
-    if (!referralCode) {
-      console.log("Referral code (affiliate ID) is missing. Skipping affiliate customer add.");
+    
+    // Add affiliate customer if referral exists
+    if (referralCode) {
+      const gain = amount * 0.2;
+      const progress = Math.min((amount / 23000) * 100, 100);
+      
+      await addDoc(collection(db, "customers"), {
+        name: studentName,
+        progress,
+        referredDate: serverTimestamp(),
+        customerEmail: studentEmail,
+        pending: true,
+        amount: gain,
+        referredBy: referralCode
+      });
     } else {
-      for (const entry of customers) {
-        const gain = entry.amount * 0.2;
-        const progress = Math.min((entry.amount / 23000) * 100, 100);
-        
-        await addDoc(collection(db, "customers"), {
-          name: entry.studentName,
-          progress,
-          referredDate: serverTimestamp(),
-          customerEmail: entry.studentEmail,
-          pending: true,
-          amount: gain,
-          referredBy: referralCode
-        });
-      }
+      console.log("Referral code (affiliate ID) is missing. Skipping affiliate customer add.");
     }
-
+    
+    // Success popup
     Swal.fire({
       icon: 'success',
       title: 'Upload Successful',
@@ -99,7 +96,7 @@ async function uploadData() {
       localStorage.setItem("userPin", userId);
       window.location.href = "user-details.html";
     });
-
+    
   } catch (error) {
     console.error("Error adding document: ", error);
     Swal.fire({
