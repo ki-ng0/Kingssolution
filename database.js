@@ -60,7 +60,7 @@ async function uploadData() {
       console.warn("Referral code (affiliate ID) is missing. Skipping affiliate customer add.");
     } else {
       // Save the referred customer data under affiliate's customers subcollection
-      await addDoc(collection(db, "affiliate", uid, "customers"), {
+      const docref = await addDoc(collection(db, "affiliate", uid, "customers"), {
         name: studentName,
         progress,
         referredDate: serverTimestamp(),
