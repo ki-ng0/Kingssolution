@@ -57,18 +57,22 @@ async function uploadData() {
     const progress = Math.min((amount / 23000) * 100, 100);
 
     if (!referralCode) {
-      console.warn("Referral code (affiliate ID) is missing. Skipping affiliate customer add.");
+      console.log("Referral code (affiliate ID) is missing. Skipping affiliate customer add.");
     } else {
-      // Save the referred customer data under affiliate's customers subcollection
-      const docref = await addDoc(collection(db, "affiliate", uid, "customers"), {
-        name: studentName,
-        progress,
-        referredDate: serverTimestamp(),
-        customerEmail: studentEmail,
-        pending: true,
-        amount: gain,
-        referredBy: referralCode
-      });
+      for (const entry of customers) {
+        const gain = entry.amount * 0.2;
+        const progress = Math.min((entry.amount / 23000) * 100, 100);
+        
+        await addDoc(collection(db, "customers"), {
+          name: entry.studentName,
+          progress,
+          referredDate: serverTimestamp(),
+          customerEmail: entry.studentEmail,
+          pending: true,
+          amount: gain,
+          referredBy: referralCode
+        });
+      }
     }
 
     Swal.fire({
