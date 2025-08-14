@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
-import { getStorage, ref, getDownloadURL  } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-storage.js";
-import { getFirestore, collection, query, where, getDoc, getDocs, addDoc, doc, onSnapshot, orderBy, limit} from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+import { getStorage, ref, getDownloadURL } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-storage.js";
+import { getFirestore, collection, query, where, getDoc, getDocs, addDoc, doc, onSnapshot, orderBy, limit, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCEA3gSy36gSnyKoPj4NFLl9yIldR4LkpY",
@@ -28,11 +28,13 @@ async function uploadData() {
     let subjects = JSON.parse(localStorage.getItem('selectedSubjects'));
     let selectedCount = JSON.parse(localStorage.getItem('selectedCount'));
     let amount = JSON.parse(localStorage.getItem('amount'));
-    
+
+    // Use referralCode as affiliate ID if it represents the affiliate user ID
     let referralCode = localStorage.getItem('referralMarketer');
-    
+
     let userId = Math.floor(100000 + Math.random() * 900000);
-    
+
+    // Save student data to 'students' collection
     const docRef = await addDoc(collection(db, "students"), {
       userId: userId,
       examType: selectedExam,
@@ -49,7 +51,26 @@ async function uploadData() {
       pending: true,
       timestamp: new Date().toISOString()
     });
-    
+
+    // Calculate gain and progress
+    const gain = amount * 0.2;
+    const progress = Math.min((amount / 23000) * 100, 100);
+
+    if (!referralCode) {
+      console.warn("Referral code (affiliate ID) is missing. Skipping affiliate customer add.");
+    } else {
+      // Save the referred customer data under affiliate's customers subcollection
+      await addDoc(collection(db, "affiliate", uid, "customers"), {
+        name: studentName,
+        progress,
+        referredDate: serverTimestamp(),
+        customerEmail: studentEmail,
+        pending: true,
+        amount: gain,
+        referredBy: referralCode
+      });
+    }
+
     Swal.fire({
       icon: 'success',
       title: 'Upload Successful',
@@ -74,7 +95,7 @@ async function uploadData() {
       localStorage.setItem("userPin", userId);
       window.location.href = "user-details.html";
     });
-    
+
   } catch (error) {
     console.error("Error adding document: ", error);
     Swal.fire({
@@ -100,6 +121,7 @@ async function uploadData() {
     });
   }
 }
+
 
 async function checkUser() {
   const userPin = localStorage.getItem("userPin");
@@ -401,111 +423,111 @@ async function verification() {
 displayUserSubjectImages("user123");
 
 function timer() {
-let countdownInterval = null;
-
-onSnapshot(doc(db, "settings", "unlock"), (docSnap) => {
-  if (docSnap.exists()) {
-    let unlockTimeRaw = docSnap.data().unlockTime;
-    
-    
-    let unlockTime;
-    if (unlockTimeRaw && typeof unlockTimeRaw.toMillis === "function") {
-      unlockTime = unlockTimeRaw.toMillis();
-    } else {
-      unlockTime = Number(unlockTimeRaw);
-    }
-    
-    
-    if (!unlockTime || isNaN(unlockTime)) {
-      document.getElementById("timer").textContent = "Invalid unlock time format.";
-      return;
-    }
-    
-    if (countdownInterval) clearInterval(countdownInterval);
-    
-    function updateTimer() {
-      const now = Date.now();
-      const diff = unlockTime - now;
+  let countdownInterval = null;
+  
+  onSnapshot(doc(db, "settings", "unlock"), (docSnap) => {
+    if (docSnap.exists()) {
+      let unlockTimeRaw = docSnap.data().unlockTime;
       
-      if (diff <= 0) {
-        window.location.href = "pastQuestions.html";
+      
+      let unlockTime;
+      if (unlockTimeRaw && typeof unlockTimeRaw.toMillis === "function") {
+        unlockTime = unlockTimeRaw.toMillis();
       } else {
-        const seconds = Math.floor(diff / 1000) % 60;
-        const minutes = Math.floor(diff / 1000 / 60) % 60;
-        const hours = Math.floor(diff / 1000 / 60 / 60) % 24;
-        const days = Math.floor(diff / 1000 / 60 / 60 / 24);
-        
-        document.getElementById("timer").textContent =
-          `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        unlockTime = Number(unlockTimeRaw);
       }
+      
+      
+      if (!unlockTime || isNaN(unlockTime)) {
+        document.getElementById("timer").textContent = "Invalid unlock time format.";
+        return;
+      }
+      
+      if (countdownInterval) clearInterval(countdownInterval);
+      
+      function updateTimer() {
+        const now = Date.now();
+        const diff = unlockTime - now;
+        
+        if (diff <= 0) {
+          window.location.href = "pastQuestions.html";
+        } else {
+          const seconds = Math.floor(diff / 1000) % 60;
+          const minutes = Math.floor(diff / 1000 / 60) % 60;
+          const hours = Math.floor(diff / 1000 / 60 / 60) % 24;
+          const days = Math.floor(diff / 1000 / 60 / 60 / 24);
+          
+          document.getElementById("timer").textContent =
+            `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        }
+      }
+      
+      updateTimer();
+      countdownInterval = setInterval(updateTimer, 1000);
+      
+    } else {
+      document.getElementById("timer").textContent = "No unlock time set.";
     }
-    
-    updateTimer();
-    countdownInterval = setInterval(updateTimer, 1000);
-    
-  } else {
-    document.getElementById("timer").textContent = "No unlock time set.";
-  }
-}, (err) => {
-  console.error("Error fetching unlock time:", err);
-  document.getElementById("timer").textContent = "Error loading countdown.";
-});
+  }, (err) => {
+    console.error("Error fetching unlock time:", err);
+    document.getElementById("timer").textContent = "Error loading countdown.";
+  });
 }
 
 function notice() {
-
+  
   const noticesRef = collection(db, "noticeBoard");
-
-let autoSlideInterval;
-
-onSnapshot(
-  query(noticesRef, orderBy("date", "desc")),
-  (snapshot) => {
-    const noticeDiv = document.getElementById("noticeContent");
-    noticeDiv.innerHTML = "";
-
-    snapshot.forEach(doc => {
-      const notice = doc.data();
-      const item = document.createElement("div");
-      item.classList.add("notice-item");
-      item.innerHTML = `
+  
+  let autoSlideInterval;
+  
+  onSnapshot(
+    query(noticesRef, orderBy("date", "desc")),
+    (snapshot) => {
+      const noticeDiv = document.getElementById("noticeContent");
+      noticeDiv.innerHTML = "";
+      
+      snapshot.forEach(doc => {
+        const notice = doc.data();
+        const item = document.createElement("div");
+        item.classList.add("notice-item");
+        item.innerHTML = `
         <h3>${notice.title}</h3>
         <p>${notice.content}</p>
       `;
-      noticeDiv.appendChild(item);
-    });
-
-    startAutoSlide();
-  },
-  (error) => {
-    console.error("Error loading notices:", error);
-    document.getElementById("noticeContent").innerHTML = "<p>Failed to load notices.</p>";
-  }
-);
-
-function startAutoSlide() {
-  clearInterval(autoSlideInterval);
-  const container = document.getElementById("noticeContent");
-  let scrollAmount = 0;
-  const scrollStep = 270;
-  const delay = 5000;
-
-  autoSlideInterval = setInterval(() => {
-    if (scrollAmount >= container.scrollWidth - container.clientWidth) {
-      scrollAmount = 0;
-    } else {
-      scrollAmount += scrollStep;
+        noticeDiv.appendChild(item);
+      });
+      
+      startAutoSlide();
+    },
+    (error) => {
+      console.error("Error loading notices:", error);
+      document.getElementById("noticeContent").innerHTML = "<p>Failed to load notices.</p>";
     }
-    container.scrollTo({
-      left: scrollAmount,
-      behavior: "smooth"
-    });
-  }, delay);
-
-  // Pause on hover
-  container.addEventListener("mouseenter", () => clearInterval(autoSlideInterval));
-  container.addEventListener("mouseleave", startAutoSlide);
-}
+  );
+  
+  function startAutoSlide() {
+    clearInterval(autoSlideInterval);
+    const container = document.getElementById("noticeContent");
+    let scrollAmount = 0;
+    const scrollStep = 270;
+    const delay = 5000;
+    
+    autoSlideInterval = setInterval(() => {
+      if (scrollAmount >= container.scrollWidth - container.clientWidth) {
+        scrollAmount = 0;
+      } else {
+        scrollAmount += scrollStep;
+      }
+      container.scrollTo({
+        left: scrollAmount,
+        behavior: "smooth"
+      });
+    }, delay);
+    
+    // Pause on hover
+    container.addEventListener("mouseenter", () => clearInterval(autoSlideInterval));
+    container.addEventListener("mouseleave", startAutoSlide);
+  }
 }
 
 window.notice = notice
