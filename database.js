@@ -55,8 +55,10 @@ async function uploadData() {
     
     // Add affiliate customer if referral exists
     if (referralCode) {
-      const gain = amount * 0.2;
-      const progress = Math.min((amount / 23000) * 100, 100);
+      let rawAmount = amount;
+      let numericAmount = parseFloat(rawAmount.replace(/[^0-9.]/g, ''));
+      const gain = numericAmount * 0.2;
+      const progress = Math.min((numericAmount / 23000) * 100, 100);
       
       await addDoc(collection(db, "customers"), {
         name: studentName,
