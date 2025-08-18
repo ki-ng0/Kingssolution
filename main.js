@@ -376,6 +376,18 @@ function getSelectedExam() {
   return selectElement.value;
 }
 
+function getCountry() {
+  const selectCountry = document.getElementById("country");
+  examSelect()
+  return selectCountry.value;
+}
+
+function newcountry() {
+  document.getElementById("country").addEventListener("change", function() {
+    const selectedCountry = getCountry();
+  });
+}
+
 function newName() {
   document.getElementById("examSelect").addEventListener("change", function() {
     const selectedExam = getSelectedExam();
@@ -386,11 +398,14 @@ function newName() {
 function examSelect() {
   document.getElementById("next").addEventListener("click", function() {
     const selectedExam = getSelectedExam();
-    if (selectedExam) {
+    const selectedCountry = getCountry();
+    if (selectedExam && selectedCountry) {
       localStorage.setItem("selectedExam", JSON.stringify(selectedExam));
+      localStorage.setItem("selectedCountry", JSON.stringify(selectedCountry));
       
     } else {
       console.log(selectedExam)
+      console.log(selectedCountry)
     }
   });
 }
@@ -520,6 +535,7 @@ function information() {
   let selectYear = JSON.parse(localStorage.getItem('selectYear'));
   let subjects = JSON.parse(localStorage.getItem('selectedSubjects'));
   let selectedCount = JSON.parse(localStorage.getItem('selectedCount'));
+  
   examType.innerHTML = selectedExam;
   name.innerHTML = studentName;
   phone.innerHTML = studentNumber;
@@ -586,3 +602,7 @@ images.forEach(img => {
     }
   });
 });
+
+function partnerHtml() {
+  window.location.href = 'affiliateLanding.html'
+}

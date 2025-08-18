@@ -326,7 +326,7 @@
       
       nav.nav ul {
         list-style: none;
-        gap: 25px;
+        gap: 24px;
         padding: 30px 40px;
         display: flex;
         flex-direction: column;
@@ -396,7 +396,7 @@
       background-color: #f9f9f9;
       transition: all 0.3s ease;
       outline: none;
-      width: 150px;
+      width: 160px;
       padding: 10px 40px 10px 10px;
       box-sizing: border-box;
     }
@@ -416,7 +416,7 @@
     
     .pin-wrapper {
       position: relative;
-      width: 150px;
+      width: 160px;
       max-width: 300px;
     }
     
@@ -1117,7 +1117,7 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
-      animation: slideIn s ease forwards;
+      animation: slideIn 3s ease forwards;
     }
     
     .notice-item h3 {

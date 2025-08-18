@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="description" content="Join the KingsSolution Affiliate Program and earn commissions by referring students and partners. Enjoy fast payouts, dedicated support, and unlimited earning potential.">
+  <meta name="keywords" content="KingsSolution affiliate program, referral program Nigeria, earn money online, partner with KingsSolution, commissions, WAEC, NECO, GCE, JUPEB, NABTEB, IJMB, education affiliate, earn as a student, make money Nigeria">
+  <meta name="author" content="KingsSolution Team">
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="KingsSolution Affiliate Program - Earn Commissions as a Partner">
+  <meta property="og:description" content="Become a KingsSolution affiliate partner today! Earn attractive commissions, get fast payouts, and grow your income by helping students access trusted exam updates and resources.">
+  <meta property="og:image" content="kingssolution.png">
+  <meta property="og:url" content="https://kingssolution.vercel.app/affiliateLanding">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://kingssolution.vercel.app/partnerDashboard" />
+  <link rel="icon" type="image/png" href="kingssolution.png">
+  <title>Affiliate Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+  <link rel="stylesheet" href="partnerDashboard.css" />
+</head>
+
+<body>
+  <div class="topbar">
+    <div class="brand">
+      <div class="logo">K</div>
+      <div>Affiliate Dashboard</div>
+    </div>
+    <div class="user-mini">
+      <div class="avatar" id="avatarInitial">A</div>
+      <button class="logout" id="logoutBtn">Logout</button>
+    </div>
+  </div>
+  
+  <div class="wrap">
+    <div class="welcome">
+      <div>
+        <h1>Hi <span id="welcomeName">there</span>, welcome back 👋</h1>
+        <div class="hint">Your performance overview and referral tools are below.</div>
+      </div>
+      <div class="chip"><span id="green-dot"><span class="active">🟢</span>Active Member</span><span id="red-dot"><span class="active">🔴</span>Inactive Member</span></div>
+    </div>
+    
+    <div class="grid">
+      <div>
+        <div class="card">
+          <div class="stats">
+            <div class="stat">
+              <div class="label">Current Balance</div>
+              <div class="value" id="balanceValue">₦0.00</div>
+            </div>
+            <div class="stat">
+              <div class="label">Total Earned (₦)</div>
+              <div class="value" id="totalEarned">₦0.00</div>
+            </div>
+          </div>
+          
+          <div class="chart-head">
+            <h3>Earnings</h3>
+            <div class="seg">
+              <button class="active">Monthly</button>
+            </div>
+          </div>
+          <canvas id="earnChart"></canvas>
+        </div>
+      </div>
+      
+      <div class="button">
+        <button class="loadMore" id="withdraw" type="button">Withdraw</button>
+      </div>
+      
+      <div id="withdrawModal" class="modal" style="display:none;">
+        <div class="modal-content">
+          <span id="closeModal" class="close">&times;</span>
+          <h3>Withdraw Funds</h3>
+          <input type="text" id="bankName" placeholder="Bank Name" required />
+          <input type="number" id="accountNumber" placeholder="Account Number" required />
+          <input type="text" id="accountName" placeholder="Account Name" required />
+          <input type="number" id="withdrawAmount" placeholder="Amount to Withdraw" required min="1" />
+          <button id="submitWithdraw">Submit</button>
+        </div>
+      </div>
+      
+      <div id="withdrawMessage" style="display:none; color:green; margin-top:10px;"></div>
+      
+      <h3>Withdrawal History</h3>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Bank</th>
+            <th>Account Number</th>
+            <th>Amount</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody id="withdrawHistory"></tbody>
+      </table>
+      <button id="loadMoreWithdrawals" style="display: none;">Load More</button>
+      <div class="card">
+        <h3>Your referral link</h3>
+        <div class="ref-field" style="margin-top:8px">
+          <input id="refLinkInput" readonly value="https://example.com/?ref=CODE" />
+          <button class="btn icon" id="copyBtn" title="Copy link">📋</button>
+        </div>
+        <div class="hint" style="margin-top:8px">
+          Referral code: <strong id="refCodeText">—</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row">
+    <div class="card">
+      <div class="chart-head">
+        <h3>Invoice list</h3>
+        <div class="seg"><button class="active">Latest</button></div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Customer</th>
+            <th>Status</th>
+            <th>Amount</th>
+          </tr>
+        </thead>
+        <tbody id="invoiceTable">
+          <tr>
+            <td></td>
+            <td></td>
+            <td><span class="tag ok"></span></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td><span class="tag ok"></span></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td><span class="tag pending"></span></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+      <button class="loadMore" id="invoiceLoadMore" style="display:none;">Load more</button>
+    </div>
+    
+    <div class="card">
+      <div class="chart-head">
+        <h3>Customer list</h3>
+        <div class="seg"><button class="active">Latest</button></div>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th colspan="2">Name</th>
+            <th>Phone number</th>
+            <th>Progress</th>
+          </tr>
+        </thead>
+        
+        <tbody id="customerTable">
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        </tbody>
+        <button class="loadMore" id="customerLoadMore" style="display:none;">Load more</button>
+      </table>
+      
+      <div class="card" style="margin-top:16px">
+        <h3>Report</h3>
+        <div class="report-card">
+          <p class="muted" style="margin-top:8px">Briefly describe the issue you’re experiencing.</p>
+          <textarea id="reportText" placeholder="Describe your problem..."></textarea>
+          <button id="sendReport">Submit Report</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function() {
+      emailjs.init("oiHnIbQQTUGPy-oMZ");
+    })();
+  </script>
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+    import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
+    import { getFirestore, collection, addDoc, setDoc, onSnapshot, doc, getDoc, getDocs, query, where, orderBy, limit, startAfter, serverTimestamp, updateDoc } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+    
+    const firebaseConfig = {
+      apiKey: "AIzaSyCEA3gSy36gSnyKoPj4NFLl9yIldR4LkpY",
+      authDomain: "kings-solution-bba0e.firebaseapp.com",
+      projectId: "kings-solution-bba0e",
+      storageBucket: "kings-solution-bba0e.firebasestorage.app",
+      messagingSenderId: "18111445430",
+      appId: "1:18111445430:web:5ca39cd117b0e2a7e6a917",
+      measurementId: "G-XL28VT1DGT"
+    };
+    
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+    const $ = (id) => document.getElementById(id);
+    
+    
+    $("copyBtn").addEventListener("click", async () => {
+      const link = $("refLinkInput").value;
+      try {
+        await navigator.clipboard.writeText(link);
+        Swal.fire({ toast: true, position: "top-end", showConfirmButton: false, icon: "success", title: "Referral link copied", timer: 1400 });
+      } catch {
+        Swal.fire({ icon: "info", title: "Copied", text: "Select and copy the link manually." });
+      }
+    });
+    
+    $("sendReport").addEventListener("click", async () => {
+      const problem = $("reportText").value.trim();
+      if (!problem) return Swal.fire("Enter a problem description", "", "info");
+      
+      try {
+        const currentUser = auth.currentUser;
+        const uid = currentUser ? currentUser.uid : "guest";
+        const userEmail = currentUser ? currentUser.email : "Not logged in";
+        const reportsRef = collection(db, "reports");
+        
+        await addDoc(reportsRef, {
+          uid,
+          userEmail,
+          problem,
+          status: "Pending",
+          submittedAt: serverTimestamp()
+        });
+        
+        Swal.fire({
+          icon: "success",
+          title: "Report Submitted",
+          text: "Thank you! Your report has been submitted. We will look into it shortly.",
+          background: "#101727",
+          color: "#fff",
+          confirmButtonColor: "#f5c518"
+        });
+        
+        $("reportText").value = "";
+      } catch (err) {
+        console.error("Error submitting report:", err);
+        Swal.fire({
+          icon: "error",
+          title: "Failed to Submit",
+          text: "Something went wrong. Please try again.",
+          background: "#101727",
+          color: "#fff",
+          confirmButtonColor: "#f5c518"
+        });
+      }
+    });
+    
+    $("logoutBtn").addEventListener("click", async () => {
+      try {
+        await signOut(auth);
+        localStorage.removeItem("referralMarketer")
+        localStorage.removeItem("userUid")
+        window.location.href = "partnerSignin.html";
+      } catch (e) {
+        Swal.fire("Error", e.message, "error");
+      }
+    });
+    
+    const monthOrder = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    const monthColors = [
+      'rgba(255, 99, 132, 0.7)',
+      'rgba(54, 162, 235, 0.7)',
+      'rgba(255, 206, 86, 0.7)',
+      'rgba(75, 192, 192, 0.7)',
+      'rgba(153, 102, 255, 0.7)',
+      'rgba(255, 159, 64, 0.7)',
+      'rgba(199, 199, 199, 0.7)',
+      'rgba(83, 102, 255, 0.7)',
+      'rgba(255, 99, 255, 0.7)',
+      'rgba(99, 255, 132, 0.7)',
+      'rgba(255, 215, 0, 0.7)',
+      'rgba(0, 191, 255, 0.7)'
+    ];
+    
+    const ctx = document.getElementById('earnChart').getContext('2d');
+    
+    const chart = new Chart(ctx, {
+      type: 'pie',
+      data: {
+        labels: [],
+        datasets: [{
+          label: 'Monthly Earnings (₦)',
+          data: [],
+          backgroundColor: [],
+          borderColor: '#fff',
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'right',
+          },
+          tooltip: {
+            callbacks: {
+              label: context => `₦${context.parsed.toLocaleString()}`
+            }
+          }
+        }
+      }
+    });
+    
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        window.location.href = "partnerSignin.html";
+        localStorage.removeItem("referralMarketer");
+        localStorage.removeItem("userUid")
+        return;
+      }
+      localStorage.setItem("userUid", user.uid);
+      $("avatarInitial").textContent = (user.email?.[0] || "A").toUpperCase();
+      
+      try {
+        const ref = doc(db, "affiliate", user.uid);
+        const snap = await getDoc(ref);
+        
+        if (snap.exists()) {
+          const a = snap.data();
+          const fullName = [a.firstName, a.lastName].filter(Boolean).join(" ") || "Partner";
+          $("welcomeName").textContent = fullName;
+          $("refLinkInput").value = a.referralURL || "";
+          $("refCodeText").textContent = a.referralCode || "—";
+          localStorage.setItem('referralMarketer', a.referralCode);
+          if (typeof a.balance === "number") $("balanceValue").textContent = `₦${a.balance.toLocaleString()}`;
+          if (typeof a.totalEarned === "number") $("totalEarned").textContent = `₦${a.totalEarned.toLocaleString()}`;
+        } else {
+          $("welcomeName").textContent = "Partner";
+          $("refLinkInput").value = "";
+          $("refCodeText").textContent = "—";
+          Swal.fire("Profile missing", "We couldn't find your affiliate profile. Please complete signup.", "warning");
+        }
+      } catch (err) {
+        console.error("Load profile failed:", err);
+        Swal.fire("Error", "Unable to load your profile right now.", "error");
+      }
+      
+      const earningsRef = collection(db, "affiliate", user.uid, "earnings");
+      
+      onSnapshot(earningsRef, (snapshot) => {
+        const dataArr = [];
+        
+        snapshot.forEach(docSnap => {
+          const data = docSnap.data();
+          if (data?.month && !isNaN(data.amount)) {
+            dataArr.push({
+              month: data.month.trim(),
+              amount: Number(data.amount)
+            });
+          }
+        });
+        
+        dataArr.sort((a, b) => monthOrder.indexOf(a.month) - monthOrder.indexOf(b.month));
+        
+        if (dataArr.length === 1 && dataArr[0].amount === 0) {
+          dataArr[0].amount = 0.01;
+        }
+        
+        chart.data.labels = dataArr.map(d => d.month);
+        chart.data.datasets[0].data = dataArr.map(d => d.amount);
+        chart.data.datasets[0].backgroundColor = dataArr.map(d => {
+          const index = monthOrder.indexOf(d.month);
+          return index >= 0 ? monthColors[index] : 'rgba(0,0,0,0.1)';
+        });
+        
+        chart.update();
+      });
+    });
+    
+    onAuthStateChanged(auth, async (user) => {
+      if (!user) {
+        return;
+      }
+      
+      const greenDot = document.getElementById('green-dot');
+      const redDot = document.getElementById('red-dot');
+      
+      try {
+        const userDoc = await getDoc(doc(db, "affiliate", user.uid));
+        if (userDoc.exists()) {
+          const userData = userDoc.data();
+          if (userData.status === 'Active') {
+            greenDot.style.display = 'inline';
+            redDot.style.display = 'none';
+          } else {
+            greenDot.style.display = 'none';
+            redDot.style.display = 'inline';
+          }
+        } else {
+          greenDot.style.display = 'none';
+          redDot.style.display = 'inline';
+        }
+      } catch (error) {
+        console.error("Error loading affiliate status:", error);
+        greenDot.style.display = 'none';
+        redDot.style.display = 'inline';
+      }
+    });
+    
+    let lastInvoiceVisible = null;
+    let lastCustomerVisible = null;
+    const referralCode = localStorage.getItem('referralMarketer');
+    
+    async function loadInvoices(isLoadMore = false) {
+      const invoiceTable = document.getElementById("invoiceTable");
+      if (!isLoadMore) invoiceTable.innerHTML = "";
+      
+      try {
+        const invoicesRef = collection(db, "customers");
+        let q;
+        
+        if (lastInvoiceVisible && isLoadMore) {
+          q = query(
+            invoicesRef,
+            where("referredBy", "==", referralCode),
+            orderBy("referredDate", "desc"),
+            startAfter(lastInvoiceVisible),
+            limit(5)
+          );
+        } else {
+          q = query(
+            invoicesRef,
+            where("referredBy", "==", referralCode),
+            orderBy("referredDate", "desc"),
+            limit(5)
+          );
+        }
+        
+        const invoicesSnapshot = await getDocs(q);
+        
+        if (invoicesSnapshot.empty && !isLoadMore) {
+          invoiceTable.innerHTML = '<tr><td colspan="4" style="text-align:center;">No invoices found.</td></tr>';
+          return;
+        }
+        
+        lastInvoiceVisible = invoicesSnapshot.docs[invoicesSnapshot.docs.length - 1];
+        
+        invoicesSnapshot.forEach((doc) => {
+          const invoice = doc.data();
+          
+          const customerPhone = invoice.phoneNumber || "N/A";
+          const statusText = invoice.pending === true ? "Pending" : "Paid";
+          const statusClass = invoice.pending === true ? "pending" : "ok";
+          const amount = invoice.amount ? `₦${Number(invoice.amount).toLocaleString()}` : "₦0";
+          
+          let dateStr = "N/A";
+          if (invoice.referredDate) {
+            if (typeof invoice.referredDate.toDate === "function") {
+              dateStr = invoice.referredDate.toDate().toLocaleDateString("en-US", { day: "2-digit", month: "short" });
+            } else if (typeof invoice.referredDate === "string") {
+              dateStr = new Date(invoice.referredDate).toLocaleDateString("en-US", { day: "2-digit", month: "short" });
+            }
+          }
+          
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+        <td>${dateStr}</td>
+        <td>${customerPhone}</td>
+        <td><span class="tag ${statusClass}">${statusText}</span></td>
+        <td>${amount}</td>
+      `;
+          
+          invoiceTable.appendChild(tr);
+        });
+        
+        toggleLoadMoreButton('invoiceLoadMore', invoicesSnapshot.size === 5);
+        
+      } catch (error) {
+        console.error("Error loading invoices:", error);
+        if (!isLoadMore)
+          invoiceTable.innerHTML = '<tr><td colspan="4" style="color:red; text-align:center;">Failed to load invoices.</td></tr>';
+      }
+    }
+    
+    async function loadCustomers(isLoadMore = false) {
+      const customerTable = document.getElementById("customerTable");
+      if (!isLoadMore) customerTable.innerHTML = "";
+      
+      try {
+        const customersRef = collection(db, "customers");
+        let q;
+        
+        if (lastCustomerVisible && isLoadMore) {
+          q = query(
+            customersRef,
+            where("referredBy", "==", referralCode),
+            orderBy("referredDate", "desc"),
+            startAfter(lastCustomerVisible),
+            limit(5)
+          );
+        } else {
+          q = query(
+            customersRef,
+            where("referredBy", "==", referralCode),
+            orderBy("referredDate", "desc"),
+            limit(5)
+          );
+        }
+        
+        const customersSnapshot = await getDocs(q);
+        
+        if (customersSnapshot.empty && !isLoadMore) {
+          customerTable.innerHTML = '<tr><td colspan="4" style="text-align:center;">No customers found.</td></tr>';
+          return;
+        }
+        
+        lastCustomerVisible = customersSnapshot.docs[customersSnapshot.docs.length - 1];
+        
+        customersSnapshot.forEach((doc) => {
+          const customer = doc.data();
+          
+          const fullName = customer.name || "N/A";
+          const progressPercent = typeof customer.progress === "number" ? customer.progress.toFixed(0) + "%" : "0%";
+          const phoneNumber = customer.phoneNumber || "N/A";
+          
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+        <td colspan="2">${fullName}</td>
+        <td>${phoneNumber}</td>
+        <td>${progressPercent}</td>
+      `;
+          
+          customerTable.appendChild(tr);
+        });
+        
+        toggleLoadMoreButton('customerLoadMore', customersSnapshot.size === 5);
+        
+      } catch (error) {
+        console.error("Error loading customers:", error);
+        if (!isLoadMore)
+          customerTable.innerHTML = '<tr><td colspan="4" style="color:red; text-align:center;">Failed to load customers.</td></tr>';
+      }
+    }
+    
+    function toggleLoadMoreButton(buttonId, shouldShow) {
+      let btn = document.getElementById(buttonId);
+      if (!btn) return;
+      
+      btn.style.display = shouldShow ? "inline-block" : "none";
+    }
+    
+    document.getElementById('invoiceLoadMore').addEventListener('click', () => loadInvoices(true));
+    document.getElementById('customerLoadMore').addEventListener('click', () => loadCustomers(true));
+    loadInvoices();
+    loadCustomers()
+    
+    
+    const withdrawBtn = document.getElementById("withdraw");
+    const modal = document.getElementById("withdrawModal");
+    const closeModal = document.getElementById("closeModal");
+    const submitWithdraw = document.getElementById("submitWithdraw");
+    const historyTable = document.getElementById("withdrawHistory");
+    const loadMoreBtn = document.getElementById("loadMoreWithdrawals");
+    
+    let lastVisibleWithdrawal = null;
+    
+    withdrawBtn.addEventListener("click", () => modal.style.display = "flex");
+    closeModal.addEventListener("click", () => modal.style.display = "none");
+    
+    submitWithdraw.addEventListener("click", async () => {
+      const bankName = document.getElementById("bankName").value.trim();
+      const accountNumber = document.getElementById("accountNumber").value.trim();
+      const accountName = document.getElementById("accountName").value.trim();
+      const withdrawAmount = Number(document.getElementById("withdrawAmount").value.trim());
+      
+      if (!bankName || !accountNumber || !accountName || !withdrawAmount) {
+        Swal.fire({
+          icon: "warning",
+          title: "Incomplete Data",
+          text: "Please fill all fields and enter a valid amount.",
+          background: "#101727",
+          color: "#fff",
+          confirmButtonColor: "#f5c518"
+        });
+        return;
+      } else if (accountNumber.length !== 10) {
+        Swal.fire({
+          icon: "warning",
+          title: "Incorrect Data",
+          text: "Invalid account number. It must be 10 digits.",
+          background: "#101727",
+          color: "#fff",
+          confirmButtonColor: "#f5c518"
+        });
+        return;
+      }
+      
+      try {
+        const currentUser = auth.currentUser;
+        if (!currentUser) throw new Error("User not logged in.");
+        const uid = currentUser.uid;
+        
+        const userRef = doc(db, "affiliate", uid);
+        const userSnap = await getDoc(userRef);
+        if (!userSnap.exists()) throw new Error("User data not found.");
+        const balance = Number(userSnap.data().balance) || 0;
+        
+        if (withdrawAmount > balance || balance === 0) {
+          Swal.fire({
+            icon: "error",
+            title: "Insufficient Balance",
+            text: `Your current balance is ₦${balance.toLocaleString()}.`,
+            background: "#101727",
+            color: "#fff",
+            confirmButtonColor: "#f5c518"
+          });
+          return;
+        } else if (withdrawAmount < 500) {
+          Swal.fire({
+            icon: "error",
+            title: "Insufficient Balance",
+            text: "You can't withdraw less then ₦500",
+            background: "#101727",
+            color: "#fff",
+            confirmButtonColor: "#f5c518"
+          });
+          return;
+        }
+        
+        const now = new Date();
+        const monthName = now.toLocaleString("default", { month: "short" });
+        const withdrawalHistoryRef = collection(db, "affiliate", uid, "withdrawalHistory", monthName, "withdrawals");
+        
+        const augDocRef = doc(db, "affiliate", uid, "withdrawalHistory", "Aug");
+        await setDoc(augDocRef, {
+          requestedAt: serverTimestamp()
+        }, { merge: true });
+        
+        await Promise.all([
+          addDoc(withdrawalHistoryRef, {
+            bankName,
+            accountNumber,
+            accountName,
+            amount: withdrawAmount,
+            status: "pending",
+            requestedAt: serverTimestamp()
+          }),
+          setDoc(userRef, { balance: balance - withdrawAmount }, { merge: true })
+        ]);
+        
+        modal.style.display = "none";
+        
+        const userLocation = localStorage.getItem("userUid");
+        await emailjs.send(
+          "service_j86hfng",
+          "template_d9z0ylx",
+          {
+            accountName,
+            bankName,
+            accountNumber,
+            amount: withdrawAmount,
+            user: userLocation,
+            requestedAt: new Date().toLocaleString(),
+            status: "pending"
+          },
+          "oiHnIbQQTUGPy-oMZ"
+        );
+        
+        console.log("Withdrawal email sent successfully.");
+        
+        Swal.fire({
+          icon: "success",
+          title: "Withdrawal Requested",
+          text: "Your withdrawal will be processed in less than 10 minutes.",
+          background: "#101727",
+          color: "#fff",
+          confirmButtonColor: "#f5c518"
+        }).then(() => window.location.reload());
+        
+      } catch (err) {
+        console.error("Withdrawal error:", err);
+        Swal.fire({
+          icon: "error",
+          title: "Withdrawal Failed",
+          text: err.message || "Please try again.",
+          background: "#101727",
+          color: "#fff",
+          confirmButtonColor: "#f5c518"
+        });
+      }
+    });
+    
+    async function loadWithdrawalHistory(isLoadMore = false) {
+      if (!isLoadMore) {
+        historyTable.innerHTML = "";
+        lastVisibleWithdrawal = null;
+      }
+      
+      try {
+        const currentUser = auth.currentUser;
+        if (!currentUser) throw new Error("User not logged in.");
+        const uid = currentUser.uid;
+        
+        const now = new Date();
+        const monthName = now.toLocaleString("default", { month: "short" });
+        
+        const withdrawalHistoryRef = collection(db, "affiliate", uid, "withdrawalHistory", monthName, "withdrawals");
+        let q;
+        
+        if (lastVisibleWithdrawal && isLoadMore) {
+          q = query(withdrawalHistoryRef, orderBy("requestedAt", "desc"), startAfter(lastVisibleWithdrawal), limit(5));
+        } else {
+          q = query(withdrawalHistoryRef, orderBy("requestedAt", "desc"), limit(5));
+        }
+        
+        const snapshot = await getDocs(q);
+        
+        if (snapshot.empty && !isLoadMore) {
+          historyTable.innerHTML = '<tr><td colspan="5" style="text-align:center;">No withdrawal history found.</td></tr>';
+          loadMoreBtn.style.display = "none";
+          return;
+        }
+        
+        lastVisibleWithdrawal = snapshot.docs[snapshot.docs.length - 1];
+        
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          const dateStr = data.requestedAt?.toDate ? data.requestedAt.toDate().toLocaleDateString("en-US") : "N/A";
+          const amountStr = data.amount ? `₦${Number(data.amount).toLocaleString()}` : "₦0";
+          const status = data.status || "Pending";
+          const bankName = data.bankName || "N/A";
+          const accountNumber = data.accountNumber || "N/A";
+          
+          const tr = document.createElement("tr");
+          tr.innerHTML = `  
+        <td>${dateStr}</td>  
+        <td>${bankName}</td>  
+        <td>${accountNumber}</td>  
+        <td>${amountStr}</td>  
+        <td><span class="tag ${status}">${status}</span></td>  
+      `;
+          historyTable.appendChild(tr);
+        });
+        
+        loadMoreBtn.style.display = snapshot.size === 5 ? "inline-block" : "none";
+        
+      } catch (err) {
+        console.error("Error loading withdrawal history:", err);
+        historyTable.innerHTML = '<tr><td colspan="5" style="color:red; text-align:center;">Failed to load history.</td></tr>';
+        loadMoreBtn.style.display = "none";
+      }
+    }
+    
+    loadMoreBtn.addEventListener("click", () => loadWithdrawalHistory(true));
+    
+    window.addEventListener("DOMContentLoaded", () => {
+      onAuthStateChanged(auth, user => {
+        if (user) loadWithdrawalHistory();
+      });
+    });
+  </script>
+</body>
+
+</html>

@@ -18,7 +18,6 @@ const storage = getStorage(app);
 
 async function uploadData() {
   try {
-    // Get user info from localStorage
     let selectedExam = JSON.parse(localStorage.getItem('selectedExam'));
     let studentName = JSON.parse(localStorage.getItem('studentName'));
     let studentNumber = JSON.parse(localStorage.getItem('studentNumber'));
@@ -29,16 +28,16 @@ async function uploadData() {
     let subjects = JSON.parse(localStorage.getItem('selectedSubjects'));
     let selectedCount = JSON.parse(localStorage.getItem('selectedCount'));
     let amount = JSON.parse(localStorage.getItem('amount'));
+    let selectedCountry = JSON.parse(localStorage.getItem('selectedCountry'));
     
-    // Referral code
     let referralCode = localStorage.getItem('referralMarketer');
     
     let userId = Math.floor(100000 + Math.random() * 900000);
     
-    // Save student data
     const docRef = await addDoc(collection(db, "students"), {
       userId: userId,
       examType: selectedExam,
+      country: selectedCountry,
       name: studentName,
       phone: studentNumber,
       email: studentEmail,
@@ -53,15 +52,15 @@ async function uploadData() {
       timestamp: new Date().toISOString()
     });
     
-    // Add affiliate customer if referral exists
     if (referralCode) {
       let rawAmount = amount;
       let numericAmount = parseFloat(rawAmount.replace(/[^0-9.]/g, ''));
-      const gain = numericAmount * 0.2;
+      const gain = numericAmount * 0.15;
       const progress = Math.min((numericAmount / 23000) * 100, 100);
       
       await addDoc(collection(db, "customers"), {
         name: studentName,
+        phoneNumber: studentNumber,
         progress,
         referredDate: serverTimestamp(),
         customerEmail: studentEmail,
@@ -73,7 +72,6 @@ async function uploadData() {
       console.log("Referral code (affiliate ID) is missing. Skipping affiliate customer add.");
     }
     
-    // Success popup
     Swal.fire({
       icon: 'success',
       title: 'Upload Successful',
@@ -125,7 +123,6 @@ async function uploadData() {
   }
 }
 
-
 async function checkUser() {
   const userPin = localStorage.getItem("userPin");
   if (!userPin) {
@@ -162,6 +159,7 @@ async function checkUser() {
       });
       
       localStorage.removeItem("userPin");
+      localStorage.removeItem("selectedCountry");
       localStorage.removeItem('selectedExam');
       localStorage.removeItem('studentName');
       localStorage.removeItem('studentNumber');
@@ -513,7 +511,7 @@ function notice() {
     const container = document.getElementById("noticeContent");
     let scrollAmount = 0;
     const scrollStep = 270;
-    const delay = 5000;
+    const delay = 4000;
     
     autoSlideInterval = setInterval(() => {
       if (scrollAmount >= container.scrollWidth - container.clientWidth) {
@@ -532,6 +530,7 @@ function notice() {
     container.addEventListener("mouseleave", startAutoSlide);
   }
 }
+
 
 window.notice = notice
 window.checkUserAccess = checkUserAccess;

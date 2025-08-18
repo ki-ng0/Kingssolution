@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+  <meta name="description" content="Join the KingsSolution Affiliate Program and earn commissions by referring students and partners. Enjoy fast payouts, dedicated support, and unlimited earning potential.">
+  <meta name="keywords" content="KingsSolution affiliate program, referral program Nigeria, earn money online, partner with KingsSolution, commissions, WAEC, NECO, GCE, JUPEB, NABTEB, IJMB, education affiliate, earn as a student, make money Nigeria">
+  <meta name="author" content="KingsSolution Team">
+  <meta name="robots" content="index, follow">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta property="og:title" content="KingsSolution Affiliate Program - Earn Commissions as a Partner">
+  <meta property="og:description" content="Become a KingsSolution affiliate partner today! Earn attractive commissions, get fast payouts, and grow your income by helping students access trusted exam updates and resources.">
+  <meta property="og:image" content="kingssolution.png">
+  <meta property="og:url" content="https://kingssolution.vercel.app/affiliateLanding">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://kingssolution.vercel.app/partnerAdmin" />
+  <link rel="icon" type="image/png" href="kingssolution.png">
+  <title>Admin Dashboard - Affiliates</title>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    :root {
+      --brand: #4f46e5;
+      --brand-2: #4338ca;
+      --card: #1e293b;
+      --line: #334155;
+      --text: #f1f5f9;
+    }
+    
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #0f172a;
+      color: #fff;
+    }
+    
+    header {
+      padding: 16px;
+      background: var(--brand);
+      font-size: 1.5rem;
+      font-weight: bold;
+      text-align: center;
+    }
+    
+    .main {
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 20px;
+      overflow-x: auto;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    
+    th,
+    td {
+      padding: 10px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+    }
+    
+    button.toggle-btn {
+      padding: 6px 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      color: #fff;
+    }
+    
+    button.active {
+      background-color: #10b981;
+    }
+    
+    button.inactive {
+      background-color: #ef4444;
+    }
+  </style>
+</head>
+
+<body>
+  <header>Admin Dashboard - Affiliates</header>
+  
+  <div class="main">
+    <div class="card">
+      <h2>Affiliate Users</h2>
+      <table id="affiliateTable">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Balance</th>
+            <th>Referral Code</th>
+            <th>Status</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+  
+  <div class="card">
+    <h2>Pending Customers</h2>
+    <table id="pendingCustomersTable">
+      <thead>
+        <tr>
+          <th>Referred By</th>
+          <th>Phone Number</th>
+          <th>Referred Date</th>
+          <th>Amount</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  
+  <div class="card">
+    <h2>All Affiliate Withdrawals</h2>
+    <table id="allWithdrawalsTable">
+      <thead>
+        <tr>
+          <th>Bank Name</th>
+          <th>Account Number</th>
+          <th>Account name</th>
+          <th>Amount</th>
+          <th>Date</th>
+          <th>status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  
+  <div class="card">
+    <h2>All Pending Reports</h2>
+    <table id="allReportsTable">
+      <thead>
+        <tr>
+          <th>User ID</th>
+          <th>Email</th>
+          <th>Submitted At</th>
+          <th>Problem</th>
+          <th>Status</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+  
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
+    import { getFirestore, collection, getDocs, updateDoc, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+    
+    const firebaseConfig = {
+      apiKey: "AIzaSyCEA3gSy36gSnyKoPj4NFLl9yIldR4LkpY",
+      authDomain: "kings-solution-bba0e.firebaseapp.com",
+      projectId: "kings-solution-bba0e",
+      storageBucket: "kings-solution-bba0e.firebasestorage.app",
+      messagingSenderId: "18111445430",
+      appId: "1:18111445430:web:5ca39cd117b0e2a7e6a917",
+      measurementId: "G-XL28VT1DGT"
+    };
+    
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    
+    async function loadAffiliates() {
+      const tableBody = document.querySelector("#affiliateTable tbody");
+      tableBody.innerHTML = '';
+      
+      const snap = await getDocs(collection(db, 'affiliate'));
+      snap.forEach(docSnap => {
+        const data = docSnap.data();
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${data.lastName || 'N/A'}</td>
+          <td>${data.phone || 'N/A'}</td>
+          <td>₦${Number(data.balance || 0).toLocaleString()}</td>
+          <td>${data.referralCode || 'N/A'}</td>
+          <td>${data.status ? 'Active' : 'Inactive'}</td>
+          <td>
+            <button class="toggle-btn ${data.status ? 'active' : 'inactive'}">
+              ${data.status ? 'Deactivate' : 'Activate'}
+            </button>
+          </td>
+        `;
+        tableBody.appendChild(tr);
+        
+        const btn = tr.querySelector('button.toggle-btn');
+        btn.addEventListener('click', async () => {
+          const newStatus = !data.status;
+          await updateDoc(doc(db, 'affiliate', docSnap.id), { status: newStatus });
+          Swal.fire({
+            icon: 'success',
+            title: `User ${newStatus ? 'Activated' : 'Deactivated'}`,
+            showConfirmButton: false,
+            timer: 1200
+          });
+          loadAffiliates();
+        });
+      });
+    }
+    
+    loadAffiliates();
+    
+    async function loadPendingCustomers() {
+      const tableBody = document.querySelector("#pendingCustomersTable tbody");
+      tableBody.innerHTML = '';
+      
+      const snap = await getDocs(collection(db, 'customers'));
+      snap.forEach(async docSnap => {
+        const data = docSnap.data();
+        if (data.pending) {
+          const tr = document.createElement('tr');
+          
+          const date = data.referredDate?.toDate?.();
+          const formattedDate = date ? `${date.getMonth() + 1}/${date.getDate()}` : 'N/A';
+          
+          tr.innerHTML = `
+        <td>${data.referredBy || 'N/A'}</td>
+        <td>${data.phoneNumber || 'N/A'}</td>
+        <td>${formattedDate}</td>
+        <td>${data.amount || 'N/A'}</td>
+        <td>${data.pending || 'N/A'}</td>
+        <td>
+          <button class="add-btn" style="background-color:#10b981;color:white;padding:6px 12px;border:none;border-radius:6px;margin-right:5px;">Add</button>
+          <button class="reject-btn" style="background-color:#ef4444;color:white;padding:6px 12px;border:none;border-radius:6px;">Reject</button>
+        </td>
+      `;
+          tableBody.appendChild(tr);
+          
+          tr.querySelector('.add-btn').addEventListener('click', async () => {
+            const affiliateSnap = await getDocs(collection(db, 'affiliate'));
+            const affiliateDoc = affiliateSnap.docs.find(a => a.data().referralCode === data.referredBy);
+            
+            if (affiliateDoc) {
+              const affiliateRef = doc(db, 'affiliate', affiliateDoc.id);
+              const affiliateData = affiliateDoc.data();
+              const amount = Number(data.amount || 0);
+              
+              const newBalance = Number(affiliateData.balance || 0) + amount;
+              const newTotalEarned = Number(affiliateData.totalEarned || 0) + amount;
+              await updateDoc(affiliateRef, { balance: newBalance, totalEarned: newTotalEarned });
+              
+              const today = new Date();
+              const monthAbbrev = today.toLocaleString("default", { month: "short" });
+              const earningsRef = doc(db, "affiliate", affiliateDoc.id, "earnings", monthAbbrev);
+              const earningsSnap = await getDoc(earningsRef);
+              
+              if (earningsSnap.exists()) {
+                const currentAmount = Number(earningsSnap.data().amount || 0);
+                await updateDoc(earningsRef, { amount: currentAmount + amount });
+              } else {
+                await setDoc(earningsRef, { month: monthAbbrev, amount: amount });
+              }
+            }
+            
+            await updateDoc(doc(db, 'customers', docSnap.id), { pending: false });
+            Swal.fire("Added!", "Customer processed and affiliate updated.", "success");
+            loadPendingCustomers();
+          });
+          
+          tr.querySelector('.reject-btn').addEventListener('click', async () => {
+            await updateDoc(doc(db, 'customers', docSnap.id), { pending: false });
+            Swal.fire("Rejected", "Customer request rejected.", "info");
+            loadPendingCustomers();
+          });
+        }
+      });
+    }
+    
+    loadPendingCustomers();
+    
+    async function loadAllWithdrawals() {
+      const tableBody = document.querySelector("#allWithdrawalsTable tbody");
+      tableBody.innerHTML = '';
+      
+      try {
+        const affiliateSnap = await getDocs(collection(db, "affiliate"));
+        if (affiliateSnap.empty) {
+          tableBody.innerHTML = '<tr><td colspan="6" style="text-align:center;">No pending withdrawals</td></tr>';
+          return;
+        }
+        
+        let hasPending = false;
+        
+        for (const affDoc of affiliateSnap.docs) {
+          const uid = affDoc.id;
+          
+          const monthDocsSnap = await getDocs(collection(db, "affiliate", uid, "withdrawalHistory"));
+          
+          if (monthDocsSnap.empty) continue;
+          
+          for (const monthDoc of monthDocsSnap.docs) {
+            const monthName = monthDoc.id;
+            
+            const withdrawalsRef = collection(db, "affiliate", uid, "withdrawalHistory", monthName, "withdrawals");
+            const withdrawalsSnap = await getDocs(withdrawalsRef);
+            
+            for (const docSnap of withdrawalsSnap.docs) {
+              const data = docSnap.data();
+              
+              if (data.status === "pending") {
+                hasPending = true;
+                
+                const tr = document.createElement('tr');
+                const date = data.requestedAt?.toDate?.() || new Date();
+                const formattedDate = `${date.getMonth() + 1}/${date.getDate()}`;
+                
+                tr.innerHTML = `
+              <td>${data.bankName || 'N/A'}</td>
+              <td>${data.accountNumber || 'N/A'}</td>
+              <td>${data.accountName || 'N/A'}</td>
+              <td>₦${Number(data.amount || 0).toLocaleString()}</td>
+              <td>${formattedDate}</td>
+               <td>${data.status || 'N/A'}</td>
+              <td>
+                <button class="paid-btn" style="background-color:#10b981;color:white;padding:6px 12px;border:none;border-radius:6px;margin-right:5px;">Paid</button>
+                <button class="failed-btn" style="background-color:#ef4444;color:white;padding:6px 12px;border:none;border-radius:6px;">Fail</button>
+              </td>
+            `;
+                tableBody.appendChild(tr);
+                
+                tr.querySelector(".paid-btn").addEventListener("click", async () => {
+                  await updateDoc(
+                    doc(db, "affiliate", uid, "withdrawalHistory", monthName, "withdrawals", docSnap.id), { status: "paid" }
+                  );
+                  Swal.fire("Success", "Withdrawal marked as Paid.", "success");
+                  tr.remove();
+                });
+                
+                tr.querySelector(".failed-btn").addEventListener("click", async () => {
+                  await updateDoc(
+                    doc(db, "affiliate", uid, "withdrawalHistory", monthName, "withdrawals", docSnap.id), { status: "failed" }
+                  );
+                  Swal.fire("Updated", "Withdrawal marked as Failed.", "info");
+                  tr.remove();
+                });
+              }
+            }
+          }
+        }
+        
+        if (!hasPending) {
+          tableBody.innerHTML = '<tr><td colspan="6" style="text-align:center;">No pending withdrawals</td></tr>';
+        }
+        
+      } catch (err) {
+        console.error("Error loading withdrawals:", err);
+        tableBody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:red;">Error loading withdrawals</td></tr>';
+      }
+    }
+    
+    loadAllWithdrawals();
+    
+    async function loadAllReports() {
+      const tableBody = document.querySelector("#allReportsTable tbody");
+      tableBody.innerHTML = '';
+      
+      const reportsSnap = await getDocs(collection(db, "reports"));
+      
+      reportsSnap.forEach(docSnap => {
+        const data = docSnap.data();
+        if (data.status === "Pending") {
+          const tr = document.createElement('tr');
+          const date = data.submittedAt?.toDate?.();
+          const formattedDate = date ? `${date.getMonth()+1}/${date.getDate()}` : 'N/A';
+          
+          const shortProblem = (data.problem || 'N/A').slice(0, 15) +
+            ((data.problem?.length > 15) ? "..." : "");
+          
+          tr.innerHTML = `
+        <td>${docSnap.id}</td>  
+        <td>${data.userEmail || 'N/A'}</td>
+        <td>${formattedDate}</td>
+        <td>
+          <span>${shortProblem}</span>
+          ${data.problem?.length > 15 ? `<button class="view-btn" style="background:#3b82f6;color:white;padding:4px 8px;border:none;border-radius:4px;margin-left:6px;">View</button>` : ""}
+        </td>
+        <td>${data.status}</td>
+        <td>
+          <button class="resolve-btn" style="background-color:#10b981;color:white;padding:6px 12px;border:none;border-radius:6px;">Resolve</button>
+        </td>
+      `;
+          tableBody.appendChild(tr);
+          
+          if (data.problem?.length > 15) {
+            tr.querySelector(".view-btn").addEventListener("click", () => {
+              Swal.fire("Problem Detail", data.problem, "info");
+            });
+          }
+          
+          tr.querySelector(".resolve-btn").addEventListener("click", async () => {
+            await updateDoc(doc(db, "reports", docSnap.id), { status: "Resolved" });
+            Swal.fire("Success", "Report marked as Resolved.", "success");
+            tr.remove();
+          });
+        }
+      });
+      
+      if (tableBody.innerHTML === '') {
+        tableBody.innerHTML = `<tr><td colspan="6">No pending reports</td></tr>`;
+      }
+    }
+    
+    loadAllReports();
+  </script>
+</body>
+
+</html>
