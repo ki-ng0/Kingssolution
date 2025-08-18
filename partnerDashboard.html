@@ -660,18 +660,6 @@
           requestedAt: serverTimestamp()
         }, { merge: true });
         
-        await Promise.all([
-          addDoc(withdrawalHistoryRef, {
-            bankName,
-            accountNumber,
-            accountName,
-            amount: withdrawAmount,
-            status: "pending",
-            requestedAt: serverTimestamp()
-          }),
-          setDoc(userRef, { balance: balance - withdrawAmount }, { merge: true })
-        ]);
-        
         modal.style.display = "none";
         
         const userLocation = localStorage.getItem("userUid");
@@ -689,6 +677,18 @@
           },
           "oiHnIbQQTUGPy-oMZ"
         );
+
+        await Promise.all([
+          addDoc(withdrawalHistoryRef, {
+            bankName,
+            accountNumber,
+            accountName,
+            amount: withdrawAmount,
+            status: "pending",
+            requestedAt: serverTimestamp()
+          }),
+          setDoc(userRef, { balance: balance - withdrawAmount }, { merge: true })
+        ]);
         
         console.log("Withdrawal email sent successfully.");
         
