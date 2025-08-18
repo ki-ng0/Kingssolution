@@ -9,12 +9,17 @@
 
 <url>
   <loc>https://kingssolution.vercel.app/</loc>
-  <lastmod>2025-08-08T12:50:49+00:00</lastmod>
+  <lastmod>2025-08-18T18:05:28+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://kingssolution.vercel.app/2025-WAEC-TIMETABLE.pdf</loc>
-  <lastmod>2025-08-08T12:50:50+00:00</lastmod>
+  <lastmod>2025-08-18T18:05:29+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kingssolution.vercel.app/affiliateLanding.html</loc>
+  <lastmod>2025-08-18T18:05:29+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 
