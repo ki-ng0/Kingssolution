@@ -592,6 +592,10 @@
     closeModal.addEventListener("click", () => modal.style.display = "none");
     
     submitWithdraw.addEventListener("click", async () => {
+      if (submitWithdraw.disabled) return; // prevent double-clicks
+      submitWithdraw.disabled = true;
+      submitWithdraw.textContent = "Processing...";
+      
       const bankName = document.getElementById("bankName").value.trim();
       const accountNumber = document.getElementById("accountNumber").value.trim();
       const accountName = document.getElementById("accountName").value.trim();
@@ -606,6 +610,8 @@
           color: "#fff",
           confirmButtonColor: "#f5c518"
         });
+        submitWithdraw.disabled = false;
+        submitWithdraw.textContent = "Withdraw";
         return;
       } else if (accountNumber.length !== 10) {
         Swal.fire({
@@ -616,6 +622,8 @@
           color: "#fff",
           confirmButtonColor: "#f5c518"
         });
+        submitWithdraw.disabled = false;
+        submitWithdraw.textContent = "Withdraw";
         return;
       }
       
@@ -638,16 +646,20 @@
             color: "#fff",
             confirmButtonColor: "#f5c518"
           });
+          submitWithdraw.disabled = false;
+          submitWithdraw.textContent = "Withdraw";
           return;
         } else if (withdrawAmount < 500) {
           Swal.fire({
             icon: "error",
             title: "Insufficient Balance",
-            text: "You can't withdraw less then ₦500",
+            text: "You can't withdraw less than ₦500",
             background: "#101727",
             color: "#fff",
             confirmButtonColor: "#f5c518"
           });
+          submitWithdraw.disabled = false;
+          submitWithdraw.textContent = "Withdraw";
           return;
         }
         
@@ -659,7 +671,7 @@
         await setDoc(augDocRef, {
           requestedAt: serverTimestamp()
         }, { merge: true });
-
+        
         await Promise.all([
           addDoc(withdrawalHistoryRef, {
             bankName,
@@ -690,8 +702,6 @@
           "oiHnIbQQTUGPy-oMZ"
         );
         
-        console.log("Withdrawal email sent successfully.");
-        
         Swal.fire({
           icon: "success",
           title: "Withdrawal Requested",
@@ -711,6 +721,9 @@
           color: "#fff",
           confirmButtonColor: "#f5c518"
         });
+      } finally {
+        submitWithdraw.disabled = false;
+        submitWithdraw.textContent = "Withdraw";
       }
     });
     
