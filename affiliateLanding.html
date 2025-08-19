@@ -22,6 +22,21 @@
       padding: 0px;
     }
     
+    html {
+      background-color: #0d1b2a;
+      color-scheme: dark;
+    }
+    
+    body {
+      background: radial-gradient(circle at top, #0d1b2a, #000);
+    }
+    
+    @supports (env(safe-area-inset-bottom)) {
+      body {
+        background-color: #0d1b2a;
+      }
+    }
+    
     body {
       font-family: 'Segoe UI', sans-serif;
       margin: 0;

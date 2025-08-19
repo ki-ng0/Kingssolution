@@ -1,3 +1,18 @@
+html {
+      background-color: black;
+      color-scheme: dark;
+    }
+    
+    body {
+      background: radial-gradient(circle at top, #0d1b2a, #000);
+    }
+    
+    @supports (env(safe-area-inset-bottom)) {
+      body {
+        background-color: black;
+      }
+    }
+
 body {
   margin: 0;
   font-family: 'Segoe UI', sans-serif;
