@@ -590,5 +590,5 @@ images.forEach(img => {
 });
 
 function partnerHtml() {
-  window.location.href = 'affiliateLanding.html'
+  window.open("affiliateLanding.html", "_blank");
 }
