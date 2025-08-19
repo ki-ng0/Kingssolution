@@ -55,20 +55,6 @@ inputs.forEach(input => {
   });
 });
 
-window.addEventListener("resize", () => {
-  const nav = document.querySelector("nav.nav");
-  if (window.innerHeight < 500) {
-    
-    nav.style.height = "100vh";
-    nav.style.overflowY = "auto";
-  } else {
-    
-    nav.style.height = "";
-    nav.style.overflowY = "";
-  }
-});
-
-
 function main(param) {
   if (param === 'index') {
     window.location.href = 'index.html';

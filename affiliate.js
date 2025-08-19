@@ -278,7 +278,7 @@ function signin() {
     const password = document.getElementById("password").value;
     
     try {
-      await setPersistence(auth, browserLocalPersistence);;
+      await setPersistence(auth, browserSessionPersistence);;
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
       
