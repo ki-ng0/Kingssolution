@@ -137,8 +137,8 @@ button:hover {
 
 .signin {
   display: flex;
-  justify-content: center;
-  margin-top: 30px;
+  justify-content: space-between;
+  margin-top: 50px;
   width: auto;
 }
 

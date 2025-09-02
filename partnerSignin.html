@@ -14,12 +14,17 @@
   <meta property="og:url" content="https://kingssolution.vercel.app/partnerSignin">
   <meta property="og:type" content="website">
   <link rel="canonical" href="https://kingssolution.vercel.app/partnerSignin" />
+  
+  <meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="KingsSolution - Empowering Students and Partners" />
+<meta name="twitter:description" content="Get verified exam updates, study resources, and join our affiliate program to earn." />
+<meta name="twitter:image" content="https://kingssolution.vercel.app/kingssolution.png" />
   <link rel="icon" type="image/png" href="kingssolution.png">
   <title>Sign In</title>
   <link rel="stylesheet" href="affiliate.css" />
 </head>
 
-<body onload="signin()">
+<body onload="signin(), resetPassword()">
   
   <div class="signup-card">
     <h2>Sign In</h2>
@@ -34,6 +39,7 @@
       <div class="note">* Required fields</div>
       <div class="signin">
         <a href="partner.html">Sign Up</a>
+        <a href="#" id="resetPasswordLink">Reset Password</a>
       </div>
     </form>
   </div>

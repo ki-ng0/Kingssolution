@@ -76,6 +76,10 @@
       list-style-type: none;
     }
     
+    .note li{
+      margin-bottom: 20px;
+    }
+    
     ul li a {
       color: #00e0ff;
       text-decoration: none;
@@ -386,10 +390,10 @@
       }
       
       #contact-us {
-        margin-top: 90px;
+        margin-top: 110px;
         display: flex;
         flex-direction: column;
-        gap: 5px;
+        gap: 6px;
       }
       
       .ans {

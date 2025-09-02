@@ -1,6 +1,6 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
 import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, setPersistence, browserSessionPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, setPersistence, browserSessionPersistence, browserLocalPersistence, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
 import { deleteUser } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
 
 const firebaseConfig = {
@@ -82,7 +82,7 @@ function partner() {
     if (password.length < 6) return showAlert('warning', 'Weak Password', 'At least 6 characters.');
     if (password !== confirmPassword) return showAlert('warning', 'Password Mismatch', 'Passwords do not match.');
     if (password == '123456') return showAlert('warning', 'Password too Weak', "Passwords can't be 123456");
-
+    
     if (country !== "Nigeria") {
       return showAlert(
         'info',
@@ -318,5 +318,58 @@ function signin() {
   });
 }
 
+function resetPassword() {
+  
+  document.getElementById("resetPasswordLink").addEventListener("click", async (e) => {
+  e.preventDefault();
+
+  const { value: email } = await Swal.fire({
+    title: "Reset Password",
+    text: "Enter your email to receive a reset link:",
+    input: "email",
+    inputPlaceholder: "Enter your email address",
+    background: '#101727',
+    color: '#ffffff',
+    confirmButtonText: "Send Reset Link",
+    confirmButtonColor: "#f5c518",
+    inputValidator: (value) => {
+      if (!value) {
+        return "Email is required!";
+      }
+    }
+  });
+
+  if (email) {
+    try {
+      await sendPasswordResetEmail(auth, email);
+
+      Swal.fire({
+        icon: "success",
+        title: "Check your email",
+        text: "A password reset link has been sent to " + email,
+        background: '#101727',
+        color: '#ffffff',
+        iconColor: '#00c3ff',
+        confirmButtonText: 'Okay',
+        confirmButtonColor: '#f5c518'
+      });
+
+    } catch (error) {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: error.message,
+        background: '#101727',
+        color: '#ffffff',
+        iconColor: '#f5c518',
+        confirmButtonText: 'Okay',
+        confirmButtonColor: '#f5c518'
+      });
+    }
+  }
+});
+}
+
 window.signin = signin
 window.partner = partner
+window.resetPassword = resetPassword
