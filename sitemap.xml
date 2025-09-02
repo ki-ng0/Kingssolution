@@ -9,18 +9,108 @@
 
 <url>
   <loc>https://kingssolution.vercel.app/</loc>
-  <lastmod>2025-08-18T18:05:28+00:00</lastmod>
+  <lastmod>2025-09-02T11:17:36+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
+  <loc>https://kingssolution.vercel.app/index.html</loc>
+  <lastmod>2025-09-02T11:17:36+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kingssolution.vercel.app/proofs.html</loc>
+  <lastmod>2025-09-02T11:17:36+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kingssolution.vercel.app/admin-dashboard.html</loc>
+  <lastmod>2025-09-02T11:17:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kingssolution.vercel.app/timer.html</loc>
+  <lastmod>2025-09-02T11:17:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kingssolution.vercel.app/pastQuestions.html</loc>
+  <lastmod>2025-09-02T11:17:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kingssolution.vercel.app/subscribe.html</loc>
+  <lastmod>2025-09-02T11:17:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kingssolution.vercel.app/answers.html</loc>
+  <lastmod>2025-09-02T11:17:37+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
   <loc>https://kingssolution.vercel.app/2025-WAEC-TIMETABLE.pdf</loc>
-  <lastmod>2025-08-18T18:05:29+00:00</lastmod>
+  <lastmod>2025-09-02T11:17:38+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://kingssolution.vercel.app/affiliateLanding.html</loc>
-  <lastmod>2025-08-18T18:05:29+00:00</lastmod>
+  <lastmod>2025-09-02T11:17:38+00:00</lastmod>
   <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kingssolution.vercel.app/partnerAdmin.html</loc>
+  <lastmod>2025-09-02T11:17:38+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kingssolution.vercel.app/step2.html</loc>
+  <lastmod>2025-09-02T11:17:38+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kingssolution.vercel.app/partnerSignin.html</loc>
+  <lastmod>2025-09-02T11:17:38+00:00</lastmod>
+  <priority>0.64</priority>
+</url>
+<url>
+  <loc>https://kingssolution.vercel.app/step3.html</loc>
+  <lastmod>2025-09-02T11:17:38+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kingssolution.vercel.app/partner.html</loc>
+  <lastmod>2025-09-02T11:17:38+00:00</lastmod>
+  <priority>0.51</priority>
+</url>
+<url>
+  <loc>https://kingssolution.vercel.app/step4.html</loc>
+  <lastmod>2025-09-02T11:17:38+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://kingssolution.vercel.app/partnerDashboard.html</loc>
+  <lastmod>2025-09-02T11:17:39+00:00</lastmod>
+  <priority>0.41</priority>
+</url>
+<url>
+  <loc>https://kingssolution.vercel.app/step5.html</loc>
+  <lastmod>2025-09-02T11:17:39+00:00</lastmod>
+  <priority>0.33</priority>
+</url>
+<url>
+  <loc>https://kingssolution.vercel.app/final-step.html</loc>
+  <lastmod>2025-09-02T11:17:39+00:00</lastmod>
+  <priority>0.26</priority>
+</url>
+<url>
+  <loc>https://kingssolution.vercel.app/user-details.html</loc>
+  <lastmod>2025-09-02T11:17:39+00:00</lastmod>
+  <priority>0.21</priority>
+</url>
+<url>
+  <loc>https://kingssolution.vercel.app/verification.html</loc>
+  <lastmod>2025-09-02T11:17:39+00:00</lastmod>
+  <priority>0.17</priority>
 </url>
 
 
