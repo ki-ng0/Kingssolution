@@ -10,16 +10,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:title" content="KingsSolution - Trusted WAEC, NECO & GCE Updates and Assistance">
   <meta property="og:description" content="KingsSolution provides real-time updates and verified answers for WAEC, NECO, and GCE. Trusted by thousands of students nationwide.">
-  <meta property="og:image" content="kingssolution.png">
+  <meta property="og:image" content="https://kingssolution.vercel.app/kingssolution.png">
   <meta property="og:url" content="https://kingssolution.vercel.app/admin-dashboard">
   <meta property="og:type" content="website">
   <meta name="google-site-verification" content="5Pspuiw6AmknmoYMZraWfhYichkz-SJj4kl6fb0IVX4" />
   <link rel="canonical" href="https://kingssolution.vercel.app/admin-dashboard" />
   
   <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="KingsSolution - Empowering Students and Partners" />
-<meta name="twitter:description" content="Get verified exam updates, study resources, and join our affiliate program to earn." />
-<meta name="twitter:image" content="https://kingssolution.vercel.app/kingssolution.png" />
+  <meta name="twitter:title" content="KingsSolution - Empowering Students and Partners" />
+  <meta name="twitter:description" content="Get verified exam updates, study resources, and join our affiliate program to earn." />
+  <meta name="twitter:image" content="https://kingssolution.vercel.app/kingssolution.png" />
   <title>ADMIN</title>
   <link rel="icon" type="image/png" href="kingssolution.png">
 </head>
@@ -27,222 +27,233 @@
 <body>
   
   <style>
-* {
-  box-sizing: border-box;
-}
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f9fafb;
+      margin: 0;
+      padding: 40px 15px;
+      color: #222;
+      line-height: 1.5;
+      text-align: center;
+    }
+    
+    h2,
+    h3 {
+      color: #1e293b;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+    
+    .container {
+      max-width: 900px;
+      background: #fff;
+      padding: 25px 30px;
+      margin: 0 auto 40px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      text-align: left;
+    }
+    
+    input,
+    select,
+    textarea {
+      font-size: 16px;
+      padding: 12px 16px;
+      margin: 12px 0;
+      border-radius: 8px;
+      border: 1.8px solid #cbd5e1;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
+      width: 100%;
+      font-family: inherit;
+      resize: vertical;
+    }
+    
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: #2563eb;
+      outline: none;
+      background-color: #f0f9ff;
+    }
+    
+    button {
+      background-color: #2563eb;
+      color: white;
+      cursor: pointer;
+      border: none;
+      font-weight: 600;
+      min-width: 120px;
+      padding: 12px 24px;
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+      user-select: none;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    
+    button:hover,
+    button:focus {
+      background-color: #1d4ed8;
+      box-shadow: 0 6px 14px rgba(29, 78, 216, 0.5);
+      outline: none;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0 8px;
+      margin-top: 24px;
+      font-size: 15px;
+      color: #334155;
+      box-shadow: 0 0 8px rgb(0 0 0 / 0.05);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    
+    th,
+    td {
+      padding: 16px 20px;
+      text-align: left;
+      vertical-align: middle;
+    }
+    
+    th {
+      background-color: #2563eb;
+      color: white;
+      font-weight: 600;
+      border-bottom: none;
+      user-select: none;
+    }
+    
+    tr {
+      background-color: #fff;
+      transition: background-color 0.15s ease;
+      border-radius: 8px;
+    }
+    
+    tr:hover {
+      background-color: #e0e7ff;
+      cursor: default;
+    }
+    
+    tr td:first-child {
+      border-top-left-radius: 8px;
+      border-bottom-left-radius: 8px;
+    }
+    
+    tr td:last-child {
+      border-top-right-radius: 8px;
+      border-bottom-right-radius: 8px;
+    }
+    
+    .paid-btn {
+      background-color: #10b981 !important;
+      color: white !important;
+      padding: 6px 14px !important;
+      border-radius: 6px !important;
+      border: none !important;
+      margin-right: 8px !important;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.25s ease;
+    }
+    
+    .paid-btn:hover {
+      background-color: #059669 !important;
+    }
+    
+    .failed-btn {
+      background-color: #ef4444 !important;
+      color: white !important;
+      padding: 6px 14px !important;
+      border-radius: 6px !important;
+      border: none !important;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.25s ease;
+    }
+    
+    .failed-btn:hover {
+      background-color: #dc2626 !important;
+    }
+    
+    .btn-group {
+      text-align: right;
+      margin-top: 16px;
+    }
+    
+    .btn-group button {
+      background-color: #2563eb;
+      user-select: none;
+      transition: background-color 0.25s ease;
+      font-weight: 600;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+      padding: 10px 22px;
+      margin-left: 8px;
+    }
+    
+    .btn-group button:hover {
+      background-color: #1d4ed8;
+      box-shadow: 0 6px 14px rgba(29, 78, 216, 0.5);
+    }
+    
+    @media (max-width: 768px) {
+      body {
+        padding: 30px 10px;
+      }
+      
+      .container {
+        padding: 20px 15px;
+      }
+      
+      table {
+        font-size: 13px;
+      }
+      
+      th,
+      td {
+        padding: 12px 10px;
+      }
+      
+      button {
+        min-width: 100px;
+        padding: 10px 18px;
+      }
+      
+      .btn-group {
+        text-align: center;
+      }
+      
+      .btn-group button {
+        margin-left: 4px;
+        margin-right: 4px;
+        width: 100%;
+        margin-bottom: 8px;
+      }
+    }
+    
+    @media (max-width: 480px) {
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background-color: #f9fafb;
-  margin: 0;
-  padding: 40px 15px;
-  color: #222;
-  line-height: 1.5;
-  text-align: center;
-}
-
-h2, h3 {
-  color: #1e293b;
-  margin-bottom: 16px;
-  font-weight: 600;
-}
-
-.container {
-  max-width: 900px;
-  background: #fff;
-  padding: 25px 30px;
-  margin: 0 auto 40px;
-  border-radius: 12px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-  text-align: left;
-}
-
-input, select, textarea {
-  font-size: 16px;
-  padding: 12px 16px;
-  margin: 12px 0;
-  border-radius: 8px;
-  border: 1.8px solid #cbd5e1;
-  transition: border-color 0.2s ease, background-color 0.2s ease;
-  width: 100%;
-  font-family: inherit;
-  resize: vertical;
-}
-
-input:focus, select:focus, textarea:focus {
-  border-color: #2563eb;
-  outline: none;
-  background-color: #f0f9ff;
-}
-
-button {
-  background-color: #2563eb;
-  color: white;
-  cursor: pointer;
-  border: none;
-  font-weight: 600;
-  min-width: 120px;
-  padding: 12px 24px;
-  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
-  user-select: none;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-button:hover, button:focus {
-  background-color: #1d4ed8;
-  box-shadow: 0 6px 14px rgba(29, 78, 216, 0.5);
-  outline: none;
-}
-
-table {
-  width: 100%;
-  border-collapse: separate;
-  border-spacing: 0 8px;
-  margin-top: 24px;
-  font-size: 15px;
-  color: #334155;
-  box-shadow: 0 0 8px rgb(0 0 0 / 0.05);
-  border-radius: 12px;
-  overflow: hidden;
-}
-
-th, td {
-  padding: 16px 20px;
-  text-align: left;
-  vertical-align: middle;
-}
-
-th {
-  background-color: #2563eb;
-  color: white;
-  font-weight: 600;
-  border-bottom: none;
-  user-select: none;
-}
-
-tr {
-  background-color: #fff;
-  transition: background-color 0.15s ease;
-  border-radius: 8px;
-}
-
-tr:hover {
-  background-color: #e0e7ff;
-  cursor: default;
-}
-
-tr td:first-child {
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
-}
-
-tr td:last-child {
-  border-top-right-radius: 8px;
-  border-bottom-right-radius: 8px;
-}
-
-.paid-btn {
-  background-color: #10b981 !important;
-  color: white !important;
-  padding: 6px 14px !important;
-  border-radius: 6px !important;
-  border: none !important;
-  margin-right: 8px !important;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.25s ease;
-}
-
-.paid-btn:hover {
-  background-color: #059669 !important;
-}
-
-.failed-btn {
-  background-color: #ef4444 !important;
-  color: white !important;
-  padding: 6px 14px !important;
-  border-radius: 6px !important;
-  border: none !important;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.25s ease;
-}
-
-.failed-btn:hover {
-  background-color: #dc2626 !important;
-}
-
-.btn-group {
-  text-align: right;
-  margin-top: 16px;
-}
-
-.btn-group button {
-  background-color: #2563eb;
-  user-select: none;
-  transition: background-color 0.25s ease;
-  font-weight: 600;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
-  padding: 10px 22px;
-  margin-left: 8px;
-}
-
-.btn-group button:hover {
-  background-color: #1d4ed8;
-  box-shadow: 0 6px 14px rgba(29, 78, 216, 0.5);
-}
-
-@media (max-width: 768px) {
-  body {
-    padding: 30px 10px;
-  }
-
-  .container {
-    padding: 20px 15px;
-  }
-
-  table {
-    font-size: 13px;
-  }
-
-  th, td {
-    padding: 12px 10px;
-  }
-
-  button {
-    min-width: 100px;
-    padding: 10px 18px;
-  }
-
-  .btn-group {
-    text-align: center;
-  }
-
-  .btn-group button {
-    margin-left: 4px;
-    margin-right: 4px;
-    width: 100%;
-    margin-bottom: 8px;
-  }
-}
-
-@media (max-width: 480px) {
-  h2, h3 {
-    font-size: 1.2rem;
-  }
-
-  button {
-    min-width: 100%;
-    padding: 12px;
-  }
-
-  input, select, textarea {
-    font-size: 14px;
-    padding: 10px 14px;
-  }
-}
-
+      h2,
+      h3 {
+        font-size: 1.2rem;
+      }
+      
+      button {
+        min-width: 100%;
+        padding: 12px;
+      }
+      
+      input,
+      select,
+      textarea {
+        font-size: 14px;
+        padding: 10px 14px;
+      }
+    }
   </style>
   
   <h2>Admin Panel</h2>
@@ -311,26 +322,28 @@ tr td:last-child {
     <option value="technical-drawing">Technical Drawing</option>
     <option value="home-management">Home Management</option>
   </select>
-  
+
   <textarea id="answerText" placeholder="Enter answer text (optional)"></textarea>
+
   <input type="file" id="answerFiles" multiple accept="image/*,video/*">
   <button onclick="uploadAnswer()">Upload</button>
   
+  <h2>Upload proofs</h2>
   <input type="file" id="fileInput" multiple accept />
   <button onclick="uploadImage()">Upload</button>
   
   <h2>📝 Add New Notice</h2>
-<form id="noticeForm">
-  <label>Notice Title</label><br>
-  <input type="text" id="noticeTitleInput" required><br><br>
-
-  <label>Notice Content</label><br>
-  <textarea id="noticeContentInput" rows="10" style="overflow: auto; " required></textarea><br><br>
-
-  <button type="submit">Upload Notice</button>
-</form>
-
-<p id="statusMessage"></p>
+  <form id="noticeForm">
+    <label>Notice Title</label><br>
+    <input type="text" id="noticeTitleInput" required><br><br>
+    
+    <label>Notice Content</label><br>
+    <textarea id="noticeContentInput" rows="10" style="overflow: auto; " required></textarea><br><br>
+    
+    <button type="submit">Upload Notice</button>
+  </form>
+  
+  <p id="statusMessage"></p>
   
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
@@ -594,6 +607,7 @@ tr td:last-child {
           await updateDoc(pastQuestionRef, {
             mediaURLs: uploadedURLs.length > 0 ? arrayUnion(...uploadedURLs) : arrayUnion(),
             answerText: answerText ? arrayUnion(answerText) : arrayUnion(),
+            createdAt: serverTimestamp(),
           });
         } else {
           await setDoc(answerRef, {
@@ -604,6 +618,7 @@ tr td:last-child {
           await setDoc(pastQuestionRef, {
             mediaURLs: uploadedURLs.length > 0 ? uploadedURLs : [],
             answerText: answerText ? [answerText] : [],
+            createdAt: serverTimestamp(),
           });
         }
         
@@ -652,34 +667,34 @@ tr td:last-child {
     
     
     
-      const noticeForm = document.getElementById("noticeForm");
-  const statusMessage = document.getElementById("statusMessage");
-
-  noticeForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const title = document.getElementById("noticeTitleInput").value.trim();
-    const content = document.getElementById("noticeContentInput").value.trim();
-
-    if (!title || !content) {
-      statusMessage.textContent = "⚠️ Please fill all fields!";
-      return;
-    }
-
-    try {
-      await addDoc(collection(db, "noticeBoard"), {
-        title: title,
-        content: content,
-        date: serverTimestamp()
-      });
-
-      statusMessage.textContent = "✅ Notice uploaded successfully!";
-      noticeForm.reset();
-    } catch (error) {
-      console.error("Error adding notice: ", error);
-      statusMessage.textContent = "❌ Failed to upload notice.";
-    }
-  });
+    const noticeForm = document.getElementById("noticeForm");
+    const statusMessage = document.getElementById("statusMessage");
+    
+    noticeForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      
+      const title = document.getElementById("noticeTitleInput").value.trim();
+      const content = document.getElementById("noticeContentInput").value.trim();
+      
+      if (!title || !content) {
+        statusMessage.textContent = "⚠️ Please fill all fields!";
+        return;
+      }
+      
+      try {
+        await addDoc(collection(db, "noticeBoard"), {
+          title: title,
+          content: content,
+          date: serverTimestamp()
+        });
+        
+        statusMessage.textContent = "✅ Notice uploaded successfully!";
+        noticeForm.reset();
+      } catch (error) {
+        console.error("Error adding notice: ", error);
+        statusMessage.textContent = "❌ Failed to upload notice.";
+      }
+    });
     
     window.deleteAnswer = deleteAnswer;
     
