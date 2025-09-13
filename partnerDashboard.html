@@ -596,7 +596,7 @@
     closeModal.addEventListener("click", () => modal.style.display = "none");
     
     submitWithdraw.addEventListener("click", async () => {
-      if (submitWithdraw.disabled) return; // prevent double-clicks
+      if (submitWithdraw.disabled) return;
       submitWithdraw.disabled = true;
       submitWithdraw.textContent = "Processing...";
       
@@ -671,7 +671,7 @@
         const monthName = now.toLocaleString("default", { month: "short" });
         const withdrawalHistoryRef = collection(db, "affiliate", uid, "withdrawalHistory", monthName, "withdrawals");
         
-        const augDocRef = doc(db, "affiliate", uid, "withdrawalHistory", "Aug");
+        const augDocRef = doc(db, "affiliate", uid, "withdrawalHistory", monthName);
         await setDoc(augDocRef, {
           requestedAt: serverTimestamp()
         }, { merge: true });
