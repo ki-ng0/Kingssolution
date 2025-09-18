@@ -20,7 +20,7 @@
     
     body {
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      background: linear-gradient(135deg, #1a2980, #26d0ce);
       color: #fff;
       line-height: 1.6;
       overflow-x: hidden;
@@ -47,6 +47,31 @@
       box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
       margin: 2rem auto;
       max-width: 1000px;
+    }
+    
+    .kings {
+      width: 100%;
+      overflow: hidden;
+      background: rgba(255, 255, 255, 0.05);
+      color: #fff;
+      font-weight: bold;
+      padding: 10px 0;
+    }
+    
+    .scroll-text {
+      display: inline-block;
+      white-space: nowrap;
+      animation: scroll-left 15s linear infinite;
+    }
+    
+    @keyframes scroll-left {
+      from {
+        transform: translateX(100%);
+      }
+      
+      to {
+        transform: translateX(-100%);
+      }
     }
     
     fieldset {
@@ -76,7 +101,7 @@
       list-style-type: none;
     }
     
-    .note li{
+    .note li {
       margin-bottom: 20px;
     }
     
@@ -107,10 +132,65 @@
     }
     
     .chat-us,
-    .subject,
-    .text,
-    .price {
+    .text {
       margin-top: 1rem;
+    }
+    
+    .price,
+    .subject {
+      margin-top: 1rem;
+      background: #00e0ff14;
+      padding: 1rem;
+      border-left: 4px solid #00e0ff;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+    
+    .price:hover,
+    .subject:hover {
+      background: #00e0ff25;
+      border-left-color: #fff;
+      transform: translateY(-2px);
+    }
+    
+    .timetable {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    
+    #section4,
+    #section3,
+    #section,
+    #section5 {
+      padding: 1rem;
+      margin: 1rem 0;
+      border: 2px solid #00e0ff;
+      /* colored border */
+      border-radius: 10px;
+      background: linear-gradient(135deg, #1a2980, #26d0ce);
+      /* gradient background */
+      transition: all 0.3s ease;
+      color: #fff;
+      /* readable text */
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
+      /* default shadow */
+    }
+    
+    #section4:hover,
+    #section3:hover,
+    #section:hover,
+    #section5:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(0, 224, 255, 0.35);
+      /* brighter shadow on hover */
+      border-color: #00ffff;
+      /* lighter border on hover */
+    }
+    
+    #section3 a {
+      text-decoration: none;
+      color: white;
     }
     
     .chat-us {
@@ -170,20 +250,8 @@
       color: #ccc;
     }
     
-    #section3 {
-      border-radius: 10px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-    }
-    
-    #section3 a {
-      text-decoration: none;
-      color: white;
-    }
-    
     header {
-      background: linear-gradient(to right, #003366, #0059b3);
+      background: linear-gradient(135deg, #1a2980, #26d0ce);
       color: white;
       display: flex;
       justify-content: space-between;
@@ -330,7 +398,7 @@
         flex-direction: column;
         padding-top: 80px;
         border-radius: 20px 0 0 20px;
-        background: linear-gradient(to right, #003366, #336699);
+        background: linear-gradient(135deg, #1a2980, #26d0ce);
         box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
         text-align: center;
         overflow-y: auto;
