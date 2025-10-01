@@ -10,16 +10,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:title" content="KingsSolution - Trusted WAEC, NECO & GCE Updates and Assistance">
   <meta property="og:description" content="KingsSolution provides real-time updates and verified answers for WAEC, NECO, and GCE. Trusted by thousands of students nationwide.">
-  <meta property="og:image" content="https://kingssolution.vercel.app/kingssolution.png">
-  <meta property="og:url" content="https://kingssolution.vercel.app/admin-dashboard">
+  <meta property="og:image" content="https://kingssolution.netlify.app/kingssolution.png">
+  <meta property="og:url" content="https://kingssolution.netlify.app/admin-dashboard">
   <meta property="og:type" content="website">
   <meta name="google-site-verification" content="5Pspuiw6AmknmoYMZraWfhYichkz-SJj4kl6fb0IVX4" />
-  <link rel="canonical" href="https://kingssolution.vercel.app/admin-dashboard" />
+  <link rel="canonical" href="https://kingssolution.netlify.app/admin-dashboard" />
   
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="KingsSolution - Empowering Students and Partners" />
   <meta name="twitter:description" content="Get verified exam updates, study resources, and join our affiliate program to earn." />
-  <meta name="twitter:image" content="https://kingssolution.vercel.app/kingssolution.png" />
+  <meta name="twitter:image" content="https://kingssolution.netlify.app/kingssolution.png" />
   <title>ADMIN</title>
   <link rel="icon" type="image/png" href="kingssolution.png">
 </head>
@@ -593,7 +593,6 @@
       }
       
       const answerRef = doc(db, "answers", subject);
-      const pastQuestionRef = doc(db, "pastQuestions", subject);
       
       try {
         const docSnap = await getDoc(answerRef);
@@ -603,22 +602,10 @@
             mediaURLs: uploadedURLs.length > 0 ? arrayUnion(...uploadedURLs) : arrayUnion(),
             answerText: answerText ? arrayUnion(answerText) : arrayUnion(),
           });
-          
-          await updateDoc(pastQuestionRef, {
-            mediaURLs: uploadedURLs.length > 0 ? arrayUnion(...uploadedURLs) : arrayUnion(),
-            answerText: answerText ? arrayUnion(answerText) : arrayUnion(),
-            createdAt: serverTimestamp(),
-          });
         } else {
           await setDoc(answerRef, {
             mediaURLs: uploadedURLs.length > 0 ? uploadedURLs : [],
             answerText: answerText ? [answerText] : [],
-          });
-          
-          await setDoc(pastQuestionRef, {
-            mediaURLs: uploadedURLs.length > 0 ? uploadedURLs : [],
-            answerText: answerText ? [answerText] : [],
-            createdAt: serverTimestamp(),
           });
         }
         

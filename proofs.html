@@ -10,16 +10,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta property="og:title" content="KingsSolution - Trusted WAEC, NECO & GCE Updates and Assistance">
   <meta property="og:description" content="KingsSolution provides real-time updates and verified answers for WAEC, NECO, and GCE. Trusted by thousands of students nationwide.">
-  <meta property="og:image" content="https://kingssolution.vercel.app/kingssolution.png">
-  <meta property="og:url" content="https://kingssolution.vercel.app/proofs">
+  <meta property="og:image" content="https://kingssolution.netlify.app/kingssolution.png">
+  <meta property="og:url" content="https://kingssolution.netlify.app/proofs">
   <meta property="og:type" content="website">
   <meta name="google-site-verification" content="5Pspuiw6AmknmoYMZraWfhYichkz-SJj4kl6fb0IVX4" />
-  <link rel="canonical" href="https://kingssolution.vercel.app/proofs" />
+  <link rel="canonical" href="https://kingssolution.netlify.app/proofs" />
   
   <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="KingsSolution - Empowering Students and Partners" />
-<meta name="twitter:description" content="Get verified exam updates, study resources, and join our affiliate program to earn." />
-<meta name="twitter:image" content="https://kingssolution.vercel.app/kingssolution.png" />
+  <meta name="twitter:title" content="KingsSolution - Empowering Students and Partners" />
+  <meta name="twitter:description" content="Get verified exam updates, study resources, and join our affiliate program to earn." />
+  <meta name="twitter:image" content="https://kingssolution.netlify.app/kingssolution.png" />
   <title>Proofs</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/png" href="kingssolution.png">
@@ -41,6 +41,97 @@
     
     const app = initializeApp(firebaseConfig);
     const db = getFirestore(app);
+    
+    async function checkUserAccess() {
+      const userPinInput = document.getElementById("userPinInput");
+      const userPin = userPinInput.value.trim();
+      
+      if (!userPin) {
+        return Swal.fire({
+          icon: 'warning',
+          title: 'Missing PIN',
+          text: 'Please enter your PIN.',
+          background: '#101727',
+          color: '#ffffff',
+          iconColor: '#f5c518',
+          confirmButtonText: 'Okay',
+          confirmButtonColor: '#f5c518',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          },
+          customClass: {
+            popup: 'kings-swal-popup',
+            title: 'kings-swal-title',
+            confirmButton: 'kings-swal-confirm'
+          }
+        });
+      }
+      
+      if (userPin === "08162347402") {
+        userPinInput.value = "";
+        window.location.href = "admin-dashboard.html";
+        return;
+      }
+      
+      const q = query(collection(db, "students"), where("userId", "==", parseInt(userPin)));
+      const querySnapshot = await getDocs(q);
+      
+      if (querySnapshot.empty) {
+        return Swal.fire({
+          icon: 'error',
+          title: 'Invalid PIN',
+          text: 'Invalid PIN! Please check and try again.',
+          background: '#101727',
+          color: '#ffffff',
+          iconColor: '#f5c518',
+          confirmButtonText: 'Okay',
+          confirmButtonColor: '#f5c518',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          },
+          customClass: {
+            popup: 'kings-swal-popup',
+            title: 'kings-swal-title',
+            confirmButton: 'kings-swal-confirm'
+          }
+        });
+      }
+      
+      const userData = querySnapshot.docs[0].data();
+      if (userData.status !== "approved") {
+        return Swal.fire({
+          icon: 'info',
+          title: 'Access Denied',
+          text: 'Your account is still pending approval.',
+          background: '#101727',
+          color: '#ffffff',
+          iconColor: '#f5c518',
+          confirmButtonText: 'Okay',
+          confirmButtonColor: '#f5c518',
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          },
+          customClass: {
+            popup: 'kings-swal-popup',
+            title: 'kings-swal-title',
+            confirmButton: 'kings-swal-confirm'
+          }
+        });
+      }
+      
+      userPinInput.value = "";
+      localStorage.setItem("userSubjects", JSON.stringify(userData.subjects));
+      window.location.href = "answers.html";
+    }
     
     async function loadImages() {
       const imagesCol = collection(db, "images");
@@ -71,8 +162,9 @@
       
       clickedImg.classList.toggle("expanded");
     }
-    
     window.addEventListener("DOMContentLoaded", loadImages);
+    
+    window.checkUserAccess = checkUserAccess
   </script>
   
   <style>
@@ -181,7 +273,7 @@
     </nav>
   </header>
   
-  <h1>All Uploaded Images</h1>
+  <h1>Past waec and neco results</h1>
   <div id="imageContainer"></div>
   <script src="main.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

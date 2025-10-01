@@ -189,7 +189,7 @@ export async function createPartnerAccount() {
   
   const last3 = phone.slice(-3);
   const referralCode = `${lastName.toLowerCase()}${last3}`;
-  const fullReferralURL = `https://kingssolution.vercel.app/?ref=${referralCode}`;
+  const fullReferralURL = `https://kingssolution.netlify.app/?ref=${referralCode}`;
   
   Swal.fire({
     title: 'Setting up your account...',

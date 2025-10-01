@@ -24,8 +24,7 @@
       color: #fff;
       line-height: 1.6;
       overflow-x: hidden;
-      
-      animation: fadeIn 1.5s ease-in;
+      animation: fadeIn 2s ease-in;
     }
     
     @keyframes fadeIn {
