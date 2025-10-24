@@ -9,23 +9,22 @@
 
 <url>
   <loc>https://kingssolution.netlify.app/</loc>
-  <lastmod>2025-10-22T12:25:49+00:00</lastmod>
+  <lastmod>2025-10-24T08:09:13+00:00</lastmod>
   <priority>1.00</priority>
 </url>
 <url>
   <loc>https://kingssolution.netlify.app/affiliatelanding</loc>
-  <lastmod>2025-10-22T12:25:49+00:00</lastmod>
+  <lastmod>2025-10-24T08:09:13+00:00</lastmod>
+  <priority>0.80</priority>
+</url>
+<url>
+  <loc>https://kingssolution.netlify.app/2025-WAEC-TIMETABLE.pdf</loc>
+  <lastmod>2025-10-24T08:09:13+00:00</lastmod>
   <priority>0.80</priority>
 </url>
 <url>
   <loc>https://kingssolution.netlify.app/partnersignin</loc>
-  <lastmod>2025-10-22T12:25:49+00:00</lastmod>
-  <priority>0.64</priority>
-</url>
-
-
-</urlset>//kingssolution.netlify.app/partnersignin</loc>
-  <lastmod>2025-10-22T12:25:49+00:00</lastmod>
+  <lastmod>2025-10-24T08:09:13+00:00</lastmod>
   <priority>0.64</priority>
 </url>
 
